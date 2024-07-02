@@ -1,14 +1,17 @@
+
 trigger:
   paths:
     include:
     - infrastructure/*
 
 pool:
-  vmImage: 'windows-2022'
+  vmImage: ubuntu-latest
 
-jobs:
-- job: TestEcho
-  displayName: 'Echo Change'
-  steps:
-  - script: echo "There has been a change in infra folder"
-    displayName: 'Echo Change'
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
