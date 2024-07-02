@@ -1,3 +1,12 @@
+parameters:
+  - name: service_connection
+    displayName: Environment Service Connection
+    type: string
+    default: mi-mac-dtos
+  - name: tf_version
+    displayName: TF Version
+    type: string
+    default: 1.5.7
 
 trigger:
   paths:
