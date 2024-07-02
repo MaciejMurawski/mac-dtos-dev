@@ -1,0 +1,8 @@
+trigger:
+  paths:
+    include:
+    - '/infrastructure/*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
