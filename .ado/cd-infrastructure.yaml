@@ -1,8 +1,14 @@
 trigger:
   paths:
     include:
-    - '/infrastructure/*'
+    - /infrastructure/*
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-2022'
 
+jobs:
+- job: TestEcho
+  displayName: 'Echo Change'
+  steps:
+  - script: echo "There has been a change in infra folder"
+    displayName: 'Echo Change'
