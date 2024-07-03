@@ -2,7 +2,7 @@ parameters:
   - name: service_connection
     displayName: Environment Service Connection
     type: string
-    default: mi-mac-dtos
+    default: sp-mac-dtos
   - name: tf_version
     displayName: TF Version
     type: string
