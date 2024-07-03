@@ -26,6 +26,7 @@ steps:
   displayName: 'Run a multi-line script'
 
 - task: TerraformTaskV4@4
+  continueOnError: false
   inputs:
     provider: 'azurerm'
     command: 'init'
@@ -36,3 +37,12 @@ steps:
     backendAzureRmStorageAccountName: 'samacdtosdevstate'
     backendAzureRmContainerName: 'tfstate'
     backendAzureRmKey: 'dev.dtos.tfstate'
+
+- task: TerraformTaskV4@4
+  continueOnError: false
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+    commandOptions: '-var-file=infrastructure/environments/dev.tfvars.config'
+    environmentServiceNameAzureRM: 'sp-mac-dtos'
