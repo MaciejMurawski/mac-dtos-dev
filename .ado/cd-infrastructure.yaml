@@ -3,15 +3,15 @@ parameters:
     displayName: Environment Service Connection
     type: string
     default: sp-mac-dtos
-  - name: tf_version
-    displayName: TF Version
+  - name: environment
+    displayName: Environment
     type: string
-    default: 1.5.7
+    default: dev
 
-trigger:
-  paths:
-    include:
-    - infrastructure/*
+trigger: none
+
+variables:
+  - group: dtos_dev_variables
 
 pool:
   vmImage: ubuntu-latest
