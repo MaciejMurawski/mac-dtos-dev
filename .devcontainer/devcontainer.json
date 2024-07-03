@@ -53,7 +53,5 @@
         "ms-dotnettools.csdevkit"
       ]
     }
-  },
-"runArgs": ["--userns=keep-id"],
-"containerUser": "vscode"
+  }
 }
