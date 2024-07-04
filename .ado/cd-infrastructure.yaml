@@ -33,12 +33,11 @@ steps:
     targetType: 'inline'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     # script: 'make terraform-init dir="infrastructure"'
-    script: '|
+    script: |
       echo ls &&
       ls -l &&
       echo $(ARM_SUBSCRIPTION_ID) &&
       echo $(STATE_BLOB)'
-
 
 - task: AzureCLI@2
   displayName: Terraform Login
