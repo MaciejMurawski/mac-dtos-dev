@@ -31,7 +31,7 @@ steps:
   displayName: Echo Vars
   inputs:
     targetType: 'inline'
-    workingDirectory: '$(System.DefaultWorkingDirectory/infrastructure)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
     # script: 'make terraform-init dir="infrastructure"'
     script: '|
       echo ls &&
