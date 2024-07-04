@@ -7,6 +7,10 @@ parameters:
     displayName: Environment
     type: string
     default: dev
+  - name: tf_version
+    displayName: Environment
+    type: string
+    default: 1.5.7
 
 trigger: none
 
@@ -16,40 +20,40 @@ variables:
 pool:
   vmImage: ubuntu-latest
 
-# - script: echo Hello, world!
-#   displayName: 'Run a one-line script'
-# 
-# - script: |
-#     echo Add other tasks to build, test, and deploy your project.
-#     echo See https://aka.ms/yaml
-#   displayName: 'Run a multi-line script'
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'sp-mac-dtos'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'apt-get install terraform --version ${{ parameters.TF_VERSION }}'
 
-stages:
-  - stage: validate
-    jobs:
-    - job: validate
-      continueOnError: false
-      steps:
-        - task: TerraformTaskV4@4
-          continueOnError: false
-          displayName: TerraformInit
-          inputs:
-            provider: 'azurerm'
-            command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-            backendAzureRmUseEnvironmentVariablesForAuthentication: false
-            backendServiceArm: 'sp-mac-dtos'
-            backendAzureRmResourceGroupName: 'rg-dtos-state'
-            backendAzureRmStorageAccountName: 'samacdtosdevstate'
-            backendAzureRmContainerName: 'tfstate'
-            backendAzureRmKey: 'dev.dtos.tfstate'
-
-        - task: TerraformTaskV4@4
-          continueOnError: false
-          displayName: TerraformPlan - ${{ parameters.environment }} Environment
-          inputs:
-            provider: 'azurerm'
-            command: 'plan'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-            commandOptions: '-var-file=environments/dtos_${{ parameters.environment }}.tfvars.config'
-            environmentServiceNameAzureRM: 'sp-mac-dtos'
+#stages:
+#  - stage: validate
+#    jobs:
+#    - job: validate
+#      continueOnError: false
+#      steps:
+#        - task: TerraformTaskV4@4
+#          continueOnError: false
+#          displayName: TerraformInit
+#          inputs:
+#            provider: 'azurerm'
+#            command: 'init'
+#            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+#            backendAzureRmUseEnvironmentVariablesForAuthentication: false
+#            backendServiceArm: 'sp-mac-dtos'
+#            backendAzureRmResourceGroupName: 'rg-dtos-state'
+#            backendAzureRmStorageAccountName: 'samacdtosdevstate'
+#            backendAzureRmContainerName: 'tfstate'
+#            backendAzureRmKey: 'dev.dtos.tfstate'
+#
+#        - task: TerraformTaskV4@4
+#          continueOnError: false
+#          displayName: TerraformPlan - ${{ parameters.environment }} Environment
+#          inputs:
+#            provider: 'azurerm'
+#            command: 'plan'
+#            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+#            commandOptions: '-var-file=environments/dtos_${{ parameters.environment }}.tfvars.config'
+#            environmentServiceNameAzureRM: 'sp-mac-dtos'
