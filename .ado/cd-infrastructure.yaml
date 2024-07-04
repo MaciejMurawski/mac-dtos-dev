@@ -65,16 +65,18 @@ stages:
             commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
             environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
 
-#  - stage: terraform_apply
-#    displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
-#    dependsOn: [terraform_init]
-#    jobs:
-#      - deployment: terraform_apply
-#        environment: dtos_dev
-#        strategy:
-#         runOnce:
-#           deploy:
-#            steps: 
+  - stage: terraform_apply
+    displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
+    dependsOn: [terraform_init]
+    jobs:
+      - deployment: terraform_apply
+        environment: dtos_dev
+        strategy:
+         runOnce:
+           deploy:
+            steps: 
+              - bash: |
+                  echo "Apply the created plan"
 
 
 
