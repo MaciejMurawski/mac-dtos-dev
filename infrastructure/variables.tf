@@ -14,6 +14,10 @@ variable "STATE_BLOB" {
   type = string
 }
 
+variable "STATE_SUB_ID" {
+  type = string
+}
+
 variable "application" {
   description = "Project/Application code for deployment"
   type        = string
