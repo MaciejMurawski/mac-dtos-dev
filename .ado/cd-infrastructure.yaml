@@ -26,10 +26,10 @@ pool:
 
 steps:
 
-- task: TerraformInstaller@1
-  displayName: Terraform Install
-  inputs:
-    terraformVersion: '${{ parameters.TF_VERSION }}'
+#- task: TerraformInstaller@1
+#  displayName: Terraform Install
+#  inputs:
+#    terraformVersion: '${{ parameters.TF_VERSION }}'
 
 #- task: Bash@3
 #  displayName: Echo Vars - Testing Task
@@ -43,21 +43,21 @@ steps:
 #      echo $(ARM_SUBSCRIPTION_ID)
 #      echo $(STATE_BLOB)
 
-- task: AzureCLI@2
-  displayName: Terraform Login
-  inputs:
-    azureSubscription: '${{ parameters.SERVICE_CONNECTION }}'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az account set -s "$(ARM_SUBSCRIPTION_ID)"
-      echo "##vso[task.setvariable variable=ARM_CLIENT_ID]$servicePrincipalId"
-      echo "##vso[task.setvariable variable=ARM_OIDC_TOKEN]$idToken"
-      echo "##vso[task.setvariable variable=ARM_USE_OIDC]true"
-      echo "##vso[task.setvariable variable=ARM_SUBSCRIPTION_ID]$subscriptionId"
-      echo "##vso[task.setvariable variable=ARM_TENANT_ID]$tenantId"
-      echo $(STATE_BLOB)
-    addSpnToEnvironment: true
+#- task: AzureCLI@2
+#   displayName: Terraform Login
+#   inputs:
+#     azureSubscription: '${{ parameters.SERVICE_CONNECTION }}'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: |
+#       az account set -s "$(ARM_SUBSCRIPTION_ID)"
+#       echo "##vso[task.setvariable variable=ARM_CLIENT_ID]$servicePrincipalId"
+#       echo "##vso[task.setvariable variable=ARM_OIDC_TOKEN]$idToken"
+#       echo "##vso[task.setvariable variable=ARM_USE_OIDC]true"
+#       echo "##vso[task.setvariable variable=ARM_SUBSCRIPTION_ID]$subscriptionId"
+#       echo "##vso[task.setvariable variable=ARM_TENANT_ID]$tenantId"
+#       echo $(STATE_BLOB)
+#     addSpnToEnvironment: true
 
 #- task: AzureCLI@2
 #   inputs:
