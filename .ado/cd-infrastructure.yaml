@@ -2,7 +2,7 @@ parameters:
   - name: service_connection
     displayName: Environment Service Connection
     type: string
-    default: sp-mac-dtos
+    default: fed-mac-dtos
   - name: environment
     displayName: Environment
     type: string
@@ -33,7 +33,13 @@ steps:
     azureSubscription: 'sp-mac-dtos'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: az account set --subscription $(ARM_SUBSCRIPTION_ID)
+    inlineScript: |
+      az account set --subscription $(ARM_SUBSCRIPTION_ID)
+      echo "##vso[task.setvariable variable=ARM_CLIENT_ID]$servicePrincipalId"
+      echo "##vso[task.setvariable variable=ARM_OIDC_TOKEN]$idToken"
+      echo "##vso[task.setvariable variable=ARM_USE_OIDC]true"
+      echo "##vso[task.setvariable variable=ARM_SUBSCRIPTION_ID]$subscriptionId"
+      echo "##vso[task.setvariable variable=ARM_TENANT_ID]$tenantId"
 
 - task: Bash@3
   displayName: Terraform Init
