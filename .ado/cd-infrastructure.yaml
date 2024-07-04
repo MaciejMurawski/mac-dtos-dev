@@ -70,6 +70,7 @@ stages:
     dependsOn: [terraform_init]
     jobs:
       - deployment: terraform_apply
+        displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
         environment: dtos_dev
         strategy:
          runOnce:
