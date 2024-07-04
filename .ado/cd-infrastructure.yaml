@@ -114,5 +114,5 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
-    commandOptions: '-var-file=/environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
+    commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
     environmentServiceNameAzureRM: 'fed-mac-dtos'
