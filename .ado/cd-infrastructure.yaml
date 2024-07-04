@@ -54,58 +54,51 @@ steps:
       echo "##vso[task.setvariable variable=ARM_TENANT_ID]$tenantId"
     addSpnToEnvironment: true
 
-- task: AzureCLI@2
+#- task: AzureCLI@2
+#   inputs:
+#     azureSubscription: '${{ parameters.SERVICE_CONNECTION }}'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)'
+#     inlineScript: |
+#       az account set -s $(az account show --query id -o tsv)
+#       cd infrastructure
+#       terraform init \
+#       -backend-config="resource_group_name=$(STATE_RG)" \
+#       -backend-config="storage_account_name=$(STATE_SA)" \
+#       -backend-config="container_name=$(STATE_CONT)" \
+#       -backend-config="key=$(STATE_BLOB)"
+# #      make terraform-init dir="infrastructure" opts="--backend-config=environments/secrets/backend_config.template"
+
+
+
+# - task: Bash@3
+#   displayName: Terraform Plan
+#   inputs:
+#     targetType: 'inline'
+#     script: 'make terraform-plan dir="infrastructure" opts="-var-file=infrastructure/environments/${{ parameters.environment }}.tfvars.config"'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+- task: TerraformTaskV4@4
+  continueOnError: false
+  displayName: TerraformInit
   inputs:
-    azureSubscription: '${{ parameters.SERVICE_CONNECTION }}'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    inlineScript: |
-      az account set -s $(az account show --query id -o tsv)
-      cd infrastructure
-      terraform init \
-      -backend-config="resource_group_name=$(STATE_RG)" \
-      -backend-config="storage_account_name=$(STATE_SA)" \
-      -backend-config="container_name=$(STATE_CONT)" \
-      -backend-config="key=$(STATE_BLOB)"
-      -backend-config="subscription_id=$(STATE_SUB_ID)"
-#      make terraform-init dir="infrastructure" opts="--backend-config=environments/secrets/backend_config.template"
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+    backendAzureRmUseEnvironmentVariablesForAuthentication: false
+    backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
+    backendAzureRmResourceGroupName: $(STATE_RG)
+    backendAzureRmStorageAccountName: $(STATE_SA)
+    backendAzureRmContainerName: $(STATE_CONT)
+    backendAzureRmKey: $(STATE_BLOB)
 
-
-
-- task: Bash@3
-  displayName: Terraform Plan
+- task: TerraformTaskV4@4
+  continueOnError: false
+  displayName: TerraformPlan - ${{ parameters.environment }} Environment
   inputs:
-    targetType: 'inline'
-    script: 'make terraform-plan dir="infrastructure" opts="-var-file=infrastructure/environments/${{ parameters.environment }}.tfvars.config"'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-
-#stages:
-#  - stage: validate
-#    jobs:
-#    - job: validate
-#      continueOnError: false
-#      steps:
-#        - task: TerraformTaskV4@4
-#          continueOnError: false
-#          displayName: TerraformInit
-#          inputs:
-#            provider: 'azurerm'
-#            command: 'init'
-#            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-#            backendAzureRmUseEnvironmentVariablesForAuthentication: false
-#            backendServiceArm: 'sp-mac-dtos'
-#            backendAzureRmResourceGroupName: 'rg-dtos-state'
-#            backendAzureRmStorageAccountName: 'samacdtosdevstate'
-#            backendAzureRmContainerName: 'tfstate'
-#            backendAzureRmKey: 'dev.dtos.tfstate'
-#
-#        - task: TerraformTaskV4@4
-#          continueOnError: false
-#          displayName: TerraformPlan - ${{ parameters.environment }} Environment
-#          inputs:
-#            provider: 'azurerm'
-#            command: 'plan'
-#            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-#            commandOptions: '-var-file=environments/dtos_${{ parameters.environment }}.tfvars.config'
-#            environmentServiceNameAzureRM: 'sp-mac-dtos'
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+    commandOptions: '-var-file=environments/${{ parameters.environment }}.tfvars.config'
+    environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
