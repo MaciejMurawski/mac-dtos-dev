@@ -1,4 +1,8 @@
 parameters:
+  - name: PLAN_ONLY
+    displayName: Execute plan-only
+    type: boolean
+    default: true
   - name: SERVICE_CONNECTION
     displayName: Environment Service Connection
     type: string
@@ -28,6 +32,9 @@ resources:
 
 variables:
   - group: dtos_dev_variables
+  - ${{ if eq(parameters.PLAN_ONLY, true) }}:
+    - name: TF_PLAN
+      value: 'true'
 
 pool:
   vmImage: ubuntu-latest
@@ -88,35 +95,17 @@ stages:
             steps:
             
               - checkout: MyGitHubRepo
-              
-              - bash: |
-                  echo "Apply the created plan"
-                  cd '${{ parameters.TF_DIRECTORY }}'
-                  ls -l
 
               - task: TerraformTaskV4@4
-                continueOnError: false
-                displayName: Terraform Init
-                inputs:
-                  provider: 'azurerm'
-                  command: 'init'
-                  backendAzureRmUseEnvironmentVariablesForAuthentication: false
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-                  backendServiceArm: 'fed-mac-dtos'
-                  backendAzureRmResourceGroupName: 'rg-dtos-state'
-                  backendAzureRmStorageAccountName: 'samacdtosdevstate'
-                  backendAzureRmContainerName: 'tfstate'
-                  backendAzureRmKey: '$(STATE_BLOB)'
-
-              - task: TerraformTaskV4@4
+                condition: and(succeeded(),ne(variables['TF_PLAN'],'true'))
                 continueOnError: false
                 displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
                 inputs:
                   provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: '${{ parameters.TF_DIRECTORY }}'
-                  commandOptions: '${{ parameters.ENVIRONMENT }}.tfplan'
-                  environmentServiceNameAzureRM: 'fed-mac-dtos'
+                  commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
+                  environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
 
 
 
