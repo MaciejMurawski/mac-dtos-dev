@@ -38,7 +38,7 @@ stages:
           displayName: Terraform Init
           inputs:
             provider: 'azurerm'
-            command: 'init'
+            command: 'init' 
             workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
             backendAzureRmUseEnvironmentVariablesForAuthentication: false
             backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
@@ -78,6 +78,7 @@ stages:
             steps: 
               - bash: |
                   echo "Apply the created plan"
+                  ls -l
 
               - task: TerraformTaskV4@4
                 continueOnError: false
@@ -94,6 +95,8 @@ stages:
                   backendAzureRmKey: $(STATE_BLOB)
 
               - task: TerraformTaskV4@4
+                continueOnError: false
+                displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
                 inputs:
                   provider: 'azurerm'
                   command: 'apply'
