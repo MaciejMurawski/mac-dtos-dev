@@ -19,7 +19,15 @@ parameters:
     displayName: Directory with Terraform Code
     type: string
     default: '$(System.DefaultWorkingDirectory)/infrastructure'
-
+  - name: DEV_REPO_ENDPOINT
+    displayName: Repository endpoint
+    type: string
+    default: MaciejMurawski
+  - name: DEV_REPO_NAME
+    displayName: Repository name
+    type: string
+    default: MaciejMurawski/mac-dtos-dev
+  
 trigger: none
 
 variables:
@@ -32,8 +40,8 @@ resources:
   repositories:
   - repository: MyGitHubRepo
     type: github
-    endpoint: MaciejMurawski
-    name: MaciejMurawski/mac-dtos-dev
+    endpoint: MaciejMurawski # '${{ parameters.DEV_REPO_ENDPOINT }}'
+    name: MaciejMurawski/mac-dtos-dev # '${{ parameters.DEV_REPO_NAME }}'
     ref: main
 
 pool:
