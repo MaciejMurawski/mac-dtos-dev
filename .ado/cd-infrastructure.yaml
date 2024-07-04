@@ -33,7 +33,8 @@ steps:
     targetType: 'inline'
     workingDirectory: '$(System.DefaultWorkingDirectory/infrastructure)'
     # script: 'make terraform-init dir="infrastructure"'
-    script: 'echo ls &&
+    script: '|
+      echo ls &&
       ls -l &&
       echo $(ARM_SUBSCRIPTION_ID) &&
       echo $(STATE_BLOB)'
