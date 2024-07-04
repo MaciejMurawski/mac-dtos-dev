@@ -89,7 +89,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'validate'
-    workingDirectory: '''${{ parameters.TF_DIRECTORY }}'''
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
    
 - task: TerraformTaskV4@4
   continueOnError: false
