@@ -37,7 +37,7 @@ steps:
       echo ls &&
       ls -l &&
       echo $(ARM_SUBSCRIPTION_ID) &&
-      echo $(STATE_BLOB)'
+      echo $(STATE_BLOB)
 
 - task: AzureCLI@2
   displayName: Terraform Login
