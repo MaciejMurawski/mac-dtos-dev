@@ -1,16 +1,20 @@
 parameters:
-  - name: service_connection
+  - name: SERVICE_CONNECTION
     displayName: Environment Service Connection
     type: string
     default: fed-mac-dtos
-  - name: environment
+  - name: ENVIRONMENT
     displayName: Environment
     type: string
     default: dev
-  - name: tf_version
-    displayName: Environment
+  - name: TF_VERSION
+    displayName: Terraform Version
     type: string
     default: 1.5.7
+  - name: TF_DIRECTORY
+    displayName: Directory with Terraform Code
+    type: string
+    default: '$(System.DefaultWorkingDirectory)/infrastructure'
 
 trigger: none
 
@@ -85,7 +89,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+    workingDirectory: $(TF_DIRECTORY)
     backendAzureRmUseEnvironmentVariablesForAuthentication: false
     backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
     backendAzureRmResourceGroupName: $(STATE_RG)
@@ -99,6 +103,6 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+    workingDirectory: $(TF_DIRECTORY)
     commandOptions: '-var-file=environments/${{ parameters.environment }}.tfvars.config'
     environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
