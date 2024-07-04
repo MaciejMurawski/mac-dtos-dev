@@ -62,7 +62,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
     inlineScript: |
       echo "Subscription variable:"
-      echo $(ARM_SUBSCRIPTION_ID)
+      az account show --query id -o tsv
       echo "..."
       az account set -s "$(ARM_SUBSCRIPTION_ID)"
       terraform init \
