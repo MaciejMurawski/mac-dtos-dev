@@ -30,7 +30,7 @@ steps:
 - task: AzureCLI@2
   displayName: Terraform Login
   inputs:
-    azureSubscription: 'sp-mac-dtos'
+    azureSubscription: '${{ parameters.SERVICE_CONNECTION }}'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
