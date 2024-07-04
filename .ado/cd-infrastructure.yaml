@@ -76,7 +76,7 @@ stages:
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
     dependsOn: [terraform_init]
-  
+    
     jobs:
       
       - deployment: terraform_apply
@@ -85,7 +85,10 @@ stages:
         strategy:
          runOnce:
            deploy:
-            steps: 
+            steps:
+            
+              - checkout: MyGitHubRepo
+              
               - bash: |
                   echo "Apply the created plan"
                   cd '${{ parameters.TF_DIRECTORY }}'
