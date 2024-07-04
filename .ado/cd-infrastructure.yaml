@@ -22,19 +22,19 @@ parameters:
 
 trigger: none
 
-resources:
-  repositories:
-  - repository: MyGitHubRepo
-    type: github
-    endpoint: MaciejMurawski
-    name: MaciejMurawski/mac-dtos-dev
-    ref: main
-
 variables:
   - group: dtos_dev_variables
   - ${{ if eq(parameters.PLAN_ONLY, true) }}:
     - name: TF_PLAN
       value: 'true'
+
+resources:
+  repositories:
+  - repository: MyGitHubRepo
+    type: github
+    endpoint: $(DEV_REPO_ENDPOINT)
+    name: $(DEV_REPO_NAME)
+    ref: main
 
 pool:
   vmImage: ubuntu-latest
