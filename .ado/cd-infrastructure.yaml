@@ -23,6 +23,7 @@ pool:
 steps:
 
 - task: TerraformInstaller@1
+  displayName: Terraform Init
   inputs:
     terraformVersion: '${{ parameters.TF_VERSION }}'
 
