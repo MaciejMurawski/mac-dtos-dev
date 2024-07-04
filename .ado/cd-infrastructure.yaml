@@ -89,7 +89,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: $(TF_DIRECTORY)
+    workingDirectory: '${{ parameters.TF_DIRECTORY }}'
     backendAzureRmUseEnvironmentVariablesForAuthentication: false
     backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
     backendAzureRmResourceGroupName: $(STATE_RG)
@@ -103,6 +103,6 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    workingDirectory: $(TF_DIRECTORY)
+    workingDirectory: '${{ parameters.TF_DIRECTORY }}'
     commandOptions: '-var-file=environments/${{ parameters.environment }}.tfvars.config'
     environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
