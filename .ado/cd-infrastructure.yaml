@@ -83,9 +83,9 @@ stages:
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
     dependsOn: [terraform_init]
+    condition: and(succeeded(),ne(variables['TF_PLAN'],'true'))
     
     jobs:
-      
       - deployment: terraform_apply
         displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
         environment: dtos_dev
@@ -93,11 +93,8 @@ stages:
          runOnce:
            deploy:
             steps:
-            
               - checkout: MyGitHubRepo
-
               - task: TerraformTaskV4@4
-                condition: and(succeeded(),ne(variables['TF_PLAN'],'true'))
                 continueOnError: false
                 displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
                 inputs:
