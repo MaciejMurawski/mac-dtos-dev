@@ -31,17 +31,17 @@ steps:
   inputs:
     terraformVersion: '${{ parameters.TF_VERSION }}'
 
-- task: Bash@3
-  displayName: Echo Vars - Testing Task
-  inputs:
-    targetType: 'inline'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-    # script: 'make terraform-init dir="infrastructure"'
-    script: |
-      echo ls
-      ls -l
-      echo $(ARM_SUBSCRIPTION_ID)
-      echo $(STATE_BLOB)
+#- task: Bash@3
+#  displayName: Echo Vars - Testing Task
+#  inputs:
+#    targetType: 'inline'
+#    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+#    # script: 'make terraform-init dir="infrastructure"'
+#    script: |
+#      echo ls
+#      ls -l
+#      echo $(ARM_SUBSCRIPTION_ID)
+#      echo $(STATE_BLOB)
 
 - task: AzureCLI@2
   displayName: Terraform Login
