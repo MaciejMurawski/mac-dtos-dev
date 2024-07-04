@@ -27,6 +27,18 @@ steps:
   inputs:
     terraformVersion: '${{ parameters.TF_VERSION }}'
 
+- task: Bash@3
+  displayName: Echo Vars
+  inputs:
+    targetType: 'inline'
+    workingDirectory: '$(System.DefaultWorkingDirectory/infrastructure)'
+    # script: 'make terraform-init dir="infrastructure"'
+    script: 'echo ls &&
+      ls -l &&
+      echo $(ARM_SUBSCRIPTION_ID) &&
+      echo $(STATE_BLOB)'
+
+
 - task: AzureCLI@2
   displayName: Terraform Login
   inputs:
@@ -45,8 +57,10 @@ steps:
   displayName: Terraform Init
   inputs:
     targetType: 'inline'
-    script: 'make terraform-init dir="infrastructure"'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(System.DefaultWorkingDirectory/infrastructure)'
+    # script: 'make terraform-init dir="infrastructure"'
+    script: 'terraform init -backend-config="resource_group_name=$(STATE_RG)" -backend-config="storage_account_name=$(STATE_SA)" -backend-config="container_name=$(STATE_CONT)" -backend-config="key=$(STATE_BLOB)"'
+
 
 - task: Bash@3
   displayName: Terraform Plan
