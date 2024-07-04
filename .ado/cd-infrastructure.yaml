@@ -60,11 +60,6 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
     # script: 'make terraform-init dir="infrastructure"'
     script: |
-      echo "Azure login again:"
-      az login
-      az account set -s "$(ARM_SUBSCRIPTION_ID)"
-      echo "\nShow az account detail:"
-      az account show
       terraform init \
       -backend-config="resource_group_name=$(STATE_RG)" \
       -backend-config="storage_account_name=$(STATE_SA)" \
