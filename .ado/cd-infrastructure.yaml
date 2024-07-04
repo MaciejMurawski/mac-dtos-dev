@@ -57,7 +57,7 @@ steps:
   displayName: Terraform Init
   inputs:
     targetType: 'inline'
-    workingDirectory: '$(System.DefaultWorkingDirectory/infrastructure)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
     # script: 'make terraform-init dir="infrastructure"'
     script: 'terraform init -backend-config="resource_group_name=$(STATE_RG)" -backend-config="storage_account_name=$(STATE_SA)" -backend-config="container_name=$(STATE_CONT)" -backend-config="key=$(STATE_BLOB)"'
 
