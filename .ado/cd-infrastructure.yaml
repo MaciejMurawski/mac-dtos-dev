@@ -101,7 +101,7 @@ stages:
                 inputs:
                   provider: 'azurerm'
                   command: 'apply'
-                  workingDirectory: '''${{ parameters.TF_DIRECTORY }}'''
+                  workingDirectory: '${{ parameters.TF_DIRECTORY }}'
                   commandOptions: '${{ parameters.ENVIRONMENT }}.tfplan'
                   environmentServiceNameAzureRM: 'fed-mac-dtos'
 
