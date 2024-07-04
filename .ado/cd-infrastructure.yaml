@@ -30,7 +30,7 @@ stages:
     dependsOn: []
     jobs:
       - job: init_and_validate
-        displayName: Terraform Init and Validate
+        displayName: Terraform Init and Plan
         steps:
           
         - task: TerraformTaskV4@4
@@ -62,7 +62,7 @@ stages:
             provider: 'azurerm'
             command: 'plan'
             workingDirectory: '${{ parameters.TF_DIRECTORY }}'
-            commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
+            commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=${{ parameters.ENVIRONMENT }}.tfplan'
             environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
 
   - stage: terraform_apply
