@@ -83,13 +83,6 @@ steps:
 #     script: 'make terraform-plan dir="infrastructure" opts="-var-file=infrastructure/environments/${{ parameters.environment }}.tfvars.config"'
 #     workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-- task: TerraformTaskV4@4
-  continueOnError: false
-  displayName: Terraform Validate
-  inputs:
-    provider: 'azurerm'
-    command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
    
 - task: TerraformTaskV4@4
   continueOnError: false
@@ -104,6 +97,14 @@ steps:
     backendAzureRmStorageAccountName: $(STATE_SA)
     backendAzureRmContainerName: $(STATE_CONT)
     backendAzureRmKey: $(STATE_BLOB)
+
+- task: TerraformTaskV4@4
+  continueOnError: false
+  displayName: Terraform Validate
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
 
 - task: TerraformTaskV4@4
   displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }} Environment
