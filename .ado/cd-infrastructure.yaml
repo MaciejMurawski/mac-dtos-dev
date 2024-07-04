@@ -51,5 +51,5 @@ stages:
             provider: 'azurerm'
             command: 'plan'
             workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-            commandOptions: '-var-file=infrastructure/environments/dev.tfvars.config'
+            commandOptions: '-var-file=environments/dev.tfvars.config'
             environmentServiceNameAzureRM: 'sp-mac-dtos'
