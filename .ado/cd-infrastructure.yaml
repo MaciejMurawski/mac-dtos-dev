@@ -55,6 +55,7 @@ steps:
       az group create --name "rg-testing-mac" --location "uksouth"
     addSpnToEnvironment: true
 
+- bash: az login --service-principal
 - task: Bash@3
   displayName: Terraform Init
   inputs:
@@ -62,11 +63,6 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
     # script: 'make terraform-init dir="infrastructure"'
     script: |
-      echo "##vso[task.setvariable variable=ARM_CLIENT_ID]$servicePrincipalId"
-      echo "##vso[task.setvariable variable=ARM_OIDC_TOKEN]$idToken"
-      echo "##vso[task.setvariable variable=ARM_USE_OIDC]true"
-      echo "##vso[task.setvariable variable=ARM_SUBSCRIPTION_ID]$subscriptionId"
-      echo "##vso[task.setvariable variable=ARM_TENANT_ID]$tenantId"
       terraform init \
       -backend-config="resource_group_name=$(STATE_RG)" \
       -backend-config="storage_account_name=$(STATE_SA)" \
