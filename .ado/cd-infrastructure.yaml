@@ -77,6 +77,13 @@ stages:
             steps: 
               - bash: |
                   echo "Apply the created plan"
+              - task: TerraformTaskV4@4
+                inputs:
+                  provider: 'azurerm'
+                  command: 'apply'
+                  workingDirectory: '''${{ parameters.TF_DIRECTORY }}'''
+                  commandOptions: '${{ parameters.ENVIRONMENT }}.tfplan'
+                  environmentServiceNameAzureRM: 'fed-mac-dtos'
 
 
 
