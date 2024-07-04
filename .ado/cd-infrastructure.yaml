@@ -59,14 +59,15 @@ steps:
     azureSubscription: '${{ parameters.SERVICE_CONNECTION }}'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
     inlineScript: |
       az account set -s $(az account show --query id -o tsv)
-      terraform init \
-      -backend-config="resource_group_name=$(STATE_RG)" \
-      -backend-config="storage_account_name=$(STATE_SA)" \
-      -backend-config="container_name=$(STATE_CONT)" \
-      -backend-config="key=$(STATE_BLOB)"
+      make terraform-init dir=infrastructure
+#      terraform init \
+#      -backend-config="resource_group_name=$(STATE_RG)" \
+#      -backend-config="storage_account_name=$(STATE_SA)" \
+#      -backend-config="container_name=$(STATE_CONT)" \
+#      -backend-config="key=$(STATE_BLOB)"
 
 
 - task: Bash@3
