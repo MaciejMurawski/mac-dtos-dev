@@ -31,7 +31,7 @@ steps:
   displayName: Echo Vars
   inputs:
     targetType: 'inline'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
     # script: 'make terraform-init dir="infrastructure"'
     script: |
       echo ls &&
@@ -66,7 +66,7 @@ steps:
   displayName: Terraform Plan
   inputs:
     targetType: 'inline'
-    script: 'make terraform-plan dir="infrastructure" opts="-var-file=infrastructure/environments/dtos_${{ parameters.environment }}.tfvars.config"'
+    script: 'make terraform-plan dir="infrastructure" opts="-var-file=infrastructure/environments/${{ parameters.environment }}.tfvars.config"'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
 
 #stages:
