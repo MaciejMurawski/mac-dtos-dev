@@ -61,10 +61,7 @@ steps:
     scriptLocation: 'inlineScript'
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
     inlineScript: |
-      echo "Subscription variable:"
-      az account show --query id -o tsv
-      echo "..."
-      az account set -s "$(ARM_SUBSCRIPTION_ID)"
+      az account set -s $(az account show --query id -o tsv)
       terraform init \
       -backend-config="resource_group_name=$(STATE_RG)" \
       -backend-config="storage_account_name=$(STATE_SA)" \
