@@ -78,6 +78,7 @@ stages:
             steps: 
               - bash: |
                   echo "Apply the created plan"
+                  cd '${{ parameters.TF_DIRECTORY }}'
                   ls -l
 
               - task: TerraformTaskV4@4
@@ -86,8 +87,8 @@ stages:
                 inputs:
                   provider: 'azurerm'
                   command: 'init'
-                  workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
                   backendAzureRmUseEnvironmentVariablesForAuthentication: false
+                  workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
                   backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
                   backendAzureRmResourceGroupName: $(STATE_RG)
                   backendAzureRmStorageAccountName: $(STATE_SA)
