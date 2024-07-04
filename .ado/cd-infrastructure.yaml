@@ -61,6 +61,9 @@ steps:
     scriptLocation: 'inlineScript'
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
     inlineScript: |
+      echo "Subscription variable:"
+      echo $(ARM_SUBSCRIPTION_ID)
+      echo "..."
       az account set -s "$(ARM_SUBSCRIPTION_ID)"
       terraform init \
       -backend-config="resource_group_name=$(STATE_RG)" \
