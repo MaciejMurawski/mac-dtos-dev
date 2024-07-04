@@ -57,7 +57,7 @@ stages:
 
   - stage: terraform_plan
     displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }}
-    dependsOn: []
+    dependsOn: [terraform_init]
     jobs:
       - deployment: terraform_plan
         environment: dtos_dev
