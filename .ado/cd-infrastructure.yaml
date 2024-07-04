@@ -22,17 +22,27 @@ pool:
 
 steps:
 
-- task: Bash@3
-  displayName: TF Install
+- task: TerraformInstaller@1
   inputs:
-    targetType: 'inline'
-    script: 'apt-get install terraform --version ${{ parameters.TF_VERSION }}'
+    terraformVersion: '${{ parameters.TF_VERSION }}'
+
 - task: AzureCLI@2
+  displayName: Terraform Init
   inputs:
     azureSubscription: 'sp-mac-dtos'
     scriptType: 'bash'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az login'
+    inlineScript: 'make terraform-init dir="infrastructure"'
+
+- task: AzureCLI@2
+  displayName: Terraform Plan
+  inputs:
+    azureSubscription: 'sp-mac-dtos'
+    scriptType: 'bash'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'make terraform-plan dir="infrastructure" opts="-var-file=infrastructure/environments/dtos_${{ parameters.environment }}.tfvars.config"'
 #stages:
 #  - stage: validate
 #    jobs:
