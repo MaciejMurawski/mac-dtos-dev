@@ -111,11 +111,6 @@ steps:
   displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }} Environment
   continueOnError: false
   inputs:
-    backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
-    backendAzureRmResourceGroupName: $(STATE_RG)
-    backendAzureRmStorageAccountName: $(STATE_SA)
-    backendAzureRmContainerName: $(STATE_CONT)
-    backendAzureRmKey: $(STATE_BLOB)
     provider: 'azurerm'
     command: 'plan'
     workingDirectory: '${{ parameters.TF_DIRECTORY }}'
