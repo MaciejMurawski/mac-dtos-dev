@@ -24,7 +24,57 @@ variables:
 pool:
   vmImage: ubuntu-latest
 
-steps:
+stages:
+  - stage: terraform_init
+    displayName: Terraform Init
+    dependsOn: []
+    jobs:
+      - job: init_and_validate
+        displayName: Terraform Init and Validate
+        steps:
+          
+        - task: TerraformTaskV4@4
+          continueOnError: false
+          displayName: Terraform Init
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
+            backendAzureRmUseEnvironmentVariablesForAuthentication: false
+            backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
+            backendAzureRmResourceGroupName: $(STATE_RG)
+            backendAzureRmStorageAccountName: $(STATE_SA)
+            backendAzureRmContainerName: $(STATE_CONT)
+            backendAzureRmKey: $(STATE_BLOB)
+
+        - task: TerraformTaskV4@4
+          continueOnError: false
+          displayName: Terraform Validate
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
+
+  - stage: terraform_plan
+    displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }}
+    dependsOn: []
+    jobs:
+      - deployment: terraform_plan
+        environment: dtos_dev
+        strategy:
+         runOnce:
+           deploy:
+            steps: 
+            - task: TerraformTaskV4@4
+              displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }} Environment
+              continueOnError: false
+              inputs:
+                provider: 'azurerm'
+                command: 'plan'
+                workingDirectory: '${{ parameters.TF_DIRECTORY }}'
+                commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
+                environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
+
 
 #- task: TerraformInstaller@1
 #  displayName: Terraform Install
@@ -83,36 +133,3 @@ steps:
 #     targetType: 'inline'
 #     script: 'make terraform-plan dir="infrastructure" opts="-var-file=infrastructure/environments/${{ parameters.environment }}.tfvars.config"'
 #     workingDirectory: '$(System.DefaultWorkingDirectory)'
-
-   
-- task: TerraformTaskV4@4
-  continueOnError: false
-  displayName: Terraform Init
-  inputs:
-    provider: 'azurerm'
-    command: 'init'
-    workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
-    backendAzureRmUseEnvironmentVariablesForAuthentication: false
-    backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
-    backendAzureRmResourceGroupName: $(STATE_RG)
-    backendAzureRmStorageAccountName: $(STATE_SA)
-    backendAzureRmContainerName: $(STATE_CONT)
-    backendAzureRmKey: $(STATE_BLOB)
-
-- task: TerraformTaskV4@4
-  continueOnError: false
-  displayName: Terraform Validate
-  inputs:
-    provider: 'azurerm'
-    command: 'validate'
-    workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
-
-- task: TerraformTaskV4@4
-  displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }} Environment
-  continueOnError: false
-  inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    workingDirectory: '${{ parameters.TF_DIRECTORY }}'
-    commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
-    environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
