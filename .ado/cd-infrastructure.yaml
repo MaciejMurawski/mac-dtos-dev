@@ -33,7 +33,7 @@ steps:
     azureSubscription: 'sp-mac-dtos'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: az account show
+    inlineScript: az account set --subscription $(ARM_SUBSCRIPTION_ID)
 
 - task: Bash@3
   displayName: Terraform Init
