@@ -32,8 +32,8 @@ resources:
   repositories:
   - repository: MyGitHubRepo
     type: github
-    endpoint: $(DEV_REPO_ENDPOINT)
-    name: $(DEV_REPO_NAME)
+    endpoint: MaciejMurawski
+    name: MaciejMurawski/mac-dtos-dev
     ref: main
 
 pool:
