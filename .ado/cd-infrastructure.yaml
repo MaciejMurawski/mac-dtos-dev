@@ -88,12 +88,12 @@ stages:
                   provider: 'azurerm'
                   command: 'init'
                   backendAzureRmUseEnvironmentVariablesForAuthentication: false
-                  workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
-                  backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
-                  backendAzureRmResourceGroupName: $(STATE_RG)
-                  backendAzureRmStorageAccountName: $(STATE_SA)
-                  backendAzureRmContainerName: $(STATE_CONT)
-                  backendAzureRmKey: $(STATE_BLOB)
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+                  backendServiceArm: 'fed-mac-dtos'
+                  backendAzureRmResourceGroupName: 'rg-dtos-state'
+                  backendAzureRmStorageAccountName: 'samacdtosdevstate'
+                  backendAzureRmContainerName: 'tfstate'
+                  backendAzureRmKey: '$(STATE_BLOB)'
 
               - task: TerraformTaskV4@4
                 continueOnError: false
