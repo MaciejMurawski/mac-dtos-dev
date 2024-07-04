@@ -59,6 +59,7 @@ steps:
     azureSubscription: '${{ parameters.SERVICE_CONNECTION }}'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
     inlineScript: |
       az account set -s "$(ARM_SUBSCRIPTION_ID)"
       terraform init \
