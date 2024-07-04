@@ -90,7 +90,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+    workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
     backendAzureRmUseEnvironmentVariablesForAuthentication: false
     backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
     backendAzureRmResourceGroupName: $(STATE_RG)
@@ -104,7 +104,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+    workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
 
 - task: TerraformTaskV4@4
   displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }} Environment
@@ -112,6 +112,6 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+    workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
     commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
     environmentServiceNameAzureRM: 'fed-mac-dtos'
