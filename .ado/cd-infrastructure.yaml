@@ -18,6 +18,14 @@ parameters:
 
 trigger: none
 
+resources:
+  repositories:
+  - repository: MyGitHubRepo
+    type: github
+    endpoint: MaciejMurawski
+    name: MaciejMurawski/mac-dtos-dev
+    ref: main
+
 variables:
   - group: dtos_dev_variables
 
@@ -68,12 +76,6 @@ stages:
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
     dependsOn: [terraform_init]
-    
-    variables:
-      - group: dtos_dev_variables
-
-    pool:
-      vmImage: ubuntu-latest
   
     jobs:
       
