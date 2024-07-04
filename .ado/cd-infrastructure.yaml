@@ -46,8 +46,8 @@ steps:
   displayName: Terraform Plan
   inputs:
     targetType: 'inline'
-    script: 'make terraform-init dir="infrastructure"'
-    workingDirectory: 'make terraform-plan dir="infrastructure" opts="-var-file=infrastructure/environments/dtos_${{ parameters.environment }}.tfvars.config"'
+    script: 'make terraform-plan dir="infrastructure" opts="-var-file=infrastructure/environments/dtos_${{ parameters.environment }}.tfvars.config"'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 
 #stages:
 #  - stage: validate
