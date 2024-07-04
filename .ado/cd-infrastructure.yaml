@@ -67,7 +67,7 @@ steps:
       -backend-config="storage_account_name=$(STATE_SA)" \
       -backend-config="container_name=$(STATE_CONT)" \
       -backend-config="key=$(STATE_BLOB)"
-      -backend-config="subscription=$(STATE_SUB_ID)"
+      -backend-config="subscription_id=$(STATE_SUB_ID)"
 #      make terraform-init dir="infrastructure" opts="--backend-config=environments/secrets/backend_config.template"
 
 
