@@ -21,13 +21,18 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
+- task: Bash@3
+  displayName: TF Install
+  inputs:
+    targetType: 'inline'
+    script: 'apt-get install terraform --version ${{ parameters.TF_VERSION }}'
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'sp-mac-dtos'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'apt-get install terraform --version ${{ parameters.TF_VERSION }}'
-
+    inlineScript: 'az login'
 #stages:
 #  - stage: validate
 #    jobs:
