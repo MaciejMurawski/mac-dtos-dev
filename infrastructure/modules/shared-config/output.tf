@@ -34,7 +34,7 @@ locals {
     route-table                 = upper("RT-${var.env}-${var.location_map[var.location]}-${var.application}")
     service-bus                 = lower("SB-${var.location_map[var.location]}-${var.env}-${var.application}")
     service-principal           = upper("SP-${var.env}-${var.application}")
-    sql-server                  = lower("SQLSVR-${var.application}-${var.env}-${var.location_map[var.location]}")
+    sql-server                  = lower("SQLSVR-${var.application}-${var.env}-${var.location_map[var.location]}-mac")
     sql-server-db               = lower("SQLDB-${var.application}-${var.env}-${var.location_map[var.location]}")
     sql-server-managed-instance = lower("SQLMI-${var.env}-${var.location_map[var.location]}-${var.application}")
     stack-dns-suffix            = "${lower(var.env)}${lower(var.application)}"
