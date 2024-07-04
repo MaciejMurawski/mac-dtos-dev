@@ -28,7 +28,7 @@ steps:
     terraformVersion: '${{ parameters.TF_VERSION }}'
 
 - task: Bash@3
-  displayName: Echo Vars
+  displayName: Echo Vars - Testing Task
   inputs:
     targetType: 'inline'
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
