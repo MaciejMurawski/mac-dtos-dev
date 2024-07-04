@@ -111,16 +111,6 @@ steps:
   displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }} Environment
   continueOnError: false
   inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
-    commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
-    environmentServiceNameAzureRM: 'fed-mac-dtos'
-
-- task: TerraformTaskV4@4
-  displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }} Environment
-  continueOnError: false
-  inputs:
     backendServiceArm: '${{ parameters.SERVICE_CONNECTION }}'
     backendAzureRmResourceGroupName: $(STATE_RG)
     backendAzureRmStorageAccountName: $(STATE_SA)
