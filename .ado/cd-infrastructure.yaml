@@ -48,7 +48,7 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-  - stage: terraform_init
+  - stage: terraform_plan
     displayName: Terraform Init
     dependsOn: []
     jobs:
@@ -90,7 +90,7 @@ stages:
 
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
-    dependsOn: [terraform_init]
+    dependsOn: [terraform_plan]
     condition: and(succeeded(),ne(variables['TF_PLAN'],'true'))
     
     jobs:
