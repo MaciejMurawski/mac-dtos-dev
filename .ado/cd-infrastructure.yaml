@@ -102,6 +102,8 @@ stages:
            deploy:
             steps:
               - checkout: MyGitHubRepo
+
+
               - task: TerraformTaskV4@4
                 continueOnError: false
                 displayName: Terraform Init
@@ -115,7 +117,7 @@ stages:
                   backendAzureRmStorageAccountName: $(STATE_SA)
                   backendAzureRmContainerName: $(STATE_CONT)
                   backendAzureRmKey: $(STATE_BLOB)
-                  
+
               - task: TerraformTaskV4@4
                 continueOnError: false
                 displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
