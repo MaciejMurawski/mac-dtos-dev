@@ -36,14 +36,6 @@ variables:
     - name: TF_PLAN
       value: 'true'
 
-resources:
-  repositories:
-  - repository: MyGitHubRepo
-    type: github
-    endpoint: MaciejMurawski # '${{ parameters.DEV_REPO_ENDPOINT }}'
-    name: MaciejMurawski/mac-dtos-dev # '${{ parameters.DEV_REPO_NAME }}'
-    ref: main
-
 pool:
   vmImage: ubuntu-latest
 
@@ -101,8 +93,8 @@ stages:
          runOnce:
            deploy:
             steps:
-              - checkout: MyGitHubRepo
-
+              - checkout: self
+                persistCredentials: true
 
               - task: TerraformTaskV4@4
                 continueOnError: false
