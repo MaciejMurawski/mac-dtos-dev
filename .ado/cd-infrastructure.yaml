@@ -57,9 +57,9 @@ stages:
             provider: 'azurerm'
             command: 'plan'
             workingDirectory: $(TF_DIRECTORY)
-            commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=$(Build.ArtifactStagingDirectory)/${{ parameters.ENVIRONMENT }}.tfplan'
+            commandOptions: '-input=false -no-color -var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=$(Build.ArtifactStagingDirectory)/${{ parameters.ENVIRONMENT }}.tfplan && echo $(Build.ArtifactStagingDirectory)/${{ parameters.ENVIRONMENT }}.tfplan > $(TF_DIRECTORY)/tfplan.txt'
             environmentServiceNameAzureRM: $(SERVICE_CONNECTION)
-        
+
         - task: PublishBuildArtifacts@1
           displayName: "Publish Artifact"
           inputs:
