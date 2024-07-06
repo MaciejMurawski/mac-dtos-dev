@@ -73,7 +73,7 @@ stages:
             environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
         
               
-        - script: copy ${{ parameters.TF_DIRECTORY }}'\${{ parameters.ENVIRONMENT }}.tfplan $(Build.ArtifactStagingDirectory)
+        - script: copy ${{ parameters.TF_DIRECTORY }}'/${{ parameters.ENVIRONMENT }}.tfplan $(Build.ArtifactStagingDirectory)
         
         - task: PublishBuildArtifacts@1
           displayName: "Publish Plan as artifact"
@@ -127,7 +127,7 @@ stages:
                   provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: '${{ parameters.TF_DIRECTORY }}'
-                  commandOptions: '-plan "$(System.ArtifactsDirectory)\${{ parameters.ENVIRONMENT }}.tfplan" -var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
+                  commandOptions: '-plan "$(System.ArtifactsDirectory)/${{ parameters.ENVIRONMENT }}.tfplan" -var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
                   environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
 
 
