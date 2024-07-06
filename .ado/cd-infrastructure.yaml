@@ -19,9 +19,6 @@ variables:
     value: "terraform_plan"
   - name: SERVICE_CONNECTION
     value: fed-mac-dtos
-  - ${{ if eq(parameters.PLAN_ONLY, true) }}:
-    - name: TF_PLAN
-      value: 'true'
 
 pool:
   vmImage: ubuntu-latest
