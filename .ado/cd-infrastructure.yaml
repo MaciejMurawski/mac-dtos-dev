@@ -73,8 +73,9 @@ stages:
             environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
         
         - task: PublishBuildArtifacts@1
+          displayName: "Publish Artifact"
           inputs:
-            PathtoPublish: '${{ parameters.TF_DIRECTORY }}''/${{ parameters.ENVIRONMENT }}.tfplan'
+            PathtoPublish: '${{ parameters.TF_DIRECTORY }}/${{ parameters.ENVIRONMENT }}.tfplan'
             ArtifactName: '${{ parameters.ENVIRONMENT }}.tfplan'
             publishLocation: 'Container'
 
@@ -109,6 +110,7 @@ stages:
                   backendAzureRmKey: $(STATE_BLOB)
               
               - task: DownloadBuildArtifacts@1
+                displayName: "Download Artifact"
                 inputs:
                   buildType: 'current'
                   downloadType: 'single'
