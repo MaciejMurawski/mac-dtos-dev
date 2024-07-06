@@ -76,6 +76,7 @@ stages:
           displayName: "Publish Artifact"
           inputs:
             PathtoPublish: '${{ parameters.TF_DIRECTORY }}/${{ parameters.ENVIRONMENT }}.tfplan'
+            # ArtifactName: '${{ parameters.ENVIRONMENT }}.tfplan'
             publishLocation: 'Container'
 
   - stage: terraform_apply
@@ -113,7 +114,7 @@ stages:
                 inputs:
                   buildType: 'current'
                   downloadType: 'single'
-                  artifactName: '${{ parameters.ENVIRONMENT }}.tfplan'
+                  # artifactName: '${{ parameters.ENVIRONMENT }}.tfplan'
                   downloadPath: '${{ parameters.TF_DIRECTORY }}'
               
               - task: TerraformTaskV4@4
