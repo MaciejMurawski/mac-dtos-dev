@@ -62,7 +62,7 @@ stages:
 
         - bash: | 
             echo $(TF_DIRECTORY)/${{ parameters.ENVIRONMENT }}.tfplan > $(Build.ArtifactStagingDirectory)/tfplan.txt
-            echo "$(Build.ArtifactStagingDirectory)/tfplan.txt"
+            cat $(Build.ArtifactStagingDirectory)/tfplan.txt
             
         - task: PublishBuildArtifacts@1
           displayName: "Publish Artifact"
