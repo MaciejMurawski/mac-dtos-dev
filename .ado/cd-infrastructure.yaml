@@ -75,7 +75,7 @@ stages:
         - task: PublishBuildArtifacts@1
           displayName: "Publish Artifact"
           inputs:
-            PathtoPublish: '${{ parameters.TF_DIRECTORY }}'
+            PathtoPublish: '${{ parameters.TF_DIRECTORY }}/${{ parameters.ENVIRONMENT }}.tfplan'
             ArtifactName: '${{ parameters.ENVIRONMENT }}.tfplan'
             publishLocation: 'Container'
 
@@ -124,7 +124,7 @@ stages:
                   provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: '${{ parameters.TF_DIRECTORY }}'
-                  commandOptions: '"$(System.ArtifactsDirectory)/${{ parameters.ENVIRONMENT }}.tfplan" -var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
+                  commandOptions: '"$(System.ArtifactsDirectory)/${{ parameters.ENVIRONMENT }}.tfplan"'
                   environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
 
 
