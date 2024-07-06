@@ -110,13 +110,12 @@ stages:
                   backendAzureRmKey: $(STATE_BLOB)
               
               - task: DownloadBuildArtifacts@1
-                displayName: "Download Artifact"
                 inputs:
                   buildType: 'current'
-                  downloadType: 'single'
-                  # artifactName: '${{ parameters.ENVIRONMENT }}.tfplan'
-                  downloadPath: '${{ parameters.TF_DIRECTORY }}'
-              
+                  downloadType: 'specific'
+                  itemPattern: '${{ parameters.ENVIRONMENT }}.tfplan'
+                  downloadPath: '${{ parameters.TF_DIRECTORY }}'''
+
               - task: TerraformTaskV4@4
                 continueOnError: false
                 displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
