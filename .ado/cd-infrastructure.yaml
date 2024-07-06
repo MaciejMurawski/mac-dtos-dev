@@ -64,7 +64,7 @@ stages:
             environmentServiceNameAzureRM: $(SERVICE_CONNECTION)
         
         - bash: |
-            $(PLAN_HAS_CHANGES) = $(TerraformPlan.changesPresent)
+            $(PLAN_HAS_CHANGES) == $(TerraformPlan.changesPresent)
             echo "Var PHC:"
             echo $(PLAN_HAS_CHANGES)
             echo "Var TerraformPlan"
