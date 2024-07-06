@@ -77,7 +77,7 @@ stages:
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
     dependsOn: [terraform_plan]
-    condition: and(succeeded(),eq(variables['PLAN_ONLY'],'true'))
+    condition: and(succeeded(),eq(variables['PLAN_ONLY'],'false'))
     
     jobs:
       - deployment: terraform_apply
