@@ -3,10 +3,6 @@ parameters:
     displayName: Execute plan-only
     type: boolean
     default: false
-  - name: SERVICE_CONNECTION
-    displayName: Environment Service Connection
-    type: string
-    default: fed-mac-dtos
   - name: ENVIRONMENT
     displayName: Environment
     type: string
