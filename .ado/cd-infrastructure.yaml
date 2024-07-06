@@ -15,10 +15,6 @@ variables:
   - group: dtos_global
   - name: TF_DIRECTORY
     value: '$(System.DefaultWorkingDirectory)/infrastructure'
-  - name: PLAN_ARTIFACT
-    value: "terraform_plan"
-  - name: SERVICE_CONNECTION
-    value: fed-mac-dtos
 
 pool:
   vmImage: ubuntu-latest
@@ -68,7 +64,7 @@ stages:
           displayName: "Publish Artifact"
           inputs:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-            ArtifactName: $(PLAN_ARTIFACT)
+            ArtifactName: $(TF_PLAN_ARTIFACT)
             publishLocation: 'Container'
 
   - stage: terraform_apply
@@ -92,7 +88,7 @@ stages:
                 inputs:
                   buildType: 'current'
                   downloadType: 'single'
-                  artifactName: $(PLAN_ARTIFACT)
+                  artifactName: $(TF_PLAN_ARTIFACT)
                   downloadPath: $(TF_DIRECTORY)
 
               - task: TerraformTaskV4@4
@@ -116,7 +112,7 @@ stages:
                   provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: $(TF_DIRECTORY)
-                  commandOptions: "$(PLAN_ARTIFACT)/${{ parameters.ENVIRONMENT }}.tfplan"
+                  commandOptions: "$(TF_PLAN_ARTIFACT)/${{ parameters.ENVIRONMENT }}.tfplan"
                   environmentServiceNameAzureRM: $(SERVICE_CONNECTION)
 
 #- task: Bash@3
