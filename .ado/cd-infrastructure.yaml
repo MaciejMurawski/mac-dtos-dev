@@ -76,7 +76,6 @@ stages:
           displayName: "Publish Artifact"
           inputs:
             PathtoPublish: '${{ parameters.TF_DIRECTORY }}/${{ parameters.ENVIRONMENT }}.tfplan'
-            ArtifactName: '${{ parameters.ENVIRONMENT }}.tfplan'
             publishLocation: 'Container'
 
   - stage: terraform_apply
