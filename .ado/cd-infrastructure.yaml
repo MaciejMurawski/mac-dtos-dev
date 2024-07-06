@@ -7,14 +7,6 @@ parameters:
     displayName: Environment
     type: string
     default: dev
-  - name: TF_VERSION
-    displayName: Terraform Version
-    type: string
-    default: 1.5.7
-  - name: TF_DIRECTORY
-    displayName: Directory with Terraform Code
-    type: string
-    default: '$(System.DefaultWorkingDirectory)/infrastructure'
   
 trigger: none
 
@@ -47,7 +39,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init' 
-            workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
+            workingDirectory: $(TF_DIRECTORY)
             backendAzureRmUseEnvironmentVariablesForAuthentication: false
             backendServiceArm: $(SERVICE_CONNECTION)
             backendAzureRmResourceGroupName: $(STATE_RG)
@@ -61,7 +53,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'validate'
-            workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
+            workingDirectory: $(TF_DIRECTORY)
 
         - task: TerraformTaskV4@4
           displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }} Environment
@@ -69,7 +61,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'plan'
-            workingDirectory: '${{ parameters.TF_DIRECTORY }}'
+            workingDirectory: $(TF_DIRECTORY)
             commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=$(Build.ArtifactStagingDirectory)/${{ parameters.ENVIRONMENT }}.tfplan'
             environmentServiceNameAzureRM: $(SERVICE_CONNECTION)
         
@@ -101,7 +93,7 @@ stages:
                   buildType: 'current'
                   downloadType: 'single'
                   artifactName: $(PLAN_ARTIFACT)
-                  downloadPath: '${{ parameters.TF_DIRECTORY }}'
+                  downloadPath: $(TF_DIRECTORY)
 
               - task: TerraformTaskV4@4
                 continueOnError: false
@@ -109,7 +101,7 @@ stages:
                 inputs:
                   provider: 'azurerm'
                   command: 'init' 
-                  workingDirectory: '${{ parameters.TF_DIRECTORY }}' 
+                  workingDirectory: $(TF_DIRECTORY)
                   backendAzureRmUseEnvironmentVariablesForAuthentication: false
                   backendServiceArm: $(SERVICE_CONNECTION)
                   backendAzureRmResourceGroupName: $(STATE_RG)
@@ -123,16 +115,9 @@ stages:
                 inputs:
                   provider: 'azurerm'
                   command: 'apply'
-                  workingDirectory: '${{ parameters.TF_DIRECTORY }}'
+                  workingDirectory: $(TF_DIRECTORY)
                   commandOptions: "$(PLAN_ARTIFACT)/${{ parameters.ENVIRONMENT }}.tfplan"
                   environmentServiceNameAzureRM: $(SERVICE_CONNECTION)
-
-
-
-#- task: TerraformInstaller@1
-#  displayName: Terraform Install
-#  inputs:
-#    terraformVersion: '${{ parameters.TF_VERSION }}'
 
 #- task: Bash@3
 #  displayName: Echo Vars - Testing Task
