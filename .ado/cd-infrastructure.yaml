@@ -59,7 +59,7 @@ stages:
             provider: 'azurerm'
             command: 'plan'
             workingDirectory: $(TF_DIRECTORY)
-            commandOptions: '-input=false -var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=${{ parameters.ENVIRONMENT }}.tfplan'
+            commandOptions: '-input=false -var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=$(Build.ArtifactStagingDirectory)/${{ parameters.ENVIRONMENT }}.tfplan'
             environmentServiceNameAzureRM: $(SERVICE_CONNECTION)
 
         - task: PublishBuildArtifacts@1
@@ -72,7 +72,8 @@ stages:
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
     dependsOn: [terraform_plan]
-    condition: and(succeeded(),${{ eq(parameters.PLAN_ONLY, false) }},eq(stageDependencies.terraform_plan.outputs['TerraformPlan.changesPresent'],'true'))
+    condition: and(succeeded(),eq(stageDependencies.terraform_plan.outputs['TerraformPlan.changesPresent'],'true'))
+    #condition: and(succeeded(),${{ eq(parameters.PLAN_ONLY, false) }},eq(stageDependencies.terraform_plan.outputs['TerraformPlan.changesPresent'],'true'))
     
     jobs:
       - deployment: terraform_apply
