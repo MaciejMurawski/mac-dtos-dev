@@ -6,7 +6,7 @@ parameters:
   - name: PLAN_ONLY
     displayName: Execute plan-only
     type: boolean
-    default: true
+    default: false
   
 trigger: none
 
