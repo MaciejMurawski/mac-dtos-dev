@@ -101,7 +101,7 @@ stages:
                 inputs:
                   buildType: 'current'
                   downloadType: 'single'
-                  artifactName: 'Tfplan'
+                  artifactName: $(PLAN_ARTIFACT)
                   downloadPath: '${{ parameters.TF_DIRECTORY }}'
 
               - task: TerraformTaskV4@4
