@@ -71,6 +71,12 @@ stages:
             workingDirectory: '${{ parameters.TF_DIRECTORY }}'
             commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=${{ parameters.ENVIRONMENT }}.tfplan'
             environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
+        
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: '${{ parameters.ENVIRONMENT }}.tfplan'
+            publishLocation: 'Container'
 
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
@@ -101,6 +107,13 @@ stages:
                   backendAzureRmStorageAccountName: $(STATE_SA)
                   backendAzureRmContainerName: $(STATE_CONT)
                   backendAzureRmKey: $(STATE_BLOB)
+              
+              - task: DownloadBuildArtifacts@1
+                inputs:
+                  buildType: 'current'
+                  downloadType: 'single'
+                  artifactName: '${{ parameters.ENVIRONMENT }}.tfplan'
+                  downloadPath: '$(System.ArtifactsDirectory)'
 
               - task: TerraformTaskV4@4
                 continueOnError: false
@@ -109,7 +122,7 @@ stages:
                   provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: '${{ parameters.TF_DIRECTORY }}'
-                  commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
+                  commandOptions: '-plan "$(System.ArtifactsDirectory)\${{ parameters.ENVIRONMENT }}.tfplan" -var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config'
                   environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
 
 
