@@ -20,6 +20,7 @@ trigger: none
 
 variables:
   - group: dtos_dev_variables
+  - group: dtos_global
   - name: PLAN_ARTIFACT
     value: "terraform_plan"
   - name: SERVICE_CONNECTION
