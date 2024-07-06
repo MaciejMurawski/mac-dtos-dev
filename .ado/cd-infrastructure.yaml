@@ -125,7 +125,7 @@ stages:
                   provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: '${{ parameters.TF_DIRECTORY }}'
-                  commandOptions: "$(System.ArtifactsDirectory)/$(PLAN_ARTIFACT)/${{ parameters.ENVIRONMENT }}.tfplan"
+                  commandOptions: "$(PLAN_ARTIFACT)/${{ parameters.ENVIRONMENT }}.tfplan"
                   environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
 
 
