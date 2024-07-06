@@ -87,6 +87,11 @@ stages:
               - checkout: self
                 persistCredentials: true
               
+                      
+              - bash: |
+                  echo "Var TerraformPlan"
+                  echo stageDependencies.terraform_plan.outputs['TerraformPlan.changesPresent']
+              
               - task: DownloadBuildArtifacts@1
                 displayName: Download plan
                 inputs:
@@ -116,5 +121,5 @@ stages:
                   provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: $(TF_DIRECTORY)
-                  commandOptions: "$(TF_PLAN_ARTIFACT)/tfplan.txt"
+                  commandOptions: "$(TF_PLAN_ARTIFACT)/${{ parameters.ENVIRONMENT }}.tfplan"
                   environmentServiceNameAzureRM: $(SERVICE_CONNECTION)
