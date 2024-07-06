@@ -15,6 +15,8 @@ variables:
   - group: dtos_global
   - name: TF_DIRECTORY
     value: '$(System.DefaultWorkingDirectory)/infrastructure'
+  - name: PLAN_HAS_CHANGES
+    value: false
 
 pool:
   vmImage: ubuntu-latest
@@ -51,6 +53,7 @@ stages:
             workingDirectory: $(TF_DIRECTORY)
 
         - task: TerraformTaskV4@4
+          name: TerraformPlan
           displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }} Environment
           continueOnError: false
           inputs:
@@ -59,11 +62,11 @@ stages:
             workingDirectory: $(TF_DIRECTORY)
             commandOptions: '-input=false -var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=${{ parameters.ENVIRONMENT }}.tfplan'
             environmentServiceNameAzureRM: $(SERVICE_CONNECTION)
+        
+        - bash: |
+            $(PLAN_HAS_CHANGES) = $(TerraformPlan.changesPresent)
+            echo $(PLAN_HAS_CHANGES)
 
-        - bash: | 
-            echo $(TF_DIRECTORY)/${{ parameters.ENVIRONMENT }}.tfplan > $(Build.ArtifactStagingDirectory)/tfplan.txt
-            cat "$(Build.ArtifactStagingDirectory)/tfplan.txt"
-            
         - task: PublishBuildArtifacts@1
           displayName: "Publish Artifact"
           inputs:
