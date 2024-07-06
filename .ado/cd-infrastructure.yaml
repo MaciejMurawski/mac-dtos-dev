@@ -91,6 +91,7 @@ stages:
                 persistCredentials: true
               
               - task: DownloadBuildArtifacts@1
+                displayName: 'Download plan'
                 inputs:
                   buildType: 'current'
                   downloadType: 'single'
