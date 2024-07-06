@@ -69,14 +69,14 @@ stages:
             provider: 'azurerm'
             command: 'plan'
             workingDirectory: '${{ parameters.TF_DIRECTORY }}'
-            commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=${{ parameters.ENVIRONMENT }}.tfplan'
+            commandOptions: '-var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=$(Build.ArtifactStagingDirectory)/${{ parameters.ENVIRONMENT }}.tfplan'
             environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
         
         - task: PublishBuildArtifacts@1
           displayName: "Publish Artifact"
           inputs:
-            PathtoPublish: '${{ parameters.TF_DIRECTORY }}/${{ parameters.ENVIRONMENT }}.tfplan'
-            ArtifactName: '${{ parameters.ENVIRONMENT }}.tfplan'
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'Tfplan'
             publishLocation: 'Container'
 
   - stage: terraform_apply
@@ -94,6 +94,13 @@ stages:
             steps:
               - checkout: self
                 persistCredentials: true
+              
+              - task: DownloadBuildArtifacts@1
+                inputs:
+                  buildType: 'current'
+                  downloadType: 'single'
+                  artifactName: 'Tfplan'
+                  downloadPath: '${{ parameters.TF_DIRECTORY }}'''
 
               - task: TerraformTaskV4@4
                 continueOnError: false
@@ -108,13 +115,6 @@ stages:
                   backendAzureRmStorageAccountName: $(STATE_SA)
                   backendAzureRmContainerName: $(STATE_CONT)
                   backendAzureRmKey: $(STATE_BLOB)
-              
-              - task: DownloadBuildArtifacts@1
-                inputs:
-                  buildType: 'current'
-                  downloadType: 'specific'
-                  itemPattern: '${{ parameters.ENVIRONMENT }}.tfplan'
-                  downloadPath: '${{ parameters.TF_DIRECTORY }}'''
 
               - task: TerraformTaskV4@4
                 continueOnError: false
