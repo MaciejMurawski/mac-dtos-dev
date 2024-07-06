@@ -2,7 +2,7 @@ parameters:
   - name: PLAN_ONLY
     displayName: Execute plan-only
     type: boolean
-    default: true
+    default: false
   - name: SERVICE_CONNECTION
     displayName: Environment Service Connection
     type: string
