@@ -65,7 +65,10 @@ stages:
         
         - bash: |
             $(PLAN_HAS_CHANGES) = $(TerraformPlan.changesPresent)
+            echo "Var PHC:""
             echo $(PLAN_HAS_CHANGES)
+            echo "Var TerraformPlan"
+            echo $(TerraformPlan.changesPresent)
 
         - task: PublishBuildArtifacts@1
           displayName: "Publish Artifact"
