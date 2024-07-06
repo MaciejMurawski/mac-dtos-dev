@@ -16,7 +16,6 @@ variables:
   - name: TF_DIRECTORY
     value: '$(System.DefaultWorkingDirectory)/infrastructure'
   - name: PLAN_HAS_CHANGES
-    value: false
 
 pool:
   vmImage: ubuntu-latest
