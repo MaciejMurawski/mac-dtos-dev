@@ -24,6 +24,8 @@ trigger: none
 
 variables:
   - group: dtos_dev_variables
+  - name: PLAN_ARTIFACT
+    value: "terraform_plan"
   - ${{ if eq(parameters.PLAN_ONLY, true) }}:
     - name: TF_PLAN
       value: 'true'
@@ -76,7 +78,7 @@ stages:
           displayName: "Publish Artifact"
           inputs:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-            ArtifactName: 'Tfplan'
+            ArtifactName: $(PLAN_ARTIFACT)
             publishLocation: 'Container'
 
   - stage: terraform_apply
@@ -100,7 +102,7 @@ stages:
                   buildType: 'current'
                   downloadType: 'single'
                   artifactName: 'Tfplan'
-                  downloadPath: '${{ parameters.TF_DIRECTORY }}'''
+                  downloadPath: '${{ parameters.TF_DIRECTORY }}'
 
               - task: TerraformTaskV4@4
                 continueOnError: false
@@ -123,7 +125,7 @@ stages:
                   provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: '${{ parameters.TF_DIRECTORY }}'
-                  commandOptions: '"$(System.ArtifactsDirectory)/${{ parameters.ENVIRONMENT }}.tfplan"'
+                  commandOptions: "$(System.ArtifactsDirectory)/$(PLAN_ARTIFACT)/${{ parameters.ENVIRONMENT }}.tfplan"
                   environmentServiceNameAzureRM: '${{ parameters.SERVICE_CONNECTION }}'
 
 
