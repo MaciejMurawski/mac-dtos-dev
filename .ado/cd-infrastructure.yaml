@@ -1,12 +1,12 @@
 parameters:
-  - name: PLAN_ONLY
-    displayName: Execute plan-only
-    type: boolean
-    default: false
   - name: ENVIRONMENT
     displayName: Environment
     type: string
     default: dev
+  - name: PLAN_ONLY
+    displayName: Execute plan-only
+    type: boolean
+    default: false
   
 trigger: none
 
