@@ -69,7 +69,7 @@ stages:
             ArtifactName: $(TF_PLAN_ARTIFACT)
             publishLocation: 'Container'
         
-        - bash: "##vso[task.setvariable variable=newChanges;isOutput=true]['terraformPlan.changesPresent']"
+        - bash: "##vso[task.setvariable variable=newChanges;isOutput=true]testing variable"
           name: setvarTask
         - bash: echo $(setvarTask.newChanges)
           
