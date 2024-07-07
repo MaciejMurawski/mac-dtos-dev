@@ -69,7 +69,7 @@ stages:
             ArtifactName: $(TF_PLAN_ARTIFACT)
             publishLocation: 'Container'
         
-        - bash: "echo ##vso[task.setvariable variable=newChanges;isOutput=true]testing variable"
+        - bash: "echo ##vso[task.setvariable variable=newChanges;isOutput=true]$(TF_PLAN_ARTIFACT)"
           name: setvarTask
           
         - bash: |
