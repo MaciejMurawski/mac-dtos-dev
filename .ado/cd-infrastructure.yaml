@@ -73,9 +73,9 @@ stages:
           name: setvarTask
           
         - bash: |
-            echo $[init_and_validate.TerraformPlan.changesPresent]
-            echo $[newChanges]
-            echo $(TF_DIRECTORY)
+            read $[init_and_validate.TerraformPlan.changesPresent]
+            read $[newChanges]
+            read $(TF_DIRECTORY)
           
 
   - stage: terraform_apply
