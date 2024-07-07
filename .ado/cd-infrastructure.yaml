@@ -73,8 +73,8 @@ stages:
           name: setvarTask
           
         - bash: |
-            echo $[init_and_validate.TerraformPlan.changesPresent]
-            echo $(newChanges)
+            echo "Variable tests:"
+            echo $(setvarTask.newChanges)
             echo $(TF_DIRECTORY)
           
 
