@@ -69,13 +69,13 @@ stages:
             ArtifactName: $(TF_PLAN_ARTIFACT)
             publishLocation: 'Container'
         
-        - bash: echo "##vso[task.setvariable variable=newChanges;isOutput=true]testing variable"
+        - bash: "echo ##vso[task.setvariable variable=newChanges;isOutput=true]testing variable"
           name: setvarTask
           
         - bash: |
-            read $[init_and_validate.TerraformPlan.changesPresent]
-            read $[newChanges]
-            read $(TF_DIRECTORY)
+            echo $[init_and_validate.TerraformPlan.changesPresent]
+            echo $[newChanges]
+            echo $(TF_DIRECTORY)
           
 
   - stage: terraform_apply
