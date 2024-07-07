@@ -69,8 +69,9 @@ stages:
             ArtifactName: $(TF_PLAN_ARTIFACT)
             publishLocation: 'Container'
         
-        - bash: "##vso[task.setvariable variable=newChanges;isOutput=true]testing variable"
+        - bash: echo "##vso[task.setvariable variable=newChanges;isOutput=true]testing variable"
           name: setvarTask
+          
         - bash: |
             echo $[terraform_plan.init_and_validate.outputs['TerraformPlan.changesPresent']]
             echo $[newChanges]
