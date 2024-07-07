@@ -73,7 +73,7 @@ stages:
           name: setvarTask
           
         - bash: |
-            echo $[terraform_plan.init_and_validate.outputs['TerraformPlan.changesPresent']]
+            echo $[init_and_validate.TerraformPlan.changesPresent]
             echo $[newChanges]
             echo $(TF_DIRECTORY)
           
