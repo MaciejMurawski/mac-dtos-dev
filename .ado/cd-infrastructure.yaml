@@ -68,6 +68,11 @@ stages:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
             ArtifactName: $(TF_PLAN_ARTIFACT)
             publishLocation: 'Container'
+        
+        - bash: "##vso[task.setvariable variable=newChanges;isOutput=true]['terraformPlan.changesPresent']"
+          name: setvarTask
+        - bash: echo $(setvarTask.newChanges)
+          
 
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
