@@ -74,7 +74,7 @@ stages:
           
         - bash: |
             echo $[init_and_validate.TerraformPlan.changesPresent]
-            echo $[newChanges]
+            echo $(newChanges)
             echo $(TF_DIRECTORY)
           
 
