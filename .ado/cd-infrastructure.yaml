@@ -71,7 +71,7 @@ stages:
         
         - bash: "##vso[task.setvariable variable=newChanges;isOutput=true]testing variable"
           name: setvarTask
-        - script: echo $(setvarTask.newChanges)
+        - bash: echo $(newChanges)
           
 
   - stage: terraform_apply
