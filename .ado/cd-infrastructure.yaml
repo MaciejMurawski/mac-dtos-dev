@@ -72,7 +72,7 @@ stages:
         - bash: "##vso[task.setvariable variable=newChanges;isOutput=true]testing variable"
           name: setvarTask
         - bash: |
-            echo $[terraformPlan.changesPresent]
+            echo $[terraform_plan.init_and_validate.outputs['TerraformPlan.changesPresent']]
             echo $[newChanges]
             echo $(TF_DIRECTORY)
           
