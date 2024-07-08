@@ -70,7 +70,7 @@ stages:
 
         - task: Bash@3
           name: setValue
-          condition: eq(variables['terraformPlan.changesPresent'], 'true')
+          #condition: eq(variables['terraformPlan.changesPresent'], 'true')
           inputs:
             targetType: 'inline'
             script: |
