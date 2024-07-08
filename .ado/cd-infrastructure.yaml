@@ -73,7 +73,7 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              echo variables['terraformPlan.changesPresent']
+              echo $['terraformPlan.changesPresent']
               # Read the output value and put it into output variable
               planOutput=$('terraformPlan.changesPresent')
               echo $(planOutput)
