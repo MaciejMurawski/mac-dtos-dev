@@ -87,7 +87,7 @@ stages:
     #condition: and(succeeded(),${{ eq(parameters.PLAN_ONLY, false) }})
     #variables:
     #  varChangeDetected: $[ stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent'] ]
-    condition: eq(variables[ stageDependencies.terraform_plan.init_and_plan.outputs['setValue.varChangeDetected'] ], 'true')
+    condition: ne(variables[ stageDependencies.terraform_plan.init_and_plan.outputs['setValue.varChangeDetected'] ], 'true')
      
     jobs:
       - deployment: terraform_apply
