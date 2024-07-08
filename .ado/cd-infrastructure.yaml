@@ -67,14 +67,6 @@ stages:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
             ArtifactName: $(TF_PLAN_ARTIFACT)
             publishLocation: 'Container'
-        - task: Bash@3
-          name: setOutput
-          inputs:
-            targetType: 'inline'
-            script: |
-              PLAN_HAS_CHANGES = $(terraformPlan.changesPresent)
-              echo $PLAN_HAS_CHANGES
-              # echo "##vso[task.setvariable variable=newChanges;isOutput=true]$(PLAN_HAS_CHANGES)"
 
         - task: Bash@3
           name: setValue
