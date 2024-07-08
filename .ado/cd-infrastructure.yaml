@@ -64,19 +64,6 @@ stages:
             ArtifactName: $(TF_PLAN_ARTIFACT)
             publishLocation: 'Container'
 
-#        - task: Bash@3
-#          name: setValue
-#          #condition: eq(variables['terraformPlan.changesPresent'], 'true')
-#          inputs:
-#            targetType: 'inline'
-#            script: |
-#              # Write your commands here
-#              
-#              echo 'Entered the task!'
-#              echo 'Output variable:'
-#              echo $(terraformPlan.changesPresent)
-#              echo "##vso[task.setvariable variable=varChangeDetected;isOutput=true]$(terraformPlan.changesPresent)"
-
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
     dependsOn: [terraform_plan]
