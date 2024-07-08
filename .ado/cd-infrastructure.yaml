@@ -1,8 +1,3 @@
-parameters:
-  - name: ENVIRONMENT
-    displayName: Environment
-    type: string
-    default: dev
   
 trigger: none
 
