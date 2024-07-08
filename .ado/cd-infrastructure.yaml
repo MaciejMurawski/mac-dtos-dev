@@ -74,7 +74,7 @@ stages:
             targetType: 'inline'
             script: |
               # Read the output value and put it into output variable
-              planOutput=$['terraformPlan.changesPresent']
+              planOutput=$('terraformPlan.changesPresent')
               echo $(planOutput)
               echo "##vso[task.setvariable variable=newChanges;isOutput=true]$(TF_DIRECTORY)"
 
