@@ -12,7 +12,7 @@ pool:
 
 stages:
   - stage: terraform_plan
-    displayName: Terraform Plan - $(ENVIRONMENT)
+    displayName: Terraform Plan - ${{ variables.ENVIRONMENT }}
     dependsOn: []
     jobs:
       - job: init_and_plan
@@ -43,7 +43,7 @@ stages:
 
         - task: TerraformTaskV4@4
           name: TerraformPlan
-          displayName: Terraform Plan - $(ENVIRONMENT) Environment
+          displayName: Terraform Plan - ${{ variables.ENVIRONMENT }} Environment
           continueOnError: false
           inputs:
             provider: 'azurerm'
@@ -66,7 +66,7 @@ stages:
      
     jobs:
       - deployment: terraform_apply
-        displayName: Terraform Apply - $(ENVIRONMENT)
+        displayName: Terraform Apply - ${{ variables.ENVIRONMENT }}
         environment: dtos_dev
         strategy:
          runOnce:
@@ -99,7 +99,7 @@ stages:
 
               - task: TerraformTaskV4@4
                 continueOnError: false
-                displayName: Terraform Apply - $(ENVIRONMENT)
+                displayName: Terraform Apply - ${{ variables.ENVIRONMENT }}
                 inputs:
                   provider: 'azurerm'
                   command: 'apply'
