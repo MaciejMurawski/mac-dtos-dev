@@ -82,7 +82,7 @@ stages:
     dependsOn: [terraform_plan]
     #variables:
     #  varChangeDetected: $[ stageDependencies.terraform_plan.outputs['init_and_plan.TerraformPlan.changesPresent'] ]
-    condition: eq(variables[ dependencies.terraform_plan.outputs['init_and_plan.TerraformPlan.changesPresent'] ], 'true')
+    condition: eq(dependencies.terraform_plan.outputs['init_and_plan.TerraformPlan.changesPresent'], 'true')
      
     jobs:
       - deployment: terraform_apply
