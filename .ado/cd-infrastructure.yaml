@@ -95,7 +95,7 @@ stages:
     #stageDependencies.{stageName}.{jobName}.outputs['{stepName}.{variableName}'] 
     variables:
       varChangeDetected: $[ stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent'] ]
-    condition: eq(variables['varChangeDetected'], 'true')
+    condition: eq(variables[ stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent'] ], 'true')
      
     jobs:
       - deployment: terraform_apply
