@@ -25,7 +25,7 @@ stages:
     displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }}
     dependsOn: []
     jobs:
-      - job: init_and_validate
+      - job: init_and_plan
         displayName: Terraform Init and Plan
         steps:
           
@@ -100,10 +100,12 @@ stages:
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
     dependsOn: [terraform_plan]
-    condition: and(succeeded(),${{ eq(parameters.PLAN_ONLY, false) }})
+    condition: eq(stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent'],'true')
+    #condition: and(succeeded(),${{ eq(parameters.PLAN_ONLY, false) }})
     #condition: and(succeeded(),eq(stageDependencies.terraform_plan.outputs['TerraformPlan.changesPresent'],'true'))
     #condition: and(succeeded(),${{ eq(parameters.PLAN_ONLY, false) }},eq(stageDependencies.terraform_plan.outputs['TerraformPlan.changesPresent'],'true'))
-    
+    #stageDependencies.{stageName}.{jobName}.outputs['{stepName}.{variableName}'] 
+ 
     jobs:
       - deployment: terraform_apply
         displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
