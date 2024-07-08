@@ -103,7 +103,7 @@ stages:
               - bash: |
                   echo "Var varChangeDetected"
                   echo $(varChangeDetected)
-                  echo $[ stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent'] ]
+                  echo stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent']
               
               - task: DownloadBuildArtifacts@1
                 displayName: Download plan
