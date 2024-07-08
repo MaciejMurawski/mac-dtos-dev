@@ -3,10 +3,6 @@ parameters:
     displayName: Environment
     type: string
     default: dev
-  - name: PLAN_ONLY
-    displayName: Execute plan-only
-    type: boolean
-    default: false
   
 trigger: none
 
@@ -84,9 +80,8 @@ stages:
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
     dependsOn: [terraform_plan]
-    #condition: and(succeeded(),${{ eq(parameters.PLAN_ONLY, false) }})
-    variables:
-      varChangeDetected: $[ stageDependencies.terraform_plan.outputs['init_and_plan.TerraformPlan.changesPresent'] ]
+    #variables:
+    #  varChangeDetected: $[ stageDependencies.terraform_plan.outputs['init_and_plan.TerraformPlan.changesPresent'] ]
     condition: eq(variables[ dependencies.terraform_plan.outputs['init_and_plan.TerraformPlan.changesPresent'] ], 'true')
      
     jobs:
