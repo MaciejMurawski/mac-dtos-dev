@@ -85,8 +85,8 @@ stages:
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
     dependsOn: [terraform_plan]
     #condition: and(succeeded(),${{ eq(parameters.PLAN_ONLY, false) }})
-    #variables:
-    #  varChangeDetected: $[ stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent'] ]
+    variables:
+      varChangeDetected: $[ stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent'] ]
     condition: ne(variables[ stageDependencies.terraform_plan.init_and_plan.outputs['setValue.varChangeDetected'] ], 'true')
      
     jobs:
@@ -103,7 +103,7 @@ stages:
               - bash: |
                   echo "Var varChangeDetected"
                   echo $(varChangeDetected)
-                  echo stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent']
+                  # echo stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent']
               
               - task: DownloadBuildArtifacts@1
                 displayName: Download plan
