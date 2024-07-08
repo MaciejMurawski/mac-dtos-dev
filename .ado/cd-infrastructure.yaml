@@ -72,7 +72,7 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              PLAN_HAS_CHANGES = $[TerraformPlan.changesPresent]
+              PLAN_HAS_CHANGES = $(terraformPlan.changesPresent)
               echo $(PLAN_HAS_CHANGES)
               # echo "##vso[task.setvariable variable=newChanges;isOutput=true]$(TF_DIRECTORY)"
 
