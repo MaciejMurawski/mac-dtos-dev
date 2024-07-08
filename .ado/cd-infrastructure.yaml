@@ -16,6 +16,7 @@ variables:
   - name: TF_DIRECTORY
     value: '$(System.DefaultWorkingDirectory)/infrastructure'
   - name: PLAN_HAS_CHANGES
+    value: false
 
 pool:
   vmImage: ubuntu-latest
@@ -73,11 +74,9 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              echo $(terraformPlan.changesPresent)
-              # Read the output value and put it into output variable
-              planOutput=$('terraformPlan.changesPresent')
-              echo $(planOutput)
-              echo "##vso[task.setvariable variable=newChanges;isOutput=true]$(TF_DIRECTORY)"
+              PLAN_HAS_CHANGES = $[ terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent'] ]
+              echo $(PLAN_HAS_CHANGES)
+              # echo "##vso[task.setvariable variable=newChanges;isOutput=true]$(TF_DIRECTORY)"
 
         - task: Bash@3
           condition: ne(variables['terraformPlan.changesPresent'], 'true')
@@ -87,15 +86,6 @@ stages:
               # Write your commands here
               
               echo 'Entered the task!'
-
-        - bash: echo "##vso[task.setvariable variable=newChanges;isOutput=true]$(TF_DIRECTORY)"
-          name: setvarTask
-          
-        - bash: |
-            echo "Variable tests:"
-            echo $(setvarTask.newChanges)
-            echo $(TF_DIRECTORY)
-          
 
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
