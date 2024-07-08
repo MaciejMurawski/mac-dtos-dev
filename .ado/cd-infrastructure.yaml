@@ -85,7 +85,7 @@ stages:
               
               echo 'Entered the task!'
               echo 'Output variable:'
-              echo $['terraformPlan.changesPresent']
+              echo $[terraformPlan.changesPresent]
 
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
