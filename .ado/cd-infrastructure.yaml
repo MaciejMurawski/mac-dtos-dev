@@ -92,11 +92,7 @@ stages:
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
     dependsOn: [terraform_plan]
-    #condition: eq(stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent'],'true')
     #condition: and(succeeded(),${{ eq(parameters.PLAN_ONLY, false) }})
-    #condition: and(succeeded(),eq(stageDependencies.terraform_plan.outputs['TerraformPlan.changesPresent'],'true'))
-    #condition: and(succeeded(),${{ eq(parameters.PLAN_ONLY, false) }},eq(stageDependencies.terraform_plan.outputs['TerraformPlan.changesPresent'],'true'))
-    #stageDependencies.{stageName}.{jobName}.outputs['{stepName}.{variableName}'] 
     #variables:
     #  varChangeDetected: $[ stageDependencies.terraform_plan.init_and_plan.outputs['TerraformPlan.changesPresent'] ]
     condition: eq(variables[ stageDependencies.terraform_plan.init_and_plan.outputs['setValue.varChangeDetected'] ], 'true')
@@ -112,7 +108,6 @@ stages:
               - checkout: self
                 persistCredentials: true
               
-                      
               - bash: |
                   echo "Var varChangeDetected"
                   echo $(varChangeDetected)
