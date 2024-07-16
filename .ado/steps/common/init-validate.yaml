@@ -3,6 +3,11 @@ parameters:
   TF_DIRECTORY: " "
 
 steps:
+
+  - task: TerraformInstaller@1
+    inputs:
+      terraformVersion: $(TF_VERSION)
+
   - task: TerraformTaskV4@4
     continueOnError: false
     displayName: Terraform Init
