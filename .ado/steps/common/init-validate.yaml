@@ -1,6 +1,5 @@
 parameters:
   ENVIRONMENT: " "
-  SERVICE_CONNECTION: " "
   TF_DIRECTORY: " "
 
 steps:
@@ -12,7 +11,7 @@ steps:
       command: 'init'
       workingDirectory: ${{ parameters.TF_DIRECTORY }}
       backendAzureRmUseEnvironmentVariablesForAuthentication: false
-      backendServiceArm: ${{ parameters.SERVICE_CONNECTION }}
+      backendServiceArm: $(oidc-service-connection)
       backendAzureRmResourceGroupName: $(STATE_RG)
       backendAzureRmStorageAccountName: $(STATE_SA)
       backendAzureRmContainerName: $(STATE_CONT)
