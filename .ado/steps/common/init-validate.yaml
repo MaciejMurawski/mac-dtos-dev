@@ -11,7 +11,7 @@ steps:
       command: 'init'
       workingDirectory: ${{ parameters.TF_DIRECTORY }}
       backendAzureRmUseEnvironmentVariablesForAuthentication: false
-      backendServiceArm: $(oidc-service-connection)
+      backendServiceArm: $(SERVICE_CONNECTION)
       backendAzureRmResourceGroupName: $(STATE_RG)
       backendAzureRmStorageAccountName: $(STATE_SA)
       backendAzureRmContainerName: $(STATE_CONT)
