@@ -10,7 +10,7 @@ steps:
       provider: 'azurerm'
       command: 'init'
       workingDirectory: ${{ parameters.TF_DIRECTORY }}
-      backendAzureRmUseEnvironmentVariablesForAuthentication: false
+      backendAzureRmUseEnvironmentVariablesForAuthentication: true
       backendServiceArm: $(SERVICE_CONNECTION)
       backendAzureRmResourceGroupName: $(STATE_RG)
       backendAzureRmStorageAccountName: $(STATE_SA)
