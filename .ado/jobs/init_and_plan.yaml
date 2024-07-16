@@ -5,18 +5,19 @@ parameters:
   TF_PLAN_ARTIFACT: " "
 
 jobs:
+  - job: init_and_plan
+    displayName: Terraform Init and Plan
+      # Init
+      - template: ../steps/common/init-validate.yaml
+        parameters:
+          ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+          SERVICE_CONN: $(SERVICE_CONNECTION)
+          TF_DIRECTORY: $(TF_DIRECTORY)
 
-  # Init
-  - template: ../steps/common/init-validate.yaml
-    parameters:
-      ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
-      SERVICE_CONN: $(SERVICE_CONNECTION)
-      TF_DIRECTORY: $(TF_DIRECTORY)
-
-  # Plan
-  - template: ../steps/plan.yaml
-    parameters:
-      ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
-      SERVICE_CONN: $(SERVICE_CONNECTION)
-      TF_DIRECTORY: $(TF_DIRECTORY)
-      TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
+      # Plan
+      - template: ../steps/plan.yaml
+        parameters:
+          ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+          SERVICE_CONN: $(SERVICE_CONNECTION)
+          TF_DIRECTORY: $(TF_DIRECTORY)
+          TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
