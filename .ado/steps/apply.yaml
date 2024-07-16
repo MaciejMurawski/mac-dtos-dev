@@ -23,5 +23,3 @@ steps:
       workingDirectory: ${{ parameters.TF_DIRECTORY }}
       commandOptions: "${{ parameters.TF_PLAN_ARTIFACT }}/${{ parameters.ENVIRONMENT }}.tfplan"
       environmentServiceNameAzureRM: ${{ parameters.SERVICE_CONNECTION }}
-    env:
-      ARM_USE_AZUREAD: true
