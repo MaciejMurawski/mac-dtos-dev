@@ -1,6 +1,6 @@
 parameters:
   ENVIRONMENT: " "
-  SERVICE_CONN: " "
+  SERVICE_CONNECTION: " "
   TF_DIRECTORY: " "
   TF_PLAN_ARTIFACT: " "
 
