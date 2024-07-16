@@ -8,6 +8,7 @@ jobs:
   - job: init_and_plan
     displayName: Terraform Init and Plan
       # Init
+    steps:
       - template: ../steps/common/init-validate.yaml
         parameters:
           ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
