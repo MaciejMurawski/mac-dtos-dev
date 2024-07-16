@@ -7,7 +7,6 @@ parameters:
 trigger: none
 
 variables:
-  - group: dtos_${{ parameters.environment }}_variables
   - group: dtos_global
   - name: TF_DIRECTORY
     value: '$(System.DefaultWorkingDirectory)/infrastructure'
@@ -19,22 +18,18 @@ stages:
   - stage: terraform_plan
     displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }}
     dependsOn: []
-    jobs:
-      - job: init_and_plan
-        displayName: Terraform Init and Plan
-        steps:
-          - template: ../steps/common/init-validate.yaml
-            parameters:
-              ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
-              SERVICE_CONN: $(SERVICE_CONNECTION)
-              TF_DIRECTORY: $(TF_DIRECTORY)
 
-          - template: ../steps/plan.yaml
-            parameters:
-              ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
-              SERVICE_CONN: $(SERVICE_CONNECTION)
-              TF_DIRECTORY: $(TF_DIRECTORY)
-              TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
+    variables:
+      - group: dtos_${{ parameters.environment }}_variables
+
+    jobs:
+      - template: ../jobs/init_and_plan.yaml
+        displayName: Terraform Init and Plan
+        parameters:
+          ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+          SERVICE_CONN: $(SERVICE_CONNECTION)
+          TF_DIRECTORY: $(TF_DIRECTORY)
+          TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
 
   - stage: terraform_apply
     displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
@@ -49,16 +44,7 @@ stages:
          runOnce:
            deploy:
             steps:
-
-              - template: ../steps/common/checkout.yaml
-
-              - template: ../steps/common/init-validate.yaml
-                parameters:
-                  ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
-                  SERVICE_CONN: $(SERVICE_CONNECTION)
-                  TF_DIRECTORY: $(TF_DIRECTORY)
-
-              - template: ../steps/apply.yaml
+              - template: ./jobs/init_and_apply.yaml
                 parameters:
                   ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
                   SERVICE_CONN: $(SERVICE_CONNECTION)

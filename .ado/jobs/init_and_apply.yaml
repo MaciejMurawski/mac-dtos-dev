@@ -1,0 +1,22 @@
+parameters:
+  ENVIRONMENT: " "
+  SERVICE_CONNECTION: " "
+  TF_DIRECTORY: " "
+  TF_PLAN_ARTIFACT: " "
+
+steps:
+
+  - template: ../steps/common/checkout.yaml
+
+  - template: ../steps/common/init-validate.yaml
+    parameters:
+      ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+      SERVICE_CONN: $(SERVICE_CONNECTION)
+      TF_DIRECTORY: $(TF_DIRECTORY)
+
+  - template: ../steps/apply.yaml
+    parameters:
+      ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+      SERVICE_CONN: $(SERVICE_CONNECTION)
+      TF_DIRECTORY: $(TF_DIRECTORY)
+      TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)

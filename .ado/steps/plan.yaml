@@ -15,6 +15,8 @@ steps:
       workingDirectory: ${{ parameters.TF_DIRECTORY }}
       commandOptions: '-input=false -var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=$(Build.ArtifactStagingDirectory)/${{ parameters.ENVIRONMENT }}.tfplan'
       environmentServiceNameAzureRM: ${{ parameters.SERVICE_CONNECTION }}
+    env:
+      ARM_USE_AZUREAD: true
 
   - task: PublishBuildArtifacts@1
     displayName: "Publish Artifact"

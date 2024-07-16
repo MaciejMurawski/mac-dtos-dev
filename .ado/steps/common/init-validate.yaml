@@ -1,6 +1,6 @@
 parameters:
   ENVIRONMENT: " "
-  SERVICE_CONN: " "
+  SERVICE_CONNECTION: " "
   TF_DIRECTORY: " "
 
 steps:
@@ -17,6 +17,8 @@ steps:
       backendAzureRmStorageAccountName: $(STATE_SA)
       backendAzureRmContainerName: $(STATE_CONT)
       backendAzureRmKey: $(STATE_BLOB)
+    env:
+      ARM_USE_AZUREAD: true
 
   - task: TerraformTaskV4@4
     continueOnError: false

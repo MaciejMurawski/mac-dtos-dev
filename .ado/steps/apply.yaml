@@ -5,24 +5,6 @@ parameters:
   TF_PLAN_ARTIFACT: " "
 
 steps:
-  - task: TerraformTaskV4@4
-    name: TerraformPlan
-    displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }} Environment
-    continueOnError: false
-    inputs:
-      provider: 'azurerm'
-      command: 'plan'
-      workingDirectory: ${{ parameters.TF_DIRECTORY }}
-      commandOptions: '-input=false -var-file=environments/${{ parameters.ENVIRONMENT }}.tfvars.config -out=$(Build.ArtifactStagingDirectory)/${{ parameters.ENVIRONMENT }}.tfplan'
-      environmentServiceNameAzureRM: ${{ parameters.SERVICE_CONNECTION }}
-
-  - task: PublishBuildArtifacts@1
-    displayName: "Publish Artifact"
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: ${{ parameters.TF_PLAN_ARTIFACT }}
-      publishLocation: 'Container'
-
 
   - task: DownloadBuildArtifacts@1
     displayName: Download plan
@@ -41,3 +23,5 @@ steps:
       workingDirectory: ${{ parameters.TF_DIRECTORY }}
       commandOptions: "${{ parameters.TF_PLAN_ARTIFACT }}/${{ parameters.ENVIRONMENT }}.tfplan"
       environmentServiceNameAzureRM: ${{ parameters.SERVICE_CONNECTION }}
+    env:
+      ARM_USE_AZUREAD: true
