@@ -19,6 +19,7 @@ stages:
       - group: dtos_development_variables
 
     jobs:
+
       - template: jobs/init_and_plan.yaml
         parameters:
           ENVIRONMENT: $(ENVIRONMENT)
