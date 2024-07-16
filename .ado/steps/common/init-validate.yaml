@@ -5,6 +5,7 @@ parameters:
 steps:
 
   - task: TerraformInstaller@1
+    displayName: Terraform Install
     inputs:
       terraformVersion: $(TF_VERSION)
 
