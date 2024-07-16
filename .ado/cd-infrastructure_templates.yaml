@@ -23,8 +23,7 @@ stages:
       - group: dtos_${{ parameters.environment }}_variables
 
     jobs:
-      - template: ../jobs/init_and_plan.yaml
-        displayName: Terraform Init and Plan
+      - template: jobs/init_and_plan.yaml
         parameters:
           ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
           SERVICE_CONN: $(SERVICE_CONNECTION)
@@ -44,7 +43,7 @@ stages:
          runOnce:
            deploy:
             steps:
-              - template: ./jobs/init_and_apply.yaml
+              - template: jobs/init_and_apply.yaml
                 parameters:
                   ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
                   SERVICE_CONN: $(SERVICE_CONNECTION)
