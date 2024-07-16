@@ -3,7 +3,7 @@ parameters:
   SERVICE_CONNECTION: " "
   TF_DIRECTORY: " "
 
-steps:
+
   - task: TerraformTaskV4@4
     continueOnError: false
     displayName: Terraform Init
