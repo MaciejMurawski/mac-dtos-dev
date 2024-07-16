@@ -9,13 +9,14 @@ variables:
 pool:
   vmImage: ubuntu-latest
 
+### Developlent environment
 stages:
   - stage: terraform_plan
-    displayName: Terraform Plan - Development
+    displayName: Terraform Plan
     dependsOn: []
 
     variables:
-      - group: dtos_$(ENVIRONMENT)_variables
+      - group: dtos_development_variables
 
     jobs:
       - template: jobs/init_and_plan.yaml
@@ -26,12 +27,12 @@ stages:
           TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
 
   - stage: terraform_apply
-    displayName: Terraform Apply - Development
+    displayName: Terraform Apply
     dependsOn: [terraform_plan]
     condition: eq(dependencies.terraform_plan.outputs['init_and_plan.TerraformPlan.changesPresent'], 'true')
 
     variables:
-      - group: dtos_$(ENVIRONMENT)_variables
+      - group: dtos_development_variables
 
     jobs:
       - deployment: terraform_apply
