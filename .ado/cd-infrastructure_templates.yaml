@@ -1,8 +1,3 @@
-parameters:
-  - name: ENVIRONMENT
-    displayName: Environment
-    type: string
-    default: dev
 
 trigger: none
 
@@ -16,39 +11,39 @@ pool:
 
 stages:
   - stage: terraform_plan
-    displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }}
+    displayName: Terraform Plan - Development
     dependsOn: []
 
     variables:
-      - group: dtos_${{ parameters.ENVIRONMENT }}_variables
+      - group: dtos_$(ENVIRONMENT)_variables
 
     jobs:
       - template: jobs/init_and_plan.yaml
         parameters:
-          ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+          ENVIRONMENT: $(ENVIRONMENT)
           SERVICE_CONNECTION: $(SERVICE_CONNECTION) 
           TF_DIRECTORY: $(TF_DIRECTORY)
           TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
 
   - stage: terraform_apply
-    displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
+    displayName: Terraform Apply - Development
     dependsOn: [terraform_plan]
     condition: eq(dependencies.terraform_plan.outputs['init_and_plan.TerraformPlan.changesPresent'], 'true')
 
     variables:
-      - group: dtos_${{ parameters.ENVIRONMENT }}_variables
+      - group: dtos_$(ENVIRONMENT)_variables
 
     jobs:
       - deployment: terraform_apply
-        displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
-        environment: dtos_dev
+        displayName: Terraform Apply - Development
+        environment: $(ENVIRONMENT)
         strategy:
          runOnce:
            deploy:
             steps:
               - template: jobs/init_and_apply.yaml
                 parameters:
-                  ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+                  ENVIRONMENT: $(ENVIRONMENT)
                   SERVICE_CONNECTION: $(SERVICE_CONNECTION)
                   TF_DIRECTORY: $(TF_DIRECTORY)
                   TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
