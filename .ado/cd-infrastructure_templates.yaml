@@ -10,8 +10,6 @@ variables:
   - group: dtos_global
   - name: TF_DIRECTORY
     value: '$(System.DefaultWorkingDirectory)/infrastructure'
-  - name: oidc-service-connection
-    value: fed-mac-dtos
 
 pool:
   vmImage: ubuntu-latest
@@ -28,7 +26,7 @@ stages:
       - template: jobs/init_and_plan.yaml
         parameters:
           ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
-          SERVICE_CONNECTION: $(oidc-service-connection) 
+          SERVICE_CONNECTION: $(SERVICE_CONNECTION) 
           TF_DIRECTORY: $(TF_DIRECTORY)
           TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
 
@@ -51,6 +49,6 @@ stages:
               - template: jobs/init_and_apply.yaml
                 parameters:
                   ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
-                  SERVICE_CONNECTION: $(oidc-service-connection)
+                  SERVICE_CONNECTION: $(SERVICE_CONNECTION)
                   TF_DIRECTORY: $(TF_DIRECTORY)
                   TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
