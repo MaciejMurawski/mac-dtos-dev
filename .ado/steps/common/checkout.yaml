@@ -1,0 +1,6 @@
+parameters:
+
+steps:
+
+  - checkout: self
+    persistCredentials: true

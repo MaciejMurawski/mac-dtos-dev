@@ -1,0 +1,66 @@
+parameters:
+  - name: ENVIRONMENT
+    displayName: Environment
+    type: string
+    default: dev
+
+trigger: none
+
+variables:
+  - group: dtos_${{ parameters.environment }}_variables
+  - group: dtos_global
+  - name: TF_DIRECTORY
+    value: '$(System.DefaultWorkingDirectory)/infrastructure'
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: terraform_plan
+    displayName: Terraform Plan - ${{ parameters.ENVIRONMENT }}
+    dependsOn: []
+    jobs:
+      - job: init_and_plan
+        displayName: Terraform Init and Plan
+        steps:
+          - template: ../steps/common/init-validate.yaml
+            parameters:
+              ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+              SERVICE_CONN: $(SERVICE_CONNECTION)
+              TF_DIRECTORY: $(TF_DIRECTORY)
+
+          - template: ../steps/plan.yaml
+            parameters:
+              ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+              SERVICE_CONN: $(SERVICE_CONNECTION)
+              TF_DIRECTORY: $(TF_DIRECTORY)
+              TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
+
+  - stage: terraform_apply
+    displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
+    dependsOn: [terraform_plan]
+    condition: eq(dependencies.terraform_plan.outputs['init_and_plan.TerraformPlan.changesPresent'], 'true')
+
+    jobs:
+      - deployment: terraform_apply
+        displayName: Terraform Apply - ${{ parameters.ENVIRONMENT }}
+        environment: dtos_dev
+        strategy:
+         runOnce:
+           deploy:
+            steps:
+
+              - template: ../steps/common/checkout.yaml
+
+              - template: ../steps/common/init-validate.yaml
+                parameters:
+                  ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+                  SERVICE_CONN: $(SERVICE_CONNECTION)
+                  TF_DIRECTORY: $(TF_DIRECTORY)
+
+              - template: ../steps/apply.yaml
+                parameters:
+                  ENVIRONMENT: ${{ parameters.ENVIRONMENT }}
+                  SERVICE_CONN: $(SERVICE_CONNECTION)
+                  TF_DIRECTORY: $(TF_DIRECTORY)
+                  TF_PLAN_ARTIFACT: $(TF_PLAN_ARTIFACT)
