@@ -20,7 +20,7 @@ stages:
     dependsOn: []
 
     variables:
-      - group: dtos_${{ parameters.environment }}_variables
+      - group: dtos_${{ parameters.ENVIRONMENT }}_variables
 
     jobs:
       - template: jobs/init_and_plan.yaml
