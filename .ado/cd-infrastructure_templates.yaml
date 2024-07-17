@@ -1,3 +1,6 @@
+# Things to change for further environments:
+# - stage variable group name: dtos_ENVIRONMENT_variables
+# - 
 
 trigger: none
 
@@ -9,7 +12,8 @@ variables:
 pool:
   vmImage: ubuntu-latest
 
-### Developlent environment
+# Developlent environment
+
 stages:
   - stage: terraform_plan
     displayName: Terraform Plan
@@ -37,7 +41,7 @@ stages:
 
     jobs:
       - deployment: terraform_apply
-        displayName: Terraform Apply - Development
+        displayName: Terraform Apply - $(ENVIRONMENT)
         environment: $(ENVIRONMENT)
         strategy:
          runOnce:
