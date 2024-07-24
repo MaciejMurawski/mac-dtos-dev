@@ -115,7 +115,7 @@ variable "function_app" {
     gl_worker_32bit    = optional(bool, false)
     gl_dotnet_isolated = optional(bool, true)
     gl_dotnet_version  = optional(string, "8.0")
-    gl_app_settings    = map(object({}))
+    gl_app_settings    = map(object())
 
     fa_config = map(object({
       name_suffix = string
