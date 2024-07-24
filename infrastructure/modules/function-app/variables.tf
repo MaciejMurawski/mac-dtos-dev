@@ -50,7 +50,7 @@ variable "gl_worker_32bit" {
 }
 
 variable "gl_dotnet_version" {
-  type        = number
+  type        = string
   description = "The version of .NET to use"
 }
 
