@@ -112,10 +112,13 @@ variable "function_app" {
   description = "Configuration for the function app"
   type = object({
     resource_group_key = optional(string, "baseline")
-    worker_32bit       = optional(bool, false)
+    gl_worker_32bit    = optional(bool, false)
+    gl_dotnet_isolated = optional(bool, true)
+    gl_dotnet_version  = optional(string, "8.0")
+    gl_app_settings    = map(object({}))
+
     fa_config = map(object({
       name_suffix = string
-      site_config = map(string)
     }))
   })
 }
