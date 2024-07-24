@@ -115,6 +115,7 @@ variable "function_app" {
     worker_32bit       = optional(bool, false)
     fa_config = map(object({
       name_suffix = string
+      site_config = map(string)
     }))
   })
 }
