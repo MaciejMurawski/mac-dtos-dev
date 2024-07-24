@@ -1,4 +1,4 @@
-﻿namespace NHS.CohortManager.ScreeningValidationService;
+namespace NHS.CohortManager.ScreeningValidationService;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Azure.Functions.Worker;
@@ -13,11 +13,13 @@ public class FileValidation
 {
     private readonly ILogger<FileValidation> _logger;
     private readonly ICallFunction _callFunction;
+    private readonly IBlobStorageHelper _blobStorageHelper;
 
-    public FileValidation(ILogger<FileValidation> logger, ICallFunction callFunction)
+    public FileValidation(ILogger<FileValidation> logger, ICallFunction callFunction, IBlobStorageHelper blobStorageHelper)
     {
         _logger = logger;
         _callFunction = callFunction;
+        _blobStorageHelper = blobStorageHelper;
     }
 
     [Function("FileValidation")]
@@ -32,20 +34,46 @@ public class FileValidation
             {
                 requestBodyJson = await reader.ReadToEndAsync();
             }
-
-
             requestBody = JsonSerializer.Deserialize<ValidationException>(requestBodyJson);
 
-            var createResponse = await _callFunction.SendPost(Environment.GetEnvironmentVariable("CreateValidationExceptionURL"), requestBodyJson);
+            var requestObject = new ValidationException()
+            {
+                RuleId = requestBody.RuleId == null ? 0 : requestBody.RuleId,
+                Cohort = "",
+                NhsNumber = string.IsNullOrEmpty(requestBody.NhsNumber) ? "" : requestBody.NhsNumber,
+                DateCreated = requestBody.DateCreated ?? DateTime.Now,
+                FileName = string.IsNullOrEmpty(requestBody.FileName) ? "" : requestBody.FileName,
+                DateResolved = requestBody.DateResolved ?? DateTime.MaxValue,
+                RuleContent = requestBody.RuleContent ?? "",
+                RuleDescription = requestBody.RuleDescription ?? "",
+                Category = requestBody.Category ?? 0,
+                ScreeningService = requestBody.ScreeningService ?? 1,
+                Fatal = requestBody.Fatal ?? 0,
+            };
+
+            var createResponse = await _callFunction.SendPost(Environment.GetEnvironmentVariable("CreateExceptionURL"), JsonSerializer.Serialize<ValidationException>(requestObject));
             if (createResponse.StatusCode != HttpStatusCode.OK)
             {
                 return req.CreateResponse(HttpStatusCode.BadRequest);
             }
-            _logger.LogInformation("File validation exception: {ExceptionMessage} from {FileName}", requestBody.RuleName, requestBody.NhsNumber);
+
+            if (requestObject.FileName != null)
+            {
+                var copied = await _blobStorageHelper.CopyFileAsync(Environment.GetEnvironmentVariable("AzureWebJobsStorage"), requestObject.FileName, Environment.GetEnvironmentVariable("inboundBlobName"));
+                if (copied)
+                {
+                    _logger.LogInformation("File validation exception: {RuleId} from {NhsNumber}", requestObject.RuleId, requestObject.NhsNumber);
+                    return req.CreateResponse(HttpStatusCode.OK);
+                }
+                _logger.LogError("there has been an error while copying the bad file or saving the exception");
+                return req.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+
             return req.CreateResponse(HttpStatusCode.OK);
         }
-        catch
+        catch (Exception ex)
         {
+            _logger.LogError(ex.Message);
             return req.CreateResponse(HttpStatusCode.BadRequest);
         }
     }

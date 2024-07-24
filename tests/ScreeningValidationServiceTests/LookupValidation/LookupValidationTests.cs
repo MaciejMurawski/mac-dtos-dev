@@ -7,21 +7,24 @@ using Common;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Model;
 using Moq;
 using NHS.CohortManager.ScreeningValidationService;
+using NHS.CohortManager.Tests.TestUtils;
+using RulesEngine.Models;
 
 [TestClass]
 public class LookupValidationTests
 {
-    private readonly Mock<ILogger<LookupValidation>> _logger = new();
     private readonly Mock<ICallFunction> _callFunction = new();
     private readonly Mock<FunctionContext> _context = new();
     private readonly Mock<HttpRequestData> _request;
+    private readonly Mock<IExceptionHandler> _handleException = new();
+    private readonly CreateResponse _createResponse = new();
     private readonly ServiceCollection _serviceCollection = new();
     private readonly LookupValidationRequestBody _requestBody;
     private readonly LookupValidation _function;
+
 
     public LookupValidationTests()
     {
@@ -35,19 +38,22 @@ public class LookupValidationTests
 
         var existingParticipant = new Participant
         {
-            NHSId = "1",
+            NhsNumber = "1",
             FirstName = "John",
             Surname = "Smith"
         };
         var newParticipant = new Participant
         {
-            NHSId = "1",
+            NhsNumber = "1",
             FirstName = "John",
             Surname = "Smith"
         };
-        _requestBody = new LookupValidationRequestBody("UpdateParticipant", existingParticipant, newParticipant);
+        _requestBody = new LookupValidationRequestBody(existingParticipant, newParticipant, "caas.csv");
 
-        _function = new LookupValidation(_logger.Object, _callFunction.Object);
+        _handleException.Setup(x => x.CreateValidationExceptionLog(It.IsAny<IEnumerable<RuleResultTree>>(), It.IsAny<ParticipantCsvRecord>()))
+            .Returns(Task.FromResult(true)).Verifiable();
+
+        _function = new LookupValidation(_createResponse, _handleException.Object);
 
         _request.Setup(r => r.CreateResponse()).Returns(() =>
         {
@@ -66,7 +72,7 @@ public class LookupValidationTests
         var result = await _function.RunAsync(_request.Object);
 
         // Assert
-        Assert.AreEqual(HttpStatusCode.BadRequest, result.StatusCode);
+        Assert.AreEqual(HttpStatusCode.InternalServerError, result.StatusCode);
         _callFunction.Verify(call => call.SendPost(It.IsAny<string>(), It.IsAny<string>()), Times.Never());
     }
 
@@ -80,7 +86,7 @@ public class LookupValidationTests
         var result = await _function.RunAsync(_request.Object);
 
         // Assert
-        Assert.AreEqual(HttpStatusCode.BadRequest, result.StatusCode);
+        Assert.AreEqual(HttpStatusCode.InternalServerError, result.StatusCode);
         _callFunction.Verify(call => call.SendPost(It.IsAny<string>(), It.IsAny<string>()), Times.Never());
     }
 
@@ -88,10 +94,11 @@ public class LookupValidationTests
     [DataRow("")]
     [DataRow(null)]
     [DataRow(" ")]
-    public async Task Run_Should_Return_BadRequest_And_Create_Exception_When_ParticipantMustAlreadyExist_Rule_Fails(string nhsNumber)
+    public async Task Run_Should_Return_OK_And_Create_Exception_When_AmendedParticipantMustExist_Rule_Fails(string nhsNumber)
     {
         // Arrange
-        _requestBody.ExistingParticipant.NHSId = nhsNumber;
+        _requestBody.NewParticipant.RecordType = Actions.Amended;
+        _requestBody.ExistingParticipant.NhsNumber = nhsNumber;
         var json = JsonSerializer.Serialize(_requestBody);
         SetUpRequestBody(json);
 
@@ -99,17 +106,21 @@ public class LookupValidationTests
         var result = await _function.RunAsync(_request.Object);
 
         // Assert
-        Assert.AreEqual(HttpStatusCode.BadRequest, result.StatusCode);
-        _callFunction.Verify(call => call.SendPost(It.Is<string>(s => s == "CreateValidationExceptionURL"), It.Is<string>(s => s.Contains("ParticipantMustAlreadyExist"))), Times.Once());
+        Assert.AreEqual(HttpStatusCode.Created, result.StatusCode);
+        _handleException.Verify(handleException => handleException.CreateValidationExceptionLog(
+            It.IsAny<IEnumerable<RuleResultTree>>(),
+            It.IsAny<ParticipantCsvRecord>()),
+            Times.Once());
     }
 
     [TestMethod]
     [DataRow("0000000000")]
     [DataRow("9999999999")]
-    public async Task Run_Should_Not_Create_Exception_When_ParticipantMustAlreadyExist_Rule_Passes(string nhsNumber)
+    public async Task Run_Should_Not_Create_Exception_When_AmendedParticipantMustExist_Rule_Passes(string nhsNumber)
     {
         // Arrange
-        _requestBody.ExistingParticipant.NHSId = nhsNumber;
+        _requestBody.NewParticipant.RecordType = Actions.Amended;
+        _requestBody.ExistingParticipant.NhsNumber = nhsNumber;
         var json = JsonSerializer.Serialize(_requestBody);
         SetUpRequestBody(json);
 
@@ -117,17 +128,20 @@ public class LookupValidationTests
         await _function.RunAsync(_request.Object);
 
         // Assert
-        _callFunction.Verify(call => call.SendPost(It.Is<string>(s => s == "CreateValidationExceptionURL"), It.Is<string>(s => s.Contains("ParticipantMustAlreadyExist"))), Times.Never());
+        _handleException.Verify(handleException => handleException.CreateValidationExceptionLog(
+            It.IsAny<IEnumerable<RuleResultTree>>(),
+            It.IsAny<ParticipantCsvRecord>()),
+            Times.Never());
     }
 
     [TestMethod]
     [DataRow("0000000000")]
     [DataRow("9999999999")]
-    public async Task Run_Should_Return_BadRequest_And_Create_Exception_When_ParticipantMustNotAlreadyExist_Rule_Fails(string nhsNumber)
+    public async Task Run_Should_Return_OK_And_Create_Exception_When_NewParticipantMustNotAlreadyExist_Rule_Fails(string nhsNumber)
     {
         // Arrange
-        _requestBody.Workflow = "AddParticipant";
-        _requestBody.ExistingParticipant.NHSId = nhsNumber;
+        _requestBody.NewParticipant.RecordType = Actions.New;
+        _requestBody.ExistingParticipant.NhsNumber = nhsNumber;
         var json = JsonSerializer.Serialize(_requestBody);
         SetUpRequestBody(json);
 
@@ -135,19 +149,22 @@ public class LookupValidationTests
         var result = await _function.RunAsync(_request.Object);
 
         // Assert
-        Assert.AreEqual(HttpStatusCode.BadRequest, result.StatusCode);
-        _callFunction.Verify(call => call.SendPost(It.Is<string>(s => s == "CreateValidationExceptionURL"), It.Is<string>(s => s.Contains("ParticipantMustNotAlreadyExist"))), Times.Once());
+        Assert.AreEqual(HttpStatusCode.Created, result.StatusCode);
+        _handleException.Verify(handleException => handleException.CreateValidationExceptionLog(
+            It.IsAny<IEnumerable<RuleResultTree>>(),
+            It.IsAny<ParticipantCsvRecord>()),
+            Times.Once());
     }
 
     [TestMethod]
     [DataRow("")]
     [DataRow(null)]
     [DataRow(" ")]
-    public async Task Run_Should_Not_Create_Exception_When_ParticipantMustNotAlreadyExist_Rule_Passes(string nhsNumber)
+    public async Task Run_Should_Not_Create_Exception_When_NewParticipantMustNotAlreadyExist_Rule_Passes(string nhsNumber)
     {
         // Arrange
-        _requestBody.Workflow = "AddParticipant";
-        _requestBody.ExistingParticipant.NHSId = nhsNumber;
+        _requestBody.NewParticipant.RecordType = Actions.New;
+        _requestBody.ExistingParticipant.NhsNumber = nhsNumber;
         var json = JsonSerializer.Serialize(_requestBody);
         SetUpRequestBody(json);
 
@@ -155,7 +172,54 @@ public class LookupValidationTests
         await _function.RunAsync(_request.Object);
 
         // Assert
-        _callFunction.Verify(call => call.SendPost(It.Is<string>(s => s == "CreateValidationExceptionURL"), It.Is<string>(s => s.Contains("ParticipantMustNotAlreadyExist"))), Times.Never());
+        _handleException.Verify(handleException => handleException.CreateValidationExceptionLog(
+            It.IsAny<IEnumerable<RuleResultTree>>(),
+            It.IsAny<ParticipantCsvRecord>()),
+            Times.Never());
+    }
+
+    [TestMethod]
+    [DataRow("")]
+    [DataRow(null)]
+    [DataRow(" ")]
+    public async Task Run_Should_Return_OK_And_Create_Exception_When_RemovedParticipantMustExist_Rule_Fails(string nhsNumber)
+    {
+        // Arrange
+        _requestBody.NewParticipant.RecordType = Actions.Removed;
+        _requestBody.ExistingParticipant.NhsNumber = nhsNumber;
+        var json = JsonSerializer.Serialize(_requestBody);
+        SetUpRequestBody(json);
+
+        // Act
+        var result = await _function.RunAsync(_request.Object);
+
+        // Assert
+        Assert.AreEqual(HttpStatusCode.Created, result.StatusCode);
+        _handleException.Verify(handleException => handleException.CreateValidationExceptionLog(
+            It.IsAny<IEnumerable<RuleResultTree>>(),
+            It.IsAny<ParticipantCsvRecord>()),
+            Times.Once());
+    }
+
+    [TestMethod]
+    [DataRow("0000000000")]
+    [DataRow("9999999999")]
+    public async Task Run_Should_Not_Create_Exception_When_RemovedParticipantMustExist_Rule_Passes(string nhsNumber)
+    {
+        // Arrange
+        _requestBody.NewParticipant.RecordType = Actions.Removed;
+        _requestBody.ExistingParticipant.NhsNumber = nhsNumber;
+        var json = JsonSerializer.Serialize(_requestBody);
+        SetUpRequestBody(json);
+
+        // Act
+        await _function.RunAsync(_request.Object);
+
+        // Assert
+        _handleException.Verify(handleException => handleException.CreateValidationExceptionLog(
+            It.IsAny<IEnumerable<RuleResultTree>>(),
+            It.IsAny<ParticipantCsvRecord>()),
+            Times.Never());
     }
 
     private void SetUpRequestBody(string json)

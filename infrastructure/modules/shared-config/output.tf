@@ -16,7 +16,7 @@ locals {
     event-grid-topic            = lower("EVGT-${var.env}-${var.location_map[var.location]}")
     function-app                = lower("${var.env}-${var.location_map[var.location]}")
     internal-load-balancer      = upper("ILB-${var.env}-${var.location_map[var.location]}-${var.application}")
-    key-vault                   = upper("KV-${var.application}-${var.env}-${var.location_map[var.location]}-mac")
+    key-vault                   = upper("KV-${var.application}-${var.env}-${var.location_map[var.location]}")
     kubernetes-service          = lower("AKS-${var.env}-${var.location_map[var.location]}-${var.application}")
     load-balancer               = upper("LB-${var.env}-${var.location_map[var.location]}-${var.application}")
     local-network-gateway       = upper("LNG-${var.env}-${var.location_map[var.location]}-${var.application}")
@@ -34,7 +34,7 @@ locals {
     route-table                 = upper("RT-${var.env}-${var.location_map[var.location]}-${var.application}")
     service-bus                 = lower("SB-${var.location_map[var.location]}-${var.env}-${var.application}")
     service-principal           = upper("SP-${var.env}-${var.application}")
-    sql-server                  = lower("SQLSVR-${var.application}-${var.env}-${var.location_map[var.location]}-mac")
+    sql-server                  = lower("SQLSVR-${var.application}-${var.env}-${var.location_map[var.location]}")
     sql-server-db               = lower("SQLDB-${var.application}-${var.env}-${var.location_map[var.location]}")
     sql-server-managed-instance = lower("SQLMI-${var.env}-${var.location_map[var.location]}-${var.application}")
     stack-dns-suffix            = "${lower(var.env)}${lower(var.application)}"

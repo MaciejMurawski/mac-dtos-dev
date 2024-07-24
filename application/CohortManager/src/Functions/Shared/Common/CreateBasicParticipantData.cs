@@ -11,7 +11,7 @@ public class CreateBasicParticipantData : ICreateBasicParticipantData
             RecordType = participant.RecordType,
             ChangeTimeStamp = participant.ChangeTimeStamp,
             SerialChangeNumber = participant.SerialChangeNumber,
-            NHSId = participant.NHSId,
+            NhsNumber = participant.NhsNumber,
             SupersededByNhsNumber = participant.SupersededByNhsNumber,
             PrimaryCareProviderEffectiveFrom = participant.PrimaryCareProviderEffectiveFromDate,
             CurrentPostingEffectiveFrom = participant.CurrentPostingEffectiveFromDate,
@@ -27,7 +27,9 @@ public class CreateBasicParticipantData : ICreateBasicParticipantData
             MobileNumberEffectiveFromDate = participant.MobileNumberEffectiveFromDate,
             EmailAddressEffectiveFromDate = participant.EmailAddressEffectiveFromDate,
             InvalidFlag = participant.InvalidFlag,
-            ChangeReasonCode = participant.ChangeReasonCode
+            ChangeReasonCode = participant.ChangeReasonCode,
+            RemovalReason = participant.ReasonForRemoval,
+            RemovalEffectiveFromDate = participant.ReasonForRemovalEffectiveFromDate
         };
     }
 }

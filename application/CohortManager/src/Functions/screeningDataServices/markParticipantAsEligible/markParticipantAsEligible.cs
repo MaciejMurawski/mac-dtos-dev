@@ -15,12 +15,14 @@ namespace markParticipantAsEligible
         private readonly ILogger<MarkParticipantAsEligible> _logger;
         private readonly ICreateResponse _createResponse;
         private readonly IUpdateParticipantData _updateParticipantData;
+        private readonly IExceptionHandler _handleException;
 
-        public MarkParticipantAsEligible(ILogger<MarkParticipantAsEligible> logger, ICreateResponse createResponse, IUpdateParticipantData updateParticipant)
+        public MarkParticipantAsEligible(ILogger<MarkParticipantAsEligible> logger, ICreateResponse createResponse, IUpdateParticipantData updateParticipant, IExceptionHandler handleException)
         {
             _logger = logger;
             _createResponse = createResponse;
             _updateParticipantData = updateParticipant;
+            _handleException = handleException;
         }
 
         [Function("markParticipantAsEligible")]
@@ -44,17 +46,18 @@ namespace markParticipantAsEligible
                 }
                 if (updated)
                 {
-                    _logger.LogInformation($"record updated for participant {participant.NHSId}");
+                    _logger.LogInformation($"record updated for participant {participant.NhsNumber}");
                     return _createResponse.CreateHttpResponse(HttpStatusCode.OK, req);
                 }
 
-                _logger.LogError($"an error occurred while updating data for {participant.NHSId}");
+                _logger.LogError($"an error occurred while updating data for {participant.NhsNumber}");
 
                 return _createResponse.CreateHttpResponse(HttpStatusCode.BadRequest, req);
             }
             catch (Exception ex)
             {
                 _logger.LogError($"an error occurred: {ex}");
+                _handleException.CreateSystemExceptionLog(ex, participant);
                 return _createResponse.CreateHttpResponse(HttpStatusCode.BadRequest, req);
             }
         }

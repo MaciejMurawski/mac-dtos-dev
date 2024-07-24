@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ParticipantManagementServic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addParticipant", "ParticipantManagementServices\addParticipant\addParticipant.csproj", "{A47CFB75-1972-4BFB-98A1-9933FD5E086F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateEligibility", "ParticipantManagementServices\UpdateEligibility\UpdateEligibility.csproj", "{BE10A415-5474-4393-A5E4-2743C905C422}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "processCaasFile", "CaasIntegration\processCaasFile\processCaasFile.csproj", "{11BE4A36-F6EC-422E-98F3-D27D4A7717B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "receiveCaasFile", "CaasIntegration\receiveCaasFile\receiveCaasFile.csproj", "{AE6D7A1A-E034-470B-8AB5-793AFE4C9C51}"
@@ -48,8 +46,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoveParticipantTests", ".
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "screeningDataServicesTests", "screeningDataServicesTests", "{2BE7CEE7-58EF-4087-8D7C-B74CE7969A5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateEligibilityTests", "..\..\..\..\tests\ParticipantManagementServicesTests\UpdateEligibilityTests\UpdateEligibilityTests.csproj", "{7CC233E4-25CE-4493-88E1-8B580685C434}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemographicDataService", "screeningDataServices\DemographicDataService\DemographicDataService.csproj", "{96AD14C8-67A1-4DC4-8593-F2D64F999223}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DemographicServices", "DemographicServices", "{8546F1DA-6055-4224-8A2B-36CDE94CBD07}"
@@ -68,8 +64,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemographicDataFunctionTest
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScreeningValidationServiceTests", "ScreeningValidationServiceTests", "{2E941CDF-4D51-4DB2-AEED-B4C44F9918CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateValidationException", "screeningDataServices\CreateValidationException\CreateValidationException.csproj", "{D312542F-0A4A-446B-B363-82EB0083F8F9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetValidationExceptions", "screeningDataServices\GetValidationExceptions\GetValidationExceptions.csproj", "{B6719E71-5BBE-4F24-B728-EE92AC5C8E07}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookupValidation", "ScreeningValidationService\LookupValidation\LookupValidation.csproj", "{5AF185E2-6CDD-47E6-8B93-4624F0A8CA66}"
@@ -85,6 +79,30 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookupValidationTests", "..\..\..\..\tests\ScreeningValidationServiceTests\LookupValidation\LookupValidationTests.csproj", "{79DF4237-68B8-4BA3-A9CC-298A96248CC1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticValidationTests", "..\..\..\..\tests\ScreeningValidationServiceTests\StaticValidation\StaticValidationTests.csproj", "{CD708F54-3DB5-4D70-ABED-8843E61EC1A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CohortDistributionServices", "CohortDistributionServices", "{F589D54E-8BFF-45BD-85A8-0C1FCF4F58F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetrieveCohortDistribution", "CohortDistributionServices\RetrieveCohortDistribution\RetrieveCohortDistribution.csproj", "{BD73440D-607E-4002-B7A1-14C0194B5230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddCohortDistributionData", "CohortDistributionServices\AddCohortDistributionData\AddCohortDistributionData.csproj", "{02CB2B53-7670-47CC-93DF-6F941FB58C38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CohortDistributionDataTests", "..\..\..\..\tests\AddCohortDistributionDataTests\CohortDistributionDataTests\CohortDistributionDataTests.csproj", "{963347ED-E02D-42D2-8A9C-05115E8B75C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoveCohortDistributionData", "CohortDistributionServices\RemoveCohortDistributionData\RemoveCohortDistributionData.csproj", "{D07AA2A7-1E9F-4168-849D-1F25AEAFD1F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformDataService", "CohortDistributionServices\TransformDataService\TransformDataService.csproj", "{81BF10AD-AD08-4D47-8150-96FA09227107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformDataServiceTests", "..\..\..\..\tests\TransformDataServiceTests\TransformDataServiceTests.csproj", "{AA690015-629F-41A3-903C-7A65845691DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceProviderAllocationService", "ServiceProviderAllocationService", "{3F601DD8-88C6-4715-BD32-548CC0D575E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllocateServiceProviderToParticipantByService", "CohortDistributionServices\ServiceProviderAllocationService\AllocateServiceProviderToParticipantByService\AllocateServiceProviderToParticipantByService.csproj", "{4650E40A-AD31-4474-A452-1D6A7F446DDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllocateServiceProviderToParticipantByServiceTest", "..\..\..\..\tests\CohortDistributionTests\ServiceProviderAllocationServiceTest\AllocateServiceProviderToParticipantByServiceTest\AllocateServiceProviderToParticipantByServiceTest.csproj", "{142C4501-749C-4ECC-8F9E-452F204D65DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateException", "CreateException\CreateException.csproj", "{F694FC4E-A899-4466-B26F-B0E4C6E50F18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkParticipantAsIneligibleTests", "..\..\..\..\tests\screeningDataServicesTests\MarkParticipantAsIneligibleTests\MarkParticipantAsIneligibleTests.csproj", "{FBAE6E8E-C678-4F9A-A642-B7B8D985907A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,10 +126,6 @@ Global
 		{A47CFB75-1972-4BFB-98A1-9933FD5E086F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A47CFB75-1972-4BFB-98A1-9933FD5E086F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A47CFB75-1972-4BFB-98A1-9933FD5E086F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE10A415-5474-4393-A5E4-2743C905C422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE10A415-5474-4393-A5E4-2743C905C422}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE10A415-5474-4393-A5E4-2743C905C422}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE10A415-5474-4393-A5E4-2743C905C422}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11BE4A36-F6EC-422E-98F3-D27D4A7717B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11BE4A36-F6EC-422E-98F3-D27D4A7717B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11BE4A36-F6EC-422E-98F3-D27D4A7717B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -164,10 +178,6 @@ Global
 		{D6EC5F88-1726-485B-AF84-9737293E7250}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6EC5F88-1726-485B-AF84-9737293E7250}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6EC5F88-1726-485B-AF84-9737293E7250}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CC233E4-25CE-4493-88E1-8B580685C434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CC233E4-25CE-4493-88E1-8B580685C434}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CC233E4-25CE-4493-88E1-8B580685C434}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CC233E4-25CE-4493-88E1-8B580685C434}.Release|Any CPU.Build.0 = Release|Any CPU
 		{96AD14C8-67A1-4DC4-8593-F2D64F999223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{96AD14C8-67A1-4DC4-8593-F2D64F999223}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96AD14C8-67A1-4DC4-8593-F2D64F999223}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -192,10 +202,6 @@ Global
 		{A99A0090-6DDF-45D7-B387-025C986DF078}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A99A0090-6DDF-45D7-B387-025C986DF078}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A99A0090-6DDF-45D7-B387-025C986DF078}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D312542F-0A4A-446B-B363-82EB0083F8F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D312542F-0A4A-446B-B363-82EB0083F8F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D312542F-0A4A-446B-B363-82EB0083F8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D312542F-0A4A-446B-B363-82EB0083F8F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B6719E71-5BBE-4F24-B728-EE92AC5C8E07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6719E71-5BBE-4F24-B728-EE92AC5C8E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6719E71-5BBE-4F24-B728-EE92AC5C8E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -228,6 +234,46 @@ Global
 		{CD708F54-3DB5-4D70-ABED-8843E61EC1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD708F54-3DB5-4D70-ABED-8843E61EC1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD708F54-3DB5-4D70-ABED-8843E61EC1A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD73440D-607E-4002-B7A1-14C0194B5230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD73440D-607E-4002-B7A1-14C0194B5230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD73440D-607E-4002-B7A1-14C0194B5230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD73440D-607E-4002-B7A1-14C0194B5230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02CB2B53-7670-47CC-93DF-6F941FB58C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02CB2B53-7670-47CC-93DF-6F941FB58C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02CB2B53-7670-47CC-93DF-6F941FB58C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02CB2B53-7670-47CC-93DF-6F941FB58C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{963347ED-E02D-42D2-8A9C-05115E8B75C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{963347ED-E02D-42D2-8A9C-05115E8B75C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{963347ED-E02D-42D2-8A9C-05115E8B75C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{963347ED-E02D-42D2-8A9C-05115E8B75C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D07AA2A7-1E9F-4168-849D-1F25AEAFD1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D07AA2A7-1E9F-4168-849D-1F25AEAFD1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D07AA2A7-1E9F-4168-849D-1F25AEAFD1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D07AA2A7-1E9F-4168-849D-1F25AEAFD1F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81BF10AD-AD08-4D47-8150-96FA09227107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BF10AD-AD08-4D47-8150-96FA09227107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BF10AD-AD08-4D47-8150-96FA09227107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BF10AD-AD08-4D47-8150-96FA09227107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA690015-629F-41A3-903C-7A65845691DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA690015-629F-41A3-903C-7A65845691DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA690015-629F-41A3-903C-7A65845691DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA690015-629F-41A3-903C-7A65845691DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4650E40A-AD31-4474-A452-1D6A7F446DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4650E40A-AD31-4474-A452-1D6A7F446DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4650E40A-AD31-4474-A452-1D6A7F446DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4650E40A-AD31-4474-A452-1D6A7F446DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{142C4501-749C-4ECC-8F9E-452F204D65DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{142C4501-749C-4ECC-8F9E-452F204D65DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{142C4501-749C-4ECC-8F9E-452F204D65DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{142C4501-749C-4ECC-8F9E-452F204D65DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F694FC4E-A899-4466-B26F-B0E4C6E50F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F694FC4E-A899-4466-B26F-B0E4C6E50F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F694FC4E-A899-4466-B26F-B0E4C6E50F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F694FC4E-A899-4466-B26F-B0E4C6E50F18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBAE6E8E-C678-4F9A-A642-B7B8D985907A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBAE6E8E-C678-4F9A-A642-B7B8D985907A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBAE6E8E-C678-4F9A-A642-B7B8D985907A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBAE6E8E-C678-4F9A-A642-B7B8D985907A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -237,7 +283,6 @@ Global
 		{323B466B-D2DB-4774-993A-61B2A66715E6} = {3A61DBD3-B2D4-45D7-9CB6-9BC4C9586467}
 		{AD400B3E-073B-4BBD-AF0F-EFAAF48A3E58} = {3A61DBD3-B2D4-45D7-9CB6-9BC4C9586467}
 		{A47CFB75-1972-4BFB-98A1-9933FD5E086F} = {E1ADFCCC-1FF7-40E6-8D82-301F3FA909A7}
-		{BE10A415-5474-4393-A5E4-2743C905C422} = {E1ADFCCC-1FF7-40E6-8D82-301F3FA909A7}
 		{11BE4A36-F6EC-422E-98F3-D27D4A7717B5} = {937A8411-5A71-43D8-906A-35614DEFD201}
 		{AE6D7A1A-E034-470B-8AB5-793AFE4C9C51} = {937A8411-5A71-43D8-906A-35614DEFD201}
 		{7BFA62FE-3066-45C1-B675-2266A28D0F96} = {E1ADFCCC-1FF7-40E6-8D82-301F3FA909A7}
@@ -250,7 +295,6 @@ Global
 		{9A53EEBB-3DE4-41FD-8552-94F79E88D674} = {8546F1DA-6055-4224-8A2B-36CDE94CBD07}
 		{FE8338CF-3245-4B4E-BAA1-4643A6AB668E} = {C1B3BF4F-54CA-4100-AA4E-EA91B17704B8}
 		{15E7492F-ACCE-4267-A52A-2ABF44690F64} = {C1B3BF4F-54CA-4100-AA4E-EA91B17704B8}
-		{D312542F-0A4A-446B-B363-82EB0083F8F9} = {3A61DBD3-B2D4-45D7-9CB6-9BC4C9586467}
 		{B6719E71-5BBE-4F24-B728-EE92AC5C8E07} = {3A61DBD3-B2D4-45D7-9CB6-9BC4C9586467}
 		{5AF185E2-6CDD-47E6-8B93-4624F0A8CA66} = {C1B3BF4F-54CA-4100-AA4E-EA91B17704B8}
 		{F2388615-C86A-4C2B-8832-F837E68D3835} = {2BE7CEE7-58EF-4087-8D7C-B74CE7969A5C}
@@ -259,6 +303,12 @@ Global
 		{E0A701BD-23C7-45C1-B969-E639B001C7E9} = {2E941CDF-4D51-4DB2-AEED-B4C44F9918CA}
 		{79DF4237-68B8-4BA3-A9CC-298A96248CC1} = {2E941CDF-4D51-4DB2-AEED-B4C44F9918CA}
 		{CD708F54-3DB5-4D70-ABED-8843E61EC1A6} = {2E941CDF-4D51-4DB2-AEED-B4C44F9918CA}
+		{BD73440D-607E-4002-B7A1-14C0194B5230} = {F589D54E-8BFF-45BD-85A8-0C1FCF4F58F3}
+		{02CB2B53-7670-47CC-93DF-6F941FB58C38} = {F589D54E-8BFF-45BD-85A8-0C1FCF4F58F3}
+		{D07AA2A7-1E9F-4168-849D-1F25AEAFD1F2} = {F589D54E-8BFF-45BD-85A8-0C1FCF4F58F3}
+		{81BF10AD-AD08-4D47-8150-96FA09227107} = {F589D54E-8BFF-45BD-85A8-0C1FCF4F58F3}
+		{3F601DD8-88C6-4715-BD32-548CC0D575E8} = {F589D54E-8BFF-45BD-85A8-0C1FCF4F58F3}
+		{4650E40A-AD31-4474-A452-1D6A7F446DDC} = {3F601DD8-88C6-4715-BD32-548CC0D575E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EACF2AC-4BC4-46CE-B6EB-1556257C4C21}
