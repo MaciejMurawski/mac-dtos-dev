@@ -14,6 +14,8 @@ module "functionapp" {
   ai_connstring = module.app_insights.ai_connection_string
   worker_32bit  = var.function_app.worker_32bit
 
+  site_config = []
+
   tags = var.tags
 
 }
