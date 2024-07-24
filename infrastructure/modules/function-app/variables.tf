@@ -43,6 +43,7 @@ variable "site_config" {
   type        = map(string)
   description = "Function app site configuration"
 }
+
 variable "ai_connstring" {
   type        = string
   description = "The App Insights connection string."
