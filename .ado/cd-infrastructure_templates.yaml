@@ -2,7 +2,14 @@
 # - stage variable group name: dtos_ENVIRONMENT_variables
 # - 
 
-trigger: none
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - Infrastructure/*  
+
 
 variables:
   - group: dtos_global
