@@ -152,3 +152,12 @@ variable "app_insights" {
   })
 }
 
+variable "acr" {
+  description = "Configuration of the Azure Container Registry"
+  type = object({
+    resource_group_key = optional(string, "cohman")
+    sku                = optional(string, "Premium")
+    admin_enabled      = optional(bool, false)
+  })
+}
+
