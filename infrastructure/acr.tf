@@ -8,6 +8,8 @@ module "acr" {
 
   sku           = var.acr.sku
   admin_enabled = var.acr.admin_enabled
-  tags          = var.tags
+
+  uai_name = var.acr.uai_name
+  tags     = var.tags
 
 }

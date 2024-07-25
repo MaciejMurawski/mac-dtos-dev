@@ -23,6 +23,12 @@ variable "admin_enabled" {
   type        = string
   description = "Specifies whether the admin user is enabled."
 }
+
+variable "uai_name" {
+  type        = string
+  description = "Name of the User Assigned Identity for ACR Push"
+}
+
 variable "tags" {
   type        = map(string)
   description = "Resource tags to be applied throughout the deployment."
