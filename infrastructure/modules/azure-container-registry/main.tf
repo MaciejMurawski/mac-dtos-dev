@@ -28,6 +28,6 @@ resource "azurerm_container_registry" "acr" {
 # create role assignment for acr
 resource "azurerm_role_assignment" "ra" {
   scope                = azurerm_container_registry.acr.id
-  role_definition_name = "AcrPull"
+  role_definition_name = "AcrPush"
   principal_id         = azurerm_user_assigned_identity.uai.principal_id
 }
