@@ -1,6 +1,6 @@
 resource "azurerm_eventgrid_topic" "egtopic" {
 
-  name                = "${var.names.event-grid-topic}-${var.name_suffix}"
+  name                = "${var.names.event-grid-topic}-${var.name_suffix}-test"
   resource_group_name = var.resource_group_name
   location            = var.location
 
