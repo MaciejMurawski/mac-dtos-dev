@@ -25,6 +25,7 @@ stages:
   - stage: terraform_plan
     displayName: Terraform Plan
     dependsOn: []
+    condition: and(succeeded(), eq(variables['Build.Reason'], 'Manual'))
 
     variables:
       - group: dtos_development_variables
