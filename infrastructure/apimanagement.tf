@@ -8,6 +8,7 @@ module "api_management" {
 
   publisher_name  = var.api_management.publisher_name
   publisher_email = var.api_management.publisher_email
+  sku             = var.api_management.sku
 
   tags = var.tags
 
