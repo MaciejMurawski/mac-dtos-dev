@@ -1,6 +1,6 @@
 
 resource "azurerm_key_vault_secret" "sqllogin" {
-  name         = "az-sql-login-mac"
+  name         = "az-sql-login-mac-dev"
   value        = "sqldtosadmin"
   key_vault_id = var.kv_id
 
@@ -16,7 +16,7 @@ resource "random_password" "randompass" {
 }
 
 resource "azurerm_key_vault_secret" "sqlpass" {
-  name         = "az-sql-pass-mac"
+  name         = "az-sql-pass-mac-dev"
   value        = random_password.randompass.result
   key_vault_id = var.kv_id
 
