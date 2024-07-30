@@ -180,7 +180,7 @@ locals {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       DOCKER_ENABLE_CI         = "false"
 
-      reateValidationExceptionURL= "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
+      CreateValidationExceptionURL= "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
 
     }
 
