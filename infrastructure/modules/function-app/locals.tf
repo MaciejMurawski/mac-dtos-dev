@@ -1,10 +1,10 @@
 locals {
-  fnapp_urls = {
+  # fnapp_urls = {
 
-    ProcessCaasFile = "https://${var.names.function-app}-${lower(var.function_app.ProcessCaasFile.name_suffix)}/api/processCaasFile"
-    FileValidation = "https://${var.names.function-app}-${lower(var.function_app.FileValidation.name_suffix)}/api/FileValidation"
+  #   ProcessCaasFile = "https://${var.names.function-app}-${lower(var.function_app.ProcessCaasFile.name_suffix)}/api/processCaasFile"
+  #   FileValidation = "https://${var.names.function-app}-${lower(var.function_app.FileValidation.name_suffix)}/api/FileValidation"
 
-  }
+  # }
 
   app_settings  = {
 
@@ -12,10 +12,10 @@ locals {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       DOCKER_ENABLE_CI         = "false"
 
-      AzureWebJobsStorage = "UseDevelopmentStorage=true" ## ??
-      caasfolder_STORAGE = "UseDevelopmentStorage=true" ## ??
-      targetFunction    = "https://${var.names.function-app}-${lower(var.function_app.ProcessCaasFile.name_suffix)}/api/processCaasFile" #locals.fnapp_urls.ProcessCaasFile #
-      FileValidationURL = "https://${var.names.function-app}-${lower(var.function_app.FileValidation.name_suffix)}/api/FileValidation" #locals.fnapp_urls.FileValidation #
+      AzureWebJobsStorage = "UseDevelopmentStorage=true"
+      caasfolder_STORAGE = "UseDevelopmentStorage=true"
+      targetFunction    = "https://${var.names.function-app}-${lower(var.function_app.ProcessCaasFile.name_suffix)}/api/processCaasFile"
+      FileValidationURL = "https://${var.names.function-app}-${lower(var.function_app.FileValidation.name_suffix)}/api/FileValidation"
     }
 
     ProcessCaasFile = {
