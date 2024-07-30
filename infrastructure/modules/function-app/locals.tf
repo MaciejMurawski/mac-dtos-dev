@@ -11,6 +11,7 @@ locals {
     receiveCaasFile = {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       DOCKER_ENABLE_CI         = "false"
+
       AzureWebJobsStorage = "UseDevelopmentStorage=true" ## ??
       caasfolder_STORAGE = "UseDevelopmentStorage=true" ## ?? aws_instance.blue.*.id
       targetFunction    = "https://${var.names.function-app}-${lower(var.function_app.ProcessCaasFile.name_suffix)}/api/processCaasFile" #locals.fnapp_urls.ProcessCaasFile #
@@ -20,6 +21,11 @@ locals {
     ProcessCaasFile = {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       DOCKER_ENABLE_CI         = "false"
+
+      PMSAddParticipant     = "https://${var.names.function-app}-${lower(var.function_app.AddNewParticipant.name_suffix)}/api/addParticipant"
+      PMSRemoveParticipant  = "https://${var.names.function-app}-${lower(var.function_app.RemoveParticipant.name_suffix)}/api/RemoveParticipant"
+      PMSUpdateParticipant  = "https://${var.names.function-app}-${lower(var.function_app.UpdateParticipant.name_suffix)}/api/updateParticipant"
+      DemographicURI        = "https://${var.names.function-app}-${lower(var.function_app.DemographicDataManagement.name_suffix)}/api/DemographicDataFunction"
     }
 
     AddNewParticipant = {
