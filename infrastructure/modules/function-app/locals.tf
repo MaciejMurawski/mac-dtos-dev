@@ -1,20 +1,20 @@
 locals {
   # fnapp_urls = {
-  #   for app in module.azurerm_linux_function_app.function : app.name => {
+  #   for_each = var.function_app
   #     url - app.
   #   }
 
   #   url = azurerm_linux_function_app.function.defaul_hostname
   #   receiveCaasFile = azurerm_linux_function_app.function.defaul_hostname[var.function_app.fa_config.receiveCaasFile]
-  # }
+
   local_app_settings  = {
 
     receiveCaasFile = {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       AzureWebJobsStorage = "UseDevelopmentStorage=true" ## ??
       caasfolder_STORAGE = "UseDevelopmentStorage=true" ## ?? aws_instance.blue.*.id
-      targetFunction = "http://${azurerm_linux_function_app.function.processCaasFile.defaul_hostname}/api/processCaasFile"
-      FileValidationURL = "http://${azurerm_linux_function_app.function.FileValidation.defaul_hostname}/api/FileValidation" #"http://localhost:7073/api/FileValidation"
+      targetFunction    = "http://${var.names.function-app}-${lower(var.function_app.fa_config.receiveCaasFile.name_suffix)}/api/processCaasFile"
+      FileValidationURL = "http://${var.names.function-app}-${lower(var.function_app.fa_config.FileValidation.name_suffix)}/api/FileValidation"
     }
 
     ProcessCaasFile = {
