@@ -13,8 +13,8 @@ locals {
       DOCKER_ENABLE_CI         = "false"
       AzureWebJobsStorage = "UseDevelopmentStorage=true" ## ??
       caasfolder_STORAGE = "UseDevelopmentStorage=true" ## ?? aws_instance.blue.*.id
-      targetFunction    = locals.fnapp_urls.ProcessCaasFile #"https://${var.names.function-app}-${lower(var.function_app.ProcessCaasFile.name_suffix)}/api/processCaasFile"
-      FileValidationURL = locals.fnapp_urls.FileValidation #"https://${var.names.function-app}-${lower(var.function_app.FileValidation.name_suffix)}/api/FileValidation"
+      targetFunction    = fnapp_urls.ProcessCaasFile #"https://${var.names.function-app}-${lower(var.function_app.ProcessCaasFile.name_suffix)}/api/processCaasFile"
+      FileValidationURL = fnapp_urls.FileValidation #"https://${var.names.function-app}-${lower(var.function_app.FileValidation.name_suffix)}/api/FileValidation"
     }
 
     ProcessCaasFile = {
