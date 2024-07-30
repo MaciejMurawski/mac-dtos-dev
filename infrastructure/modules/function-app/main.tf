@@ -24,7 +24,7 @@ resource "azurerm_linux_function_app" "function" {
   tags         = var.tags
 
   lifecycle {
-    ignore_changes = [tags, app_settings, connection_string]
+    ignore_changes = [tags, connection_string]
   }
 
 }
