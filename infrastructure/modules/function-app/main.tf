@@ -28,12 +28,3 @@ resource "azurerm_linux_function_app" "function" {
   }
 
 }
-
-# data "azurerm_function_app_host_keys" "fnapphostkey" {
-#   for_each = azurerm_linux_function_app.function
-
-#   name                = each.value.name
-#   resource_group_name = each.value.resource_group_name
-
-#   #depends_on = [azurerm_function_app.example]
-# }
