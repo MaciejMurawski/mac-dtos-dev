@@ -20,7 +20,7 @@ resource "azurerm_linux_function_app" "function" {
     }
   }
 
-  app_settings = var.app_settings
+  app_settings =  local.local_app_settings.each.value.name
   tags         = var.tags
 
   lifecycle {
