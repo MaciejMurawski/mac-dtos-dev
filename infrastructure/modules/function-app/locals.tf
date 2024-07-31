@@ -6,7 +6,7 @@ locals {
 
   # }
 
-  app_settings  = {
+  app_settings = {
 
     receiveCaasFile = {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
@@ -22,10 +22,10 @@ locals {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       DOCKER_ENABLE_CI         = "false"
 
-      PMSAddParticipant     = "https://${var.names.function-app}-${lower(var.function_app.AddNewParticipant.name_suffix)}/api/addParticipant"
-      PMSRemoveParticipant  = "https://${var.names.function-app}-${lower(var.function_app.RemoveParticipant.name_suffix)}/api/RemoveParticipant"
-      PMSUpdateParticipant  = "https://${var.names.function-app}-${lower(var.function_app.UpdateParticipant.name_suffix)}/api/updateParticipant"
-      DemographicURI        = "https://${var.names.function-app}-${lower(var.function_app.DemographicDataManagement.name_suffix)}/api/DemographicDataFunction"
+      PMSAddParticipant    = "https://${var.names.function-app}-${lower(var.function_app.AddNewParticipant.name_suffix)}/api/addParticipant"
+      PMSRemoveParticipant = "https://${var.names.function-app}-${lower(var.function_app.RemoveParticipant.name_suffix)}/api/RemoveParticipant"
+      PMSUpdateParticipant = "https://${var.names.function-app}-${lower(var.function_app.UpdateParticipant.name_suffix)}/api/updateParticipant"
+      DemographicURI       = "https://${var.names.function-app}-${lower(var.function_app.DemographicDataManagement.name_suffix)}/api/DemographicDataFunction"
     }
 
     AddNewParticipant = {
@@ -119,8 +119,8 @@ locals {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       DOCKER_ENABLE_CI         = "false"
 
-      CreateValidationExceptionURL= "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
-      inboundBlobName= "file-exceptions"
+      CreateValidationExceptionURL = "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
+      inboundBlobName              = "file-exceptions"
 
     }
 
@@ -128,7 +128,7 @@ locals {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       DOCKER_ENABLE_CI         = "false"
 
-      CreateValidationExceptionURL= "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
+      CreateValidationExceptionURL = "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
 
     }
 
@@ -136,7 +136,7 @@ locals {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       DOCKER_ENABLE_CI         = "false"
 
-      CreateValidationExceptionURL= "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
+      CreateValidationExceptionURL = "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
 
     }
 
@@ -180,7 +180,7 @@ locals {
       FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       DOCKER_ENABLE_CI         = "false"
 
-      CreateValidationExceptionURL= "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
+      CreateValidationExceptionURL = "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
 
     }
 

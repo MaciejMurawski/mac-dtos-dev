@@ -63,4 +63,14 @@ variable "app_settings" {
   description = "App settings for App Service"
 }
 
+variable "acr_registry_url" {
+  description = "The URL that can be used to log into the container registry."
+}
 
+variable "image_name" {
+  description = "Name of the docker image"
+}
+
+variable "image_tag" {
+  description = "Tag of the docker image"
+}

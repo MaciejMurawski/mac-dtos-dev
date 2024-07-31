@@ -19,6 +19,11 @@ module "functionapp" {
 
   app_settings = var.function_app.gl_app_settings
 
+  acr_registry_url = module.azurerm_container_registry.acr.login_server
+
+  image_name = var.image_name
+  image_tag  = var.function_app.gl_docker_env_tag
+
   tags = var.tags
 
 }

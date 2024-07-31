@@ -17,6 +17,11 @@ resource "azurerm_linux_function_app" "function" {
     application_stack {
       use_dotnet_isolated_runtime = var.gl_dotnet_isolated
       dotnet_version              = var.gl_dotnet_version
+      docker {
+        registry_url = var.acr_registry_url
+        image_name   = each.value.docker_img_name
+        image_tag    = var.image_tag
+      }
     }
   }
 
