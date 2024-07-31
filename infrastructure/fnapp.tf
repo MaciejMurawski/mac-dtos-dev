@@ -21,7 +21,7 @@ module "functionapp" {
 
   acr_registry_url = module.acr.login_server
   cont_registry_use_mi = var.function_app.gl_cont_registry_use_mi
-  acr_mi_client_id = module.acr.mi_client_id
+  acr_mi_id = module.acr.mi_id
 
   # image_name = var.image_name
   image_tag  = var.function_app.gl_docker_env_tag
