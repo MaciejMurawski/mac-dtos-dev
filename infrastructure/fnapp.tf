@@ -14,8 +14,8 @@ module "functionapp" {
   ai_connstring = module.app_insights.ai_connection_string
 
   gl_worker_32bit    = var.function_app.gl_worker_32bit
-  gl_dotnet_isolated = var.function_app.gl_dotnet_isolated
-  gl_dotnet_version  = var.function_app.gl_dotnet_version
+  #gl_dotnet_isolated = var.function_app.gl_dotnet_isolated
+  #gl_dotnet_version  = var.function_app.gl_dotnet_version
 
   app_settings = var.function_app.gl_app_settings
 
