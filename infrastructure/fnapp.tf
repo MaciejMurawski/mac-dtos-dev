@@ -19,7 +19,7 @@ module "functionapp" {
 
   app_settings = var.function_app.gl_app_settings
 
-  acr_registry_url = module.acr.acr_login_server
+  acr_registry_url = module.acr.login_server
 
   # image_name = var.image_name
   image_tag  = var.function_app.gl_docker_env_tag
