@@ -31,6 +31,11 @@ resource "azurerm_linux_function_app" "function" {
     }
   }
 
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [var.acr_mi_client_id]
+  }
+
   app_settings = local.app_settings[each.key]
   tags         = var.tags
 
