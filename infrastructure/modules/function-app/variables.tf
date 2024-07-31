@@ -78,3 +78,7 @@ variable "cont_registry_use_mi" {
 variable "acr_mi_id" {
   description = "The ID of the Managed Service Identity to use for connections to the Azure Container Registry."
 }
+
+variable "acr_mi_client_id" {
+  description = "The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry."
+}

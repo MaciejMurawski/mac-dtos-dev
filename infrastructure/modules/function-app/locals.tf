@@ -10,7 +10,7 @@ locals {
 
     receiveCaasFile = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       AzureWebJobsStorage = "UseDevelopmentStorage=true"
       caasfolder_STORAGE  = "UseDevelopmentStorage=true"
@@ -20,7 +20,7 @@ locals {
 
     ProcessCaasFile = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       PMSAddParticipant    = "https://${var.names.function-app}-${lower(var.function_app.AddNewParticipant.name_suffix)}/api/addParticipant"
       PMSRemoveParticipant = "https://${var.names.function-app}-${lower(var.function_app.RemoveParticipant.name_suffix)}/api/RemoveParticipant"
@@ -30,7 +30,7 @@ locals {
 
     AddNewParticipant = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       DSaddParticipant            = "https://${var.names.function-app}-${lower(var.function_app.CreateParticipant.name_suffix)}/api/CreateParticipant"
       DSmarkParticipantAsEligible = "https://${var.names.function-app}-${lower(var.function_app.MarkParticipantEligible.name_suffix)}/api/markParticipantAsEligible"
@@ -41,14 +41,14 @@ locals {
 
     RemoveParticipant = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       markParticipantAsIneligible = "https://${var.names.function-app}-${lower(var.function_app.MarkParticipantAsIneligible.name_suffix)}/api/markParticipantAsIneligible"
     }
 
     UpdateParticipant = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       UpdateParticipant   = "https://${var.names.function-app}-${lower(var.function_app.UpdateParticipantDetails.name_suffix)}/api/updateParticipantDetails"
       StaticValidationURL = "https://${var.names.function-app}-${lower(var.function_app.StaticValidation.name_suffix)}/api/StaticValidation"
@@ -58,7 +58,7 @@ locals {
 
     CreateParticipant = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       UNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
@@ -68,7 +68,7 @@ locals {
 
     MarkParticipantEligible = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
 
@@ -76,7 +76,7 @@ locals {
 
     MarkParticipantAsIneligible = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
       LookupValidationURL = "https://${var.names.function-app}-${lower(var.function_app.LookupValidation.name_suffix)}/api/LookupValidation"
@@ -85,7 +85,7 @@ locals {
 
     UpdateParticipantDetails = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
       LookupValidationURL = "https://${var.names.function-app}-${lower(var.function_app.LookupValidation.name_suffix)}/api/LookupValidation"
@@ -94,14 +94,14 @@ locals {
 
     CreateValidationExceptions = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
     }
 
     GetValidationExceptions = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
 
@@ -109,7 +109,7 @@ locals {
 
     DemographicDataService = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
 
@@ -117,7 +117,7 @@ locals {
 
     FileValidation = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       CreateValidationExceptionURL = "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
       inboundBlobName              = "file-exceptions"
@@ -126,7 +126,7 @@ locals {
 
     StaticValidation = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       CreateValidationExceptionURL = "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
 
@@ -134,7 +134,7 @@ locals {
 
     LookupValidation = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       CreateValidationExceptionURL = "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
 
@@ -142,7 +142,7 @@ locals {
 
     DemographicDataManagement = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       DemographicDataServiceURI = "https://${var.names.function-app}-${lower(var.function_app.DemographicDataService.name_suffix)}/api/DemographicDataService"
 
@@ -150,7 +150,7 @@ locals {
 
     AddCohortDistributionData = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
 
@@ -158,7 +158,7 @@ locals {
 
     RetrieveCohortDistributionData = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
 
@@ -166,19 +166,19 @@ locals {
 
     RemoveCohortDistributionData = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
     }
 
     TransformData = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
     }
 
     AllocateServiceProvider = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
 
       CreateValidationExceptionURL = "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}/api/CreateValidationException"
 
@@ -186,7 +186,7 @@ locals {
 
     CreateCohortDistribution = {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
-      DOCKER_ENABLE_CI         = "false"
+      DOCKER_ENABLE_CI = "false"
     }
 
     RetrieveParticipantData = {

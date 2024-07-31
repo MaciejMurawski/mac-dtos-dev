@@ -14,7 +14,7 @@ resource "azurerm_linux_function_app" "function" {
 
     ### TO ADD
     container_registry_use_managed_identity       = var.cont_registry_use_mi
-    container_registry_managed_identity_client_id = var.acr_mi_id #azurerm_user_assigned_identity.uai.client_id
+    container_registry_managed_identity_client_id = var.acr_mi_client_id #azurerm_user_assigned_identity.uai.client_id
     ##########
 
     application_insights_connection_string = var.ai_connstring
