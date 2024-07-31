@@ -67,10 +67,14 @@ variable "acr_registry_url" {
   description = "The URL that can be used to log into the container registry."
 }
 
-# variable "image_name" {
-#   description = "Name of the docker image"
-# }
-
 variable "image_tag" {
   description = "Tag of the docker image"
+}
+
+variable "cont_registry_use_mi" {
+  description = "Should connections for Azure Container Registry use Managed Identity."
+}
+
+variable "acr_mi_client_id" {
+  description = "The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry."
 }

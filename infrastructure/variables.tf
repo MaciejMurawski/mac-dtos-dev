@@ -113,10 +113,11 @@ variable "function_app" {
   type = object({
     resource_group_key = optional(string, "baseline")
     gl_worker_32bit    = optional(bool, false)
-    gl_dotnet_isolated = optional(bool, true)
-    gl_dotnet_version  = optional(string, "8.0")
+    # gl_dotnet_isolated = optional(bool, true)
+    # gl_dotnet_version  = optional(string, "8.0")
     gl_docker_env_tag  = optional(string, "development")
     gl_app_settings    = map(string)
+    gl_cont_registry_use_mi = optional(bool, true)
 
     fa_config = map(object({
       name_suffix     = string
