@@ -13,9 +13,9 @@ locals {
       DOCKER_ENABLE_CI         = "false"
 
       AzureWebJobsStorage = "UseDevelopmentStorage=true"
-      caasfolder_STORAGE = "UseDevelopmentStorage=true"
-      targetFunction    = "https://${var.names.function-app}-${lower(var.function_app.ProcessCaasFile.name_suffix)}/api/processCaasFile"
-      FileValidationURL = "https://${var.names.function-app}-${lower(var.function_app.FileValidation.name_suffix)}/api/FileValidation"
+      caasfolder_STORAGE  = "UseDevelopmentStorage=true"
+      targetFunction      = "https://${var.names.function-app}-${lower(var.function_app.ProcessCaasFile.name_suffix)}/api/processCaasFile"
+      FileValidationURL   = "https://${var.names.function-app}-${lower(var.function_app.FileValidation.name_suffix)}/api/FileValidation"
     }
 
     ProcessCaasFile = {
