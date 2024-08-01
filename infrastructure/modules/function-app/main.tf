@@ -33,6 +33,7 @@ resource "azurerm_linux_function_app" "function" {
   }
 
   app_settings = local.app_settings[each.key]
+
   tags         = var.tags
 
   lifecycle {
