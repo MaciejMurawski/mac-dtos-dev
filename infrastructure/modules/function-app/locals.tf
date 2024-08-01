@@ -12,8 +12,7 @@ locals {
       #FUNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
       DOCKER_ENABLE_CI = "false"
 
-      AzureWebJobsStorage = "UseDevelopmentStorage=true"
-      caasfolder_STORAGE  = var.caasfolder_STORAGE #module.storage.sa_fe_primary_connection_string # "UseDevelopmentStorage=true"
+      caasfolder_STORAGE  = var.caasfolder_STORAGE
       targetFunction      = "https://${var.names.function-app}-${lower(var.function_app.ProcessCaasFile.name_suffix)}/api/processCaasFile"
       FileValidationURL   = "https://${var.names.function-app}-${lower(var.function_app.FileValidation.name_suffix)}/api/FileValidation"
     }
