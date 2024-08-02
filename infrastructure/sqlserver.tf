@@ -21,7 +21,7 @@ module "azuresql" {
   max_gb                = var.sqlserver.dbs.cohman.max_gb
   read_scale            = var.sqlserver.dbs.cohman.read_scale
   sku                   = var.sqlserver.dbs.cohman.sku
-  db_destroy_prevention = var.sqlserver.dbs.db_destroy_prevention
+  #db_destroy_prevention = var.sqlserver.dbs.db_destroy_prevention
 
   # FW Rules
   azurepassthrough = var.sqlserver.server.azure_services_access_enabled
