@@ -48,6 +48,8 @@ resource "azurerm_mssql_server" "sqlserver" {
     identity_ids = [azurerm_user_assigned_identity.uai-sql.id]
   }
 
+  primary_user_assigned_identity_id = azurerm_user_assigned_identity.uai-sql.id
+
   lifecycle {
     ignore_changes = [tags]
   }
