@@ -21,7 +21,7 @@ resource "azurerm_linux_function_app" "function" {
     application_stack {
       docker {
         registry_url = var.acr_registry_url
-        image_name   = each.value.docker_img_name
+        image_name   = "${var.docker_img_prefix}-${lower(each.value.name_suffix)}-mac"
         image_tag    = var.image_tag
       }
     }
@@ -34,7 +34,7 @@ resource "azurerm_linux_function_app" "function" {
 
   app_settings = local.app_settings[each.key]
 
-  tags         = var.tags
+  tags = var.tags
 
   lifecycle {
     ignore_changes = [tags, connection_string]

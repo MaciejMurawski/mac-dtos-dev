@@ -21,7 +21,7 @@ module "storage" {
   fe_sa_replication_type = var.storage_accounts.file_exceptions.replication_type
   fe_public_access       = var.storage_accounts.file_exceptions.public_network_access_enabled
 
-  fe_cont_name           = var.storage_accounts.file_exceptions.cont_name
-  fe_cont_access_type    = var.storage_accounts.file_exceptions.cont_access_type
+  fe_cont_name        = var.storage_accounts.file_exceptions.cont_name
+  fe_cont_access_type = var.storage_accounts.file_exceptions.cont_access_type
 
 }
