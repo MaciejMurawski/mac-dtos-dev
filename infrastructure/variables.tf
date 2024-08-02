@@ -132,7 +132,6 @@ variable "function_app" {
 
     fa_config = map(object({
       name_suffix     = string
-      docker_img_name = string
     }))
   })
 }
