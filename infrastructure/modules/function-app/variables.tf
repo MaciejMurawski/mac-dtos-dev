@@ -74,5 +74,13 @@ variable "acr_mi_client_id" {
 }
 
 variable "caasfolder_STORAGE" {
+  description = "Value expected by the Reveice-Cass-File function app"
+}
 
+variable "docker_CI_enable" {
+  description = "Is the Docker CI enabled (default - false)"
+}
+
+variable "docker_img_prefix" {
+  description = "A commont part of the docker image name"
 }
