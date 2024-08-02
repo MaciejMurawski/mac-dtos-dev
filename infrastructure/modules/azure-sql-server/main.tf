@@ -31,8 +31,8 @@ resource "azurerm_mssql_server" "sqlserver" {
   resource_group_name = var.resource_group_name
   location            = var.location
   version             = var.sqlversion
-  administrator_login          = azurerm_key_vault_secret.sqllogin.value
-  administrator_login_password = azurerm_key_vault_secret.sqlpass.value
+  #administrator_login          = azurerm_key_vault_secret.sqllogin.value
+  #administrator_login_password = azurerm_key_vault_secret.sqlpass.value
   minimum_tls_version = var.tlsver
 
   tags = var.tags
