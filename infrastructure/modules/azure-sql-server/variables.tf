@@ -73,11 +73,6 @@ variable "tags" {
   default     = {}
 }
 
-# variable "db_destroy_prevention" {
-#   type        = bool
-#   description = "Prevent the automated db destroy"
-# }
-
 # fw rule
 variable "azurepassthrough" {
   type        = bool

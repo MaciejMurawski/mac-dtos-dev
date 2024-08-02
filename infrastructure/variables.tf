@@ -99,7 +99,6 @@ variable "sqlserver" {
       max_gb                = optional(number, 5)
       read_scale            = optional(bool, false)
       sku                   = optional(string, "S0")
-      #db_destroy_prevention = optional(bool, true)
     }))
 
     # FW Rules
