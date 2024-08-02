@@ -45,7 +45,7 @@ resource "azurerm_mssql_server" "sqlserver" {
 
   identity {
     type         = "UserAssigned"
-    identity_ids = azurerm_user_assigned_identity.uai-sql.id
+    identity_ids = [azurerm_user_assigned_identity.uai-sql.id]
   }
 
   lifecycle {
