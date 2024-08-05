@@ -73,7 +73,6 @@ variable "tags" {
   default     = {}
 }
 
-
 # fw rule
 variable "azurepassthrough" {
   type        = bool
@@ -93,4 +92,13 @@ variable "start_ip" {
 variable "end_ip" {
   type        = string
   description = "The ending IP address to allow through the firewall for this rule."
+}
+
+variable "sql_uai_name" {
+  type        = string
+  description = "Name of the User Assigned Identity for SQL Server"
+}
+variable "ad_auth_only" {
+  type        = bool
+  description = "Specifies whether only AD Users and administrators can be used to login, or also local database users."
 }
