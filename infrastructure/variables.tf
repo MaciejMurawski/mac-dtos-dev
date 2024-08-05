@@ -80,9 +80,9 @@ variable "sqlserver" {
   description = "Configuration for the Azure MSSQL server instance and a default database "
   type = object({
 
-    sql_uai_name = optional(string, "dtos-cohort-manager-sql-adm")
-    sqlsvr_cohman_dev_uks_admin = optional(string, "sqlsvr_cohman_dev_uks_admin")
-    ad_auth_only = optional(bool, true)
+    sql_uai_name       = optional(string, "dtos-cohort-manager-sql-adm")
+    sql_adm_group_name = optional(string, "sqlsvr_cohman_dev_uks_admin")
+    ad_auth_only       = optional(bool, true)
 
     # Server Instance
     server = object({
@@ -94,12 +94,12 @@ variable "sqlserver" {
 
     # Database
     dbs = map(object({
-      db_name_suffix        = optional(string, "baseline")
-      collation             = optional(string, "SQL_Latin1_General_CP1_CI_AS")
-      licence_type          = optional(string, "LicenseIncluded")
-      max_gb                = optional(number, 5)
-      read_scale            = optional(bool, false)
-      sku                   = optional(string, "S0")
+      db_name_suffix = optional(string, "baseline")
+      collation      = optional(string, "SQL_Latin1_General_CP1_CI_AS")
+      licence_type   = optional(string, "LicenseIncluded")
+      max_gb         = optional(number, 5)
+      read_scale     = optional(bool, false)
+      sku            = optional(string, "S0")
     }))
 
     # FW Rules

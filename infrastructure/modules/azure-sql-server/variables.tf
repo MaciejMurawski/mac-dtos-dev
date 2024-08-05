@@ -104,6 +104,6 @@ variable "ad_auth_only" {
 }
 
 variable "sql_adm_group_name" {
-  type = string
+  type        = string
   description = "Name of the Entra ID group with permissions to manage the SQL Server"
 }
