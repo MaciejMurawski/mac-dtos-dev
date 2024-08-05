@@ -5,7 +5,7 @@ locals {
     app-service-plan            = lower("ASP-${var.application}-${var.env}-${var.location_map[var.location]}-mac")
     app-service                 = lower("AS-${var.env}-${var.location_map[var.location]}-${var.application}-mac")
     availability-set            = lower("AVS-${var.env}-${var.location_map[var.location]}-${var.application}-mac")
-    azure-container-registry    = lower("ACR${var.env}${var.location_map[var.location]}${var.application}mac")
+    azure-container-registry    = lower("ACR${var.env}${var.location_map[var.location]}${var.application}mac2")
     connection                  = upper("CON-${var.env}-${var.location_map[var.location]}-${var.application}-mac")
     custom-image                = upper("IMAGE-${var.env}-${var.location_map[var.location]}-mac")
     dns-zone                    = "${lower(var.application)}.${lower(var.env)}.net"

@@ -80,7 +80,7 @@ variable "sqlserver" {
   description = "Configuration for the Azure MSSQL server instance and a default database "
   type = object({
 
-    sql_uai_name = optional(string, "name_of_the_new_MI")
+    sql_uai_name = optional(string, "dtos-cohort-manager-sql-adm")
     ad_auth_only = optional(bool, true)
 
     # Server Instance
