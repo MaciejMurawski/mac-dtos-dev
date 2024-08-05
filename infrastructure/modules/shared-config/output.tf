@@ -46,8 +46,8 @@ locals {
     storage-flow-logs           = lower("STFLOW${var.env}${var.location_map[var.location]}${var.application}-mac2")
     storage-shared-state        = lower("STSTATE${var.env}${var.location_map[var.location]}${var.application}-mac2")
     subnet                      = upper("SN-${var.env}-${var.location_map[var.location]}-${var.application}-mac2")
-    virtual-mac2hine             = upper("${var.env}-${var.application}-mac2")
-    win-virtual-mac2hine         = upper("${var.env}-${var.application}-mac2")
+    virtual-machine             = upper("${var.env}-${var.application}-mac2")
+    win-virtual-machine         = upper("${var.env}-${var.application}-mac2")
     virtual-network             = upper("VNET-${var.env}-${var.location_map[var.location]}-${var.application}-mac2")
     vnet-gateway                = upper("GWY-${var.env}-${var.location_map[var.location]}-${var.application}-mac2")
   }
@@ -103,8 +103,8 @@ output "names" {
     storage-flow-logs           = local.names.storage-flow-logs
     storage-shared-state        = local.names.storage-shared-state
     subnet                      = local.names.subnet
-    virtual-mac2hine             = local.names.virtual-mac2hine
-    win-virtual-mac2hine         = local.names.win-virtual-mac2hine
+    virtual-machine             = local.names.virtual-machine
+    win-virtual-machine         = local.names.win-virtual-machine
     virtual-network             = local.names.virtual-network
     vnet-gateway                = local.names.vnet-gateway
   }
