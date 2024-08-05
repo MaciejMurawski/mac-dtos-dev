@@ -81,6 +81,7 @@ variable "sqlserver" {
   type = object({
 
     sql_uai_name = optional(string, "dtos-cohort-manager-sql-adm")
+    sqlsvr_cohman_dev_uks_admin = optional(string, "sqlsvr_cohman_dev_uks_admin")
     ad_auth_only = optional(bool, true)
 
     # Server Instance

@@ -10,6 +10,7 @@ module "azuresql" {
   kv_id               = module.key_vault.key_vault_id
 
   sql_uai_name = var.sqlserver.sql_uai_name
+  sql_adm_group_name = var.sqlserver.sql_adm_group_name
   ad_auth_only = var.sqlserver.ad_auth_only
 
   tags = var.tags
