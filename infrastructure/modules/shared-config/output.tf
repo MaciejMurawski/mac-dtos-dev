@@ -18,7 +18,7 @@ locals {
     event-grid-topic            = lower("EVGT-${var.env}-${var.location_map[var.location]}-mac")
     function-app                = lower("${var.env}-${var.location_map[var.location]}-mac")
     internal-load-balancer      = upper("ILB-${var.env}-${var.location_map[var.location]}-${var.application}-mac")
-    key-vault                   = upper("KV-${var.application}-${var.env}-${var.location_map[var.location]}-mac")
+    key-vault                   = upper("KV-${var.application}-${var.env}-${var.location_map[var.location]}-mac2")
     kubernetes-service          = lower("AKS-${var.env}-${var.location_map[var.location]}-${var.application}-mac")
     load-balancer               = upper("LB-${var.env}-${var.location_map[var.location]}-${var.application}-mac")
     local-network-gateway       = upper("LNG-${var.env}-${var.location_map[var.location]}-${var.application}-mac")
