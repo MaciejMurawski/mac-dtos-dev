@@ -1,6 +1,6 @@
 locals {
   names = {
-    api-management              = lower("APIM-${var.env}-${var.application}-${var.location_map[var.location]}-mac")
+    api-management              = lower("APIM-${var.env}-${var.application}-${var.location_map[var.location]}-mac2")
     app-insights                = upper("${var.env}-${var.location_map[var.location]}-mac")
     app-service-plan            = lower("ASP-${var.application}-${var.env}-${var.location_map[var.location]}-mac")
     app-service                 = lower("AS-${var.env}-${var.location_map[var.location]}-${var.application}-mac")
