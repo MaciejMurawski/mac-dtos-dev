@@ -5,7 +5,7 @@ locals {
   #   FileValidation = "https://${var.names.function-app}-${lower(var.function_app.FileValidation.name_suffix)}/api/FileValidation"
 
   # }
-
+  db_connection_string = "Server=${var.names.sql-server}.database.windows.net; Authentication=Active Directory Managed Identity; Database=${var.db_name}"
   app_settings = {
 
     receiveCaasFile = {
@@ -61,7 +61,7 @@ locals {
 
       UNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
 
-      DtOsDatabaseConnectionString = "Server=${var.names.sql-server}.database.windows.net; Authentication=Active Directory Managed Identity; Database=${var.db_name}"
+      DtOsDatabaseConnectionString = locals.db_connection_string
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
       LookupValidationURL = "https://${var.names.function-app}-${lower(var.function_app.LookupValidation.name_suffix)}/api/LookupValidation"
 
