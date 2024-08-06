@@ -54,7 +54,6 @@ locals {
       DSmarkParticipantAsEligible = local.fnapp_urls.markParticipantAsEligible
       DemographicURIGet           = local.fnapp_urls.demographicDataFunction
       StaticValidationURL         = local.fnapp_urls.staticValidation
-
     }
 
     RemoveParticipant = {
@@ -67,89 +66,75 @@ locals {
       UpdateParticipant   = local.fnapp_urls.updateParticipant
       StaticValidationURL = local.fnapp_urls.staticValidation
       DemographicURIGet   = local.fnapp_urls.demographicDataFunction
-
     }
 
     CreateParticipant = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
       LookupValidationURL          = local.fnapp_urls.lookupValidation
-
     }
 
     MarkParticipantEligible = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
-
     }
 
     MarkParticipantAsIneligible = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
       LookupValidationURL          = local.fnapp_urls.lookupValidation
-
     }
 
     UpdateParticipantDetails = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
       LookupValidationURL          = local.fnapp_urls.lookupValidation
-
     }
 
     CreateValidationExceptions = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
-
     }
 
     GetValidationExceptions = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
-
     }
 
     DemographicDataService = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
-
     }
 
     FileValidation = {
 
       CreateValidationExceptionURL = local.fnapp_urls.createValidationException
       inboundBlobName              = "file-exceptions"
-
     }
 
     StaticValidation = {
 
       CreateValidationExceptionURL = local.fnapp_urls.createValidationException
-
     }
 
     LookupValidation = {
 
       CreateValidationExceptionURL = local.fnapp_urls.createValidationException
-
     }
 
     DemographicDataManagement = {
 
       DemographicDataServiceURI = local.fnapp_urls.demographicDataService
-
     }
 
     AddCohortDistributionData = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
-
     }
 
     RetrieveCohortDistributionData = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
-
     }
 
     RemoveCohortDistributionData = {
@@ -164,7 +149,6 @@ locals {
     AllocateServiceProvider = {
 
       CreateValidationExceptionURL = local.fnapp_urls.createValidationException
-
     }
 
     CreateCohortDistribution = {
