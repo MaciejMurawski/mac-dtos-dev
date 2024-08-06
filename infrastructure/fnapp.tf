@@ -19,6 +19,7 @@ module "functionapp" {
   acr_mi_id        = module.acr.mi_id
   acr_mi_client_id = module.acr.mi_client_id
 
+  #app_settings          = var.function_app.gl_app_settings
   image_tag             = var.function_app.gl_docker_env_tag
   docker_img_prefix     = var.function_app.gl_docker_img_prefix
   docker_CI_enable      = var.function_app.gl_docker_CI_enable
