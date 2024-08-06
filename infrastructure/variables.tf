@@ -116,7 +116,6 @@ variable "function_app" {
     gl_docker_env_tag        = optional(string, "development")
     gl_docker_CI_enable      = optional(string, "cohort-manager")
     gl_docker_img_prefix     = optional(string, "false")
-    gl_app_settings          = map(string)
     gl_cont_registry_use_mi  = optional(bool, true)
     gl_enable_appsrv_storage = optional(string, "false")
 
