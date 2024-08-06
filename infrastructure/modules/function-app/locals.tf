@@ -6,6 +6,9 @@ locals {
 
   # }
   db_connection_string = "Server=${var.names.sql-server}.database.windows.net; Authentication=Active Directory Managed Identity; Database=${var.db_name}"
+}
+
+locals {
   app_settings = {
 
     receiveCaasFile = {
