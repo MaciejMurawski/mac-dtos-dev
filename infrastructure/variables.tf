@@ -1,18 +1,3 @@
-# variable "STATE_RG" {
-#   type = string
-# }
-
-# variable "STATE_SA" {
-#   type = string
-# }
-
-# variable "STATE_CONT" {
-#   type = string
-# }
-
-# variable "STATE_BLOB" {
-#   type = string
-# }
 
 variable "application" {
   description = "Project/Application code for deployment"

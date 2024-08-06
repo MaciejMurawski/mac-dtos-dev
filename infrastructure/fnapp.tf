@@ -29,6 +29,7 @@ module "functionapp" {
 
   #Specific FNApp settings:
   caasfolder_STORAGE = module.storage.sa_fe_primary_connection_string
+  db_name            = var.sqlserver.dbs.name_suffix
 
   tags = var.tags
 

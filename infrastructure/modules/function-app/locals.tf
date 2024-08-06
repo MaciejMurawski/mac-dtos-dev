@@ -60,6 +60,8 @@ locals {
       DOCKER_ENABLE_CI = var.docker_CI_enable
 
       UNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
+
+      DtOsDatabaseConnectionString = "Server=${var.names.sql-server}.database.windows.net; Authentication=Active Directory Managed Identity; Database=${var.db_name}"
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
       LookupValidationURL = "https://${var.names.function-app}-${lower(var.function_app.LookupValidation.name_suffix)}/api/LookupValidation"
 
