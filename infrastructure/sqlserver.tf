@@ -9,18 +9,19 @@ module "azuresql" {
   tlsver              = var.sqlserver.server.tlsversion
   kv_id               = module.key_vault.key_vault_id
 
-  sql_uai_name = var.sqlserver.sql_uai_name
-  ad_auth_only = var.sqlserver.ad_auth_only
+  sql_uai_name       = var.sqlserver.sql_uai_name
+  sql_adm_group_name = var.sqlserver.sql_adm_group_name
+  ad_auth_only       = var.sqlserver.ad_auth_only
 
   tags = var.tags
 
   # Default database
-  db_name_suffix        = var.sqlserver.dbs.cohman.db_name_suffix
-  collation             = var.sqlserver.dbs.cohman.collation
-  licence_type          = var.sqlserver.dbs.cohman.licence_type
-  max_gb                = var.sqlserver.dbs.cohman.max_gb
-  read_scale            = var.sqlserver.dbs.cohman.read_scale
-  sku                   = var.sqlserver.dbs.cohman.sku
+  db_name_suffix = var.sqlserver.dbs.cohman.db_name_suffix
+  collation      = var.sqlserver.dbs.cohman.collation
+  licence_type   = var.sqlserver.dbs.cohman.licence_type
+  max_gb         = var.sqlserver.dbs.cohman.max_gb
+  read_scale     = var.sqlserver.dbs.cohman.read_scale
+  sku            = var.sqlserver.dbs.cohman.sku
   #db_destroy_prevention = var.sqlserver.dbs.db_destroy_prevention
 
   # FW Rules
