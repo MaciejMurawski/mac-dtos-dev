@@ -64,7 +64,7 @@ locals {
 
       UNCTIONS_WORKER_RUNTIME = "dotnet-isolated"
 
-      DtOsDatabaseConnectionString = locals.db_connection_string
+      DtOsDatabaseConnectionString = local.db_connection_string
       #DtOsDatabaseConnectionString = Server=localhost,1433;Database=${DB_NAME};User Id=SA;Password=${PASSWORD};TrustServerCertificate=True
       LookupValidationURL = "https://${var.names.function-app}-${lower(var.function_app.LookupValidation.name_suffix)}/api/LookupValidation"
 
