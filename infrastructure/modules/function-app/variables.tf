@@ -86,6 +86,6 @@ variable "docker_img_prefix" {
 }
 
 variable "db_name" {
-  type = string
+  type        = string
   description = "Name of the deployed DB to which the connection string is linking."
 }
