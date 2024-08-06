@@ -32,7 +32,7 @@ resource "azurerm_linux_function_app" "function" {
     identity_ids = [var.acr_mi_id]
   }
 
-  app_settings = local.app_settings[each.key]
+  app_settings = merge(local.global_app_settings, local.app_settings[each.key])
 
   tags = var.tags
 
