@@ -113,11 +113,12 @@ variable "function_app" {
     gl_worker_32bit    = optional(bool, false)
     # gl_dotnet_isolated = optional(bool, true)
     # gl_dotnet_version  = optional(string, "8.0")
-    gl_docker_env_tag       = optional(string, "development")
-    gl_docker_CI_enable     = optional(string, "cohort-manager")
-    gl_docker_img_prefix    = optional(string, "false")
-    gl_app_settings         = map(string)
-    gl_cont_registry_use_mi = optional(bool, true)
+    gl_docker_env_tag        = optional(string, "development")
+    gl_docker_CI_enable      = optional(string, "cohort-manager")
+    gl_docker_img_prefix     = optional(string, "false")
+    gl_app_settings          = map(string)
+    gl_cont_registry_use_mi  = optional(bool, true)
+    gl_enable_appsrv_storage = optional(string, "false")
 
     fa_config = map(object({
       name_suffix = string

@@ -85,6 +85,10 @@ variable "docker_img_prefix" {
   description = "A commont part of the docker image name"
 }
 
+variable "enable_appsrv_storage" {
+  description = "If websites app service storage should be enabled"
+}
+
 variable "db_name" {
   type        = string
   description = "Name of the deployed DB to which the connection string is linking."
