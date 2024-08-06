@@ -49,9 +49,9 @@ variable "gl_worker_32bit" {
   description = "Should the Windows Function App use a 32-bit worker process. Defaults to true"
 }
 
-variable "app_settings" {
-  description = "App settings for App Service"
-}
+# variable "app_settings" {
+#   description = "App settings for App Service"
+# }
 
 variable "acr_registry_url" {
   description = "The URL that can be used to log into the container registry."
