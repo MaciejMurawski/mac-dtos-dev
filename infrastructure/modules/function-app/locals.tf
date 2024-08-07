@@ -6,12 +6,12 @@ locals {
     addParticipant              = "https://${var.names.function-app}-${lower(var.function_app.AddNewParticipant.name_suffix)}.azurewebsites.net/api/addParticipant"
     removeParticipant           = "https://${var.names.function-app}-${lower(var.function_app.RemoveParticipant.name_suffix)}.azurewebsites.net/api/RemoveParticipant"
     updateParticipant           = "https://${var.names.function-app}-${lower(var.function_app.UpdateParticipant.name_suffix)}.azurewebsites.net/api/updateParticipant"
+    updateParticipantDetails    = "https://${var.names.function-app}-${lower(var.function_app.UpdateParticipantDetails.name_suffix)}.azurewebsites.net/api/updateParticipantDetails"
     demographicDataFunction     = "https://${var.names.function-app}-${lower(var.function_app.DemographicDataManagement.name_suffix)}.azurewebsites.net/api/DemographicDataFunction"
     createParticipant           = "https://${var.names.function-app}-${lower(var.function_app.CreateParticipant.name_suffix)}.azurewebsites.net/api/CreateParticipant"
-    markParticipantAsEligible   = "https://${var.names.function-app}-${lower(var.function_app.MarkParticipantEligible.name_suffix)}.azurewebsites.net/api/markParticipantAsEligible"
+    markParticipantAsEligible   = "https://${var.names.function-app}-${lower(var.function_app.MarkParticipantAsEligible.name_suffix)}.azurewebsites.net/api/markParticipantAsEligible"
     staticValidation            = "https://${var.names.function-app}-${lower(var.function_app.StaticValidation.name_suffix)}.azurewebsites.net/api/StaticValidation"
     markParticipantAsIneligible = "https://${var.names.function-app}-${lower(var.function_app.MarkParticipantAsIneligible.name_suffix)}.azurewebsites.net/api/markParticipantAsIneligible"
-    updateParticipant           = "https://${var.names.function-app}-${lower(var.function_app.UpdateParticipantDetails.name_suffix)}.azurewebsites.net/api/updateParticipantDetails"
     lookupValidation            = "https://${var.names.function-app}-${lower(var.function_app.LookupValidation.name_suffix)}.azurewebsites.net/api/LookupValidation"
     createValidationException   = "https://${var.names.function-app}-${lower(var.function_app.CreateValidationExceptions.name_suffix)}.azurewebsites.net/api/CreateValidationException"
     demographicDataService      = "https://${var.names.function-app}-${lower(var.function_app.DemographicDataService.name_suffix)}.azurewebsites.net/api/DemographicDataService"
@@ -63,7 +63,7 @@ locals {
 
     UpdateParticipant = {
 
-      UpdateParticipant   = local.fnapp_urls.updateParticipant
+      UpdateParticipant   = local.fnapp_urls.updateParticipantDetails
       StaticValidationURL = local.fnapp_urls.staticValidation
       DemographicURIGet   = local.fnapp_urls.demographicDataFunction
     }
@@ -74,7 +74,7 @@ locals {
       LookupValidationURL          = local.fnapp_urls.lookupValidation
     }
 
-    MarkParticipantEligible = {
+    MarkParticipantAsEligible = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
     }
