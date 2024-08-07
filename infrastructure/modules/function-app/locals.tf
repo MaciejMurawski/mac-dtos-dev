@@ -107,7 +107,7 @@ locals {
       exceptionFunctionURL         = local.fnapp_urls.createException
     }
 
-    CreateExceptions = {
+    CreateException = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
     }
