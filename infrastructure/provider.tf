@@ -13,8 +13,16 @@ terraform {
 provider "azurerm" {
 
   features {}
+  # Subscription Id to create the resources in passed in via TF variables
+  # subscription_id = var.TARGET_SUBSCRIPTION_ID
 }
 
+# provider "azurerm" {
+#   alias = "devops"
+#   features {}
+#   # Subscription Id to create the resources in passed in via TF variables
+#   subscription_id = var.DEVOPS_SUBSCRIPTION_ID
+# }
 provider "azuread" {
   # Configuration options
 }
