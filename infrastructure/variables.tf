@@ -1,4 +1,12 @@
+# variable "TARGET_SUBSCRIPTION_ID" {
+#   description = "ID of a subscription to deploy infrastructure"
+#   type        = string
+# }
 
+# variable "DEVOPS_SUBSCRIPTION_ID" {
+#   description = "ID of a DevOps subscription to deploy infrastructure"
+#   type        = string
+# }
 variable "application" {
   description = "Project/Application code for deployment"
   type        = string

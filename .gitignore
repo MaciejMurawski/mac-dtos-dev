@@ -39,3 +39,6 @@ local.settings.json
 .env
 # sample data
 application/CohortManager/SampleData/
+
+
+.VSCodeCounter/*
