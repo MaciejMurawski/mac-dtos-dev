@@ -19,7 +19,7 @@ locals {
     allocateServiceProvider          = "https://${var.names.function-app}-${lower(var.function_app.AllocateServiceProvider.name_suffix)}.azurewebsites.net/api/AllocateServiceProvider"
     transformDataService             = "https://${var.names.function-app}-${lower(var.function_app.TransformDataService.name_suffix)}.azurewebsites.net/api/TransformDataService"
     addCohortDistributionData        = "https://${var.names.function-app}-${lower(var.function_app.AddCohortDistributionData.name_suffix)}.azurewebsites.net/api/AddCohortDistributionData"
-    removeFromCohortDistributionData = "https://${var.names.function-app}-${lower(var.function_app.RemoveFromCohortDistributionData.name_suffix)}.azurewebsites.net/api/RemoveFromCohortDistributionData"
+    removeCohortDistributionData = "https://${var.names.function-app}-${lower(var.function_app.RemoveCohortDistributionData.name_suffix)}.azurewebsites.net/api/RemoveCohortDistributionData"
     createCohortDistribution         = "https://${var.names.function-app}-${lower(var.function_app.CreateCohortDistribution.name_suffix)}.azurewebsites.net/api/CreateCohortDistribution"
 
   }
@@ -67,7 +67,7 @@ locals {
 
       markParticipantAsIneligible     = local.fnapp_urls.markParticipantAsIneligible
       DemographicURI                  = local.fnapp_urls.demographicDataFunction
-      removeFromCohortDistributionURL = local.fnapp_urls.removeFromCohortDistributionData
+      removeFromCohortDistributionURL = local.fnapp_urls.removeCohortDistributionData
       ExceptionFunctionURL            = local.fnapp_urls.createException
     }
 
@@ -153,7 +153,7 @@ locals {
       DtOsDatabaseConnectionString = local.db_connection_string
     }
 
-    RemoveFromCohortDistributionData = {
+    RemoveCohortDistributionData = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
     }
