@@ -60,13 +60,15 @@ locals {
       DSmarkParticipantAsEligible = local.fnapp_urls.markParticipantAsEligible
       DemographicURIGet           = local.fnapp_urls.demographicDataFunction
       StaticValidationURL         = local.fnapp_urls.staticValidation
-      exceptionFunctionURL        = local.fnapp_urls.createException
+      ExceptionFunctionURL        = local.fnapp_urls.createException
     }
 
     RemoveParticipant = {
 
       markParticipantAsIneligible     = local.fnapp_urls.markParticipantAsIneligible
       DemographicURI                  = local.fnapp_urls.demographicDataFunction
+      removeFromCohortDistributionURL = local.fnapp_urls.removeCohortDistributionData
+      ExceptionFunctionURL            = local.fnapp_urls.createException
       removeFromCohortDistributionURL = local.fnapp_urls.removeCohortDistributionData
       exceptionFunctionURL            = local.fnapp_urls.createException
     }
@@ -77,34 +79,34 @@ locals {
       StaticValidationURL          = local.fnapp_urls.staticValidation
       DemographicURIGet            = local.fnapp_urls.demographicDataFunction
       cohortDistributionServiceURL = local.fnapp_urls.createCohortDistribution
-      exceptionFunctionURL         = local.fnapp_urls.createException
+      ExceptionFunctionURL         = local.fnapp_urls.createException
     }
 
     CreateParticipant = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
       LookupValidationURL          = local.fnapp_urls.lookupValidation
-      exceptionFunctionURL         = local.fnapp_urls.createException
+      ExceptionFunctionURL         = local.fnapp_urls.createException
     }
 
     MarkParticipantAsEligible = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
-      exceptionFunctionURL         = local.fnapp_urls.createException
+      ExceptionFunctionURL         = local.fnapp_urls.createException
     }
 
     MarkParticipantAsIneligible = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
       LookupValidationURL          = local.fnapp_urls.lookupValidation
-      exceptionFunctionURL         = local.fnapp_urls.createException
+      ExceptionFunctionURL         = local.fnapp_urls.createException
     }
 
     UpdateParticipantDetails = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
       LookupValidationURL          = local.fnapp_urls.lookupValidation
-      exceptionFunctionURL         = local.fnapp_urls.createException
+      ExceptionFunctionURL         = local.fnapp_urls.createException
     }
 
     CreateException = {
@@ -124,18 +126,18 @@ locals {
 
     FileValidation = {
 
-      exceptionFunctionURL = local.fnapp_urls.createException
+      ExceptionFunctionURL = local.fnapp_urls.createException
       inboundBlobName      = "file-exceptions"
     }
 
     StaticValidation = {
 
-      exceptionFunctionURL = local.fnapp_urls.createException
+      ExceptionFunctionURL = local.fnapp_urls.createException
     }
 
     LookupValidation = {
 
-      exceptionFunctionURL = local.fnapp_urls.createException
+      ExceptionFunctionURL = local.fnapp_urls.createException
     }
 
     DemographicDataManagement = {
@@ -154,6 +156,7 @@ locals {
     }
 
     RemoveCohortDistributionData = {
+    RemoveCohortDistributionData = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
     }
@@ -164,7 +167,7 @@ locals {
 
     AllocateServiceProvider = {
 
-      exceptionFunctionURL = local.fnapp_urls.createException
+      ExceptionFunctionURL = local.fnapp_urls.createException
     }
 
     CreateCohortDistribution = {
