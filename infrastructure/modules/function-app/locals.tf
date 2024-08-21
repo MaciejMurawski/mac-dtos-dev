@@ -156,7 +156,6 @@ locals {
     }
 
     RemoveCohortDistributionData = {
-    RemoveCohortDistributionData = {
 
       DtOsDatabaseConnectionString = local.db_connection_string
     }
@@ -183,3 +182,4 @@ locals {
     }
   }
 }
+
