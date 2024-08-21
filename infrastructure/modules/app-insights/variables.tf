@@ -35,7 +35,7 @@ variable "law_id" {
 
 ### DevOps subsripion AppInsights
 
-variable "audit_law_id" {
-  type        = string
-  description = "Is the LAW workspace ID in Audit subscription."
-}
+# variable "audit_law_id" {
+#   type        = string
+#   description = "Is the LAW workspace ID in Audit subscription."
+# }
