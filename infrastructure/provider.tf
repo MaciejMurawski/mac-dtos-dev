@@ -15,13 +15,13 @@ provider "azurerm" {
   features {}
 }
 
-provider "azurerm" {
-  alias = "audit"
-  subscription_id = "458925b3-1fcc-436c-a5cd-f9419dda2537" # var.AUDIT_SUBSCRIPTION_ID
-  # Configuration options
+# provider "azurerm" {
+#   alias = "audit"
+#   subscription_id = "458925b3-1fcc-436c-a5cd-f9419dda2537" # var.AUDIT_SUBSCRIPTION_ID
+#   # Configuration options
 
-  features {}
-}
+#   features {}
+# }
 
 provider "azuread" {
   # Configuration options
