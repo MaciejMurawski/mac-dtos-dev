@@ -3,7 +3,7 @@ resource "azurerm_monitor_autoscale_setting" "asp_autoscale" {
   name                = "${var.names.app-service}-autoscale"
   resource_group_name = var.resource_group_name
   location            = var.location
-  target_resource_id  = azurerm_app_service_plan.appserviceplan.id
+  target_resource_id  = azurerm_service_plan.appserviceplan.id
 
   profile {
     name =  "${var.names.app-service}-MemoryPercentage"
@@ -17,7 +17,7 @@ resource "azurerm_monitor_autoscale_setting" "asp_autoscale" {
     rule {
       metric_trigger {
         metric_name        = "MemoryPercentage"
-        metric_resource_id = azurerm_app_service.appservice.id
+        metric_resource_id = azurerm_service_plan.appserviceplan.id
         time_grain         = "PT1M"
         statistic          = "Average"
         time_window        = "PT10M"
@@ -37,7 +37,7 @@ resource "azurerm_monitor_autoscale_setting" "asp_autoscale" {
     rule {
       metric_trigger {
         metric_name        = "MemoryPercentage"
-        metric_resource_id = azurerm_app_service.appservice.id
+        metric_resource_id = azurerm_service_plan.appserviceplan.id
         time_grain         = "PT1M"
         statistic          = "Average"
         time_window        = "PT10M"

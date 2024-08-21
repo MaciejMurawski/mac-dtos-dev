@@ -14,11 +14,3 @@ resource "azurerm_service_plan" "appserviceplan" {
   }
 
 }
-
-resource "azurerm_app_service" "appservice" {
-  name                = var.names.app-service
-  resource_group_name = var.resource_group_name
-  location            = var.location
-
-  app_service_plan_id = azurerm_app_service_plan.appserviceplan.id
-}
