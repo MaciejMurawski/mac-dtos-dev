@@ -1,6 +1,6 @@
 
 resource "azurerm_monitor_autoscale_setting" "asp_autoscale" {
-  name                = "${var.names.app-service-plan-plan}-autoscale"
+  name                = "${var.names.app-service-plan}-autoscale"
   resource_group_name = var.resource_group_name
   location            = var.location
   target_resource_id  = azurerm_service_plan.appserviceplan.id
