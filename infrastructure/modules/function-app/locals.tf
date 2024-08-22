@@ -21,6 +21,7 @@ locals {
     addCohortDistributionData        = "https://${var.names.function-app}-${lower(var.function_app.AddCohortDistributionData.name_suffix)}.azurewebsites.net/api/AddCohortDistributionData"
     removeCohortDistributionData     = "https://${var.names.function-app}-${lower(var.function_app.RemoveCohortDistributionData.name_suffix)}.azurewebsites.net/api/RemoveCohortDistributionData"
     createCohortDistribution         = "https://${var.names.function-app}-${lower(var.function_app.CreateCohortDistribution.name_suffix)}.azurewebsites.net/api/CreateCohortDistribution"
+    validateCohortDistributionRecord = "https://${var.names.function-app}-${lower(var.function_app.ValidateCohortDistributionRecord.name_suffix)}.azurewebsites.net/api/ValidateCohortDistributionRecord"
 
   }
 
@@ -179,6 +180,12 @@ locals {
 
     RetrieveParticipantData = {
 
+    }
+
+    ValidateCohortDistributionRecord = {
+
+      LookupValidationURL          = local.fnapp_urls.lookupValidation
+      DtOsDatabaseConnectionString = local.db_connection_string
     }
   }
 }
